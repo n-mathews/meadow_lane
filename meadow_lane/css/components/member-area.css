@@ -1,0 +1,88 @@
+/**
+ * member-area.css — Meadow Lane Park
+ * Placeholder styles for the future secure member area.
+ * Expand this file when the member portal is built.
+ */
+
+.member-login-page {
+  min-height: 60vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-20) var(--container-pad);
+}
+
+.member-login-card {
+  background: white;
+  border: 1px solid var(--clr-stone);
+  border-radius: var(--radius-xl);
+  padding: var(--space-12) var(--space-10);
+  width: 100%;
+  max-width: 440px;
+  box-shadow: var(--shadow-lg);
+}
+
+.member-login-card__logo {
+  text-align: center;
+  margin-bottom: var(--space-8);
+}
+
+.member-login-card__title {
+  font-family: var(--font-serif);
+  font-size: var(--text-3xl);
+  font-weight: 500;
+  color: var(--clr-slate);
+  text-align: center;
+  margin-bottom: var(--space-2);
+}
+
+.member-login-card__subtitle {
+  text-align: center;
+  color: var(--clr-text-light);
+  font-size: var(--text-sm);
+  margin-bottom: var(--space-8);
+}
+
+.member-dashboard {
+  padding: var(--space-10) var(--container-pad);
+}
+
+.member-dashboard__grid {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: var(--space-8);
+  align-items: start;
+}
+
+.member-sidebar {
+  background: white;
+  border: 1px solid var(--clr-stone);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  position: sticky;
+  top: calc(72px + var(--space-4));
+}
+
+.member-sidebar__nav a {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-5);
+  font-size: var(--text-sm);
+  color: var(--clr-text-mid);
+  border-left: 3px solid transparent;
+  transition: background var(--transition-fast), color var(--transition-fast);
+}
+
+.member-sidebar__nav a:hover,
+.member-sidebar__nav a.is-active {
+  background: var(--clr-teal-light);
+  color: var(--clr-teal);
+  border-left-color: var(--clr-teal);
+  text-decoration: none;
+}
+
+@media (max-width: 900px) {
+  .member-dashboard__grid { grid-template-columns: 1fr; }
+  .member-sidebar { position: static; }
+}

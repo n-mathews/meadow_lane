@@ -1,0 +1,66 @@
+
+# Global styles loaded on every page
+global-styling:
+  version: VERSION
+  css:
+    base:
+      css/base/reset.css: {}
+      css/base/typography.css: {}
+      css/base/variables.css: {}
+    layout:
+      css/layout/layout.css: {}
+      css/layout/grid.css: {}
+    component:
+      css/components/navigation.css: {}
+      css/components/hero.css: {}
+      css/components/cards.css: {}
+      css/components/buttons.css: {}
+      css/components/forms.css: {}
+      css/components/amenities.css: {}
+      css/components/listings.css: {}
+      css/components/footer.css: {}
+  js:
+    js/global.js: {}
+  dependencies:
+    - core/drupal
+    - core/once
+
+# Navigation / mobile menu
+navigation:
+  version: VERSION
+  js:
+    js/navigation.js: {}
+  dependencies:
+    - core/drupal
+    - core/once
+    - meadow_lane/global-styling
+
+# Hero region enhancements
+hero:
+  version: VERSION
+  css:
+    component:
+      css/components/hero.css: {}
+  dependencies:
+    - meadow_lane/global-styling
+
+# Homes for sale / listings
+listings:
+  version: VERSION
+  css:
+    component:
+      css/components/listings.css: {}
+  js:
+    js/listings.js: {}
+  dependencies:
+    - meadow_lane/global-styling
+    - core/drupal
+
+# Member login area (placeholder for future secure section)
+member-area:
+  version: VERSION
+  css:
+    component:
+      css/components/member-area.css: {}
+  dependencies:
+    - meadow_lane/global-styling

@@ -1,0 +1,24 @@
+{#
+/**
+ * @file block--system-menu-block--main.html.twig
+ * Meadow Lane Park — renders the main navigation menu items
+ * as nav__menu-item list entries (without the outer <ul>,
+ * which lives in page.html.twig).
+ */
+#}
+{% for item in items %}
+  <li{{ item.attributes.addClass('nav__menu-item', item.is_expanded ? 'has-children' : '', item.in_active_trail ? 'is-active' : '') }}>
+    <a{{ item.url ? ' href="' ~ item.url ~ '"' }} {{ item.attributes }}>
+      {{ item.title }}
+    </a>
+    {% if item.below %}
+      <ul class="nav__submenu">
+        {% for child in item.below %}
+          <li{{ child.attributes.addClass('nav__submenu-item', child.in_active_trail ? 'is-active' : '') }}>
+            <a href="{{ child.url }}">{{ child.title }}</a>
+          </li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+  </li>
+{% endfor %}

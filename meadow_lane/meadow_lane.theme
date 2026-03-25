@@ -1,0 +1,147 @@
+<?php
+
+/**
+ * @file
+ * meadow_lane.theme — Preprocess functions for the Meadow Lane Park theme.
+ */
+
+use Drupal\Core\Template\Attribute;
+
+/**
+ * Implements hook_preprocess_HOOK() for html.html.twig.
+ */
+function meadow_lane_preprocess_html(array &$variables): void {
+  // Add path-based body classes.
+  $current_path = \Drupal::service('path.current')->getPath();
+  $alias = \Drupal::service('path_alias.manager')->getAliasByPath($current_path);
+  $alias = ltrim($alias, '/');
+  if ($alias) {
+    $variables['attributes']['class'][] = 'page--' . preg_replace('/[^a-z0-9]/', '-', strtolower($alias));
+  }
+
+  // Front page class.
+  if (\Drupal::service('path.matcher')->isFrontPage()) {
+    $variables['attributes']['class'][] = 'page--front';
+  }
+
+  // Pass theme settings to HTML template.
+  $variables['show_member_login'] = theme_get_setting('show_member_login') ?? TRUE;
+}
+
+/**
+ * Implements hook_preprocess_HOOK() for page.html.twig.
+ */
+function meadow_lane_preprocess_page(array &$variables): void {
+  $variables['hero_tagline']   = theme_get_setting('hero_tagline')   ?? 'Life on the Thousand Islands';
+  $variables['hero_subtext']   = theme_get_setting('hero_subtext')   ?? '';
+  $variables['contact_phone']  = theme_get_setting('contact_phone')  ?? '';
+  $variables['contact_email']  = theme_get_setting('contact_email')  ?? '';
+  $variables['contact_address']= theme_get_setting('contact_address')?? 'Alexandria Bay, New York';
+  $variables['footer_tagline'] = theme_get_setting('footer_tagline') ?? 'Proud to be co-owned by the people who call it home.';
+  $variables['social_facebook']= theme_get_setting('social_facebook')?? '';
+  $variables['show_member_login'] = theme_get_setting('show_member_login') ?? TRUE;
+  $variables['is_front'] = \Drupal::service('path.matcher')->isFrontPage();
+}
+
+/**
+ * Implements hook_preprocess_HOOK() for node.html.twig.
+ */
+function meadow_lane_preprocess_node(array &$variables): void {
+  $node = $variables['node'];
+  $variables['bundle'] = $node->bundle();
+
+  // For 'home_listing' content type — pass key fields directly.
+  if ($node->bundle() === 'home_listing') {
+    $variables['listing_price']   = $node->hasField('field_price')   ? $node->get('field_price')->value   : NULL;
+    $variables['listing_beds']    = $node->hasField('field_bedrooms') ? $node->get('field_bedrooms')->value : NULL;
+    $variables['listing_baths']   = $node->hasField('field_bathrooms')? $node->get('field_bathrooms')->value: NULL;
+    $variables['listing_sqft']    = $node->hasField('field_sqft')     ? $node->get('field_sqft')->value     : NULL;
+    $variables['listing_address'] = $node->hasField('field_address')  ? $node->get('field_address')->value  : NULL;
+    $variables['listing_status']  = $node->hasField('field_status')   ? $node->get('field_status')->value   : 'available';
+  }
+}
+
+/**
+ * Implements hook_preprocess_HOOK() for block.html.twig.
+ */
+function meadow_lane_preprocess_block(array &$variables): void {
+  $variables['plugin_id'] = $variables['elements']['#plugin_id'] ?? '';
+}
+
+/**
+ * Implements hook_preprocess_HOOK() for menu.html.twig.
+ */
+function meadow_lane_preprocess_menu(array &$variables): void {
+  $variables['show_member_login'] = theme_get_setting('show_member_login') ?? TRUE;
+}
+
+/**
+ * Implements hook_theme_suggestions_HOOK_alter() for page templates.
+ */
+function meadow_lane_theme_suggestions_page_alter(array &$suggestions, array $variables): void {
+  if ($node = \Drupal::routeMatch()->getParameter('node')) {
+    if (is_object($node)) {
+      $suggestions[] = 'page__node__' . $node->bundle();
+    }
+  }
+}
+
+/**
+ * Implements hook_theme_suggestions_HOOK_alter() for node templates.
+ */
+function meadow_lane_theme_suggestions_node_alter(array &$suggestions, array $variables): void {
+  $node = $variables['elements']['#node'];
+  $view_mode = $variables['elements']['#view_mode'];
+  $suggestions[] = 'node__' . $node->bundle() . '__' . $view_mode;
+}
+
+/**
+ * Implements hook_preprocess_HOOK() for views_view.
+ */
+function meadow_lane_preprocess_views_view(array &$variables): void {
+  $variables['view_id'] = $variables['view']->id();
+}
+
+/**
+ * Implements hook_page_attachments_alter().
+ *
+ * Attach Google Fonts for Playfair Display + DM Sans.
+ */
+function meadow_lane_page_attachments_alter(array &$attachments): void {
+  $attachments['#attached']['html_head'][] = [
+    [
+      '#type' => 'html_tag',
+      '#tag' => 'link',
+      '#attributes' => [
+        'rel'  => 'preconnect',
+        'href' => 'https://fonts.googleapis.com',
+      ],
+    ],
+    'google_fonts_preconnect',
+  ];
+
+  $attachments['#attached']['html_head'][] = [
+    [
+      '#type' => 'html_tag',
+      '#tag' => 'link',
+      '#attributes' => [
+        'rel'         => 'preconnect',
+        'href'        => 'https://fonts.gstatic.com',
+        'crossorigin' => TRUE,
+      ],
+    ],
+    'google_fonts_preconnect_gstatic',
+  ];
+
+  $attachments['#attached']['html_head'][] = [
+    [
+      '#type' => 'html_tag',
+      '#tag' => 'link',
+      '#attributes' => [
+        'rel'  => 'stylesheet',
+        'href' => 'https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:wght@300;400;500&display=swap',
+      ],
+    ],
+    'google_fonts',
+  ];
+}

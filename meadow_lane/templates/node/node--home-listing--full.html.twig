@@ -1,0 +1,87 @@
+{#
+/**
+ * @file node--home-listing--full.html.twig
+ * Meadow Lane Park — full detail page for a Home Listing node.
+ */
+#}
+<article{{ attributes.addClass('listing-detail') }}>
+
+  {# Photo gallery #}
+  {% if content.field_images %}
+    <div class="listing-detail__gallery">
+      {{ content.field_images }}
+    </div>
+  {% endif %}
+
+  <div class="listing-detail__body layout-two-col layout-two-col--sidebar">
+
+    {# Left: main info #}
+    <div class="listing-detail__main">
+
+      {# Price + status #}
+      <div class="listing-detail__price-row">
+        {% if listing_price %}
+          <div class="listing-detail__price">${{ listing_price|number_format(0, '.', ',') }}</div>
+        {% endif %}
+        {% if listing_status %}
+          <span class="listing-card__badge listing-card__badge--{{ listing_status|lower|replace({' ': '-'}) }}">
+            {{ listing_status|t }}
+          </span>
+        {% endif %}
+      </div>
+
+      {% if listing_address %}
+        <p class="listing-detail__address">{{ listing_address }}</p>
+      {% endif %}
+
+      {# Key specs #}
+      <div class="listing-detail__specs">
+        {% if listing_beds %}
+          <div class="listing-detail__spec-item">
+            <span class="listing-detail__spec-value">{{ listing_beds }}</span>
+            <span class="listing-detail__spec-label">{{ 'Bedrooms'|t }}</span>
+          </div>
+        {% endif %}
+        {% if listing_baths %}
+          <div class="listing-detail__spec-item">
+            <span class="listing-detail__spec-value">{{ listing_baths }}</span>
+            <span class="listing-detail__spec-label">{{ 'Bathrooms'|t }}</span>
+          </div>
+        {% endif %}
+        {% if listing_sqft %}
+          <div class="listing-detail__spec-item">
+            <span class="listing-detail__spec-value">{{ listing_sqft|number_format(0, '.', ',') }}</span>
+            <span class="listing-detail__spec-label">{{ 'Sq Ft'|t }}</span>
+          </div>
+        {% endif %}
+      </div>
+
+      {# Body / description #}
+      {% if content.body %}
+        <div class="prose">{{ content.body }}</div>
+      {% endif %}
+
+      {# Any remaining fields #}
+      {{ content|without('field_images', 'body', 'field_price', 'field_bedrooms', 'field_bathrooms', 'field_sqft', 'field_address', 'field_status') }}
+
+    </div>
+
+    {# Right: contact sidebar #}
+    <aside class="listing-detail__sidebar">
+      <div class="card card--raised">
+        <h2 class="card__title">{{ 'Interested in this home?'|t }}</h2>
+        <p class="card__body" style="margin-bottom: 1.25rem;">
+          {{ 'Contact us for more information, to schedule a viewing, or to learn about our resident-ownership model.'|t }}
+        </p>
+        <a href="/contact?ref={{ node.id() }}" class="btn btn--primary" style="width:100%; justify-content:center;">
+          {{ 'Get in touch'|t }}
+        </a>
+        <a href="/ownership" class="btn btn--outline" style="width:100%; justify-content:center; margin-top:.75rem;">
+          {{ 'How ownership works'|t }}
+        </a>
+      </div>
+    </aside>
+
+  </div>
+
+</article>
