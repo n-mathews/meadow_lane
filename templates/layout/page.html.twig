@@ -5,97 +5,27 @@
  *
  * Variables (selected):
  *   - is_front: TRUE on the front page.
- *   - hero_tagline, hero_subtext: From theme settings.
- *   - show_member_login: From theme settings.
- *   - contact_phone, contact_email, contact_address: Theme settings.
- *   - footer_tagline, social_facebook: Theme settings.
- *   - page.header, page.primary_menu, page.hero: Regions.
- *   - page.content, page.content_top, page.content_bottom: Regions.
- *   - page.footer_first…footer_fourth, page.footer_bottom: Regions.
+ *   - show_member_login, hero_tagline, hero_subtext: Theme settings.
+ *   - footer_tagline, social_facebook, contact_*: Theme settings.
+ *   - page.*: All Drupal region variables.
  */
 #}
 <div class="site-wrapper">
 
-  {# ── Header ─────────────────────────────────────────── #}
-  <header class="layout-header" role="banner">
-    <nav class="site-nav" aria-label="{{ 'Site navigation'|t }}">
+  {{ include('@meadow_lane/partials/site-header.html.twig') }}
 
-      {# Logo #}
-      <a class="nav__logo" href="{{ path('<front>') }}" rel="home" aria-label="{{ 'Meadow Lane Park — home'|t }}">
-        <div class="nav__logo-mark" aria-hidden="true">
-          {{ include('@meadow_lane/partials/logo-mark.svg.twig') }}
-        </div>
-        <div class="nav__brand">
-          {{ 'Meadow Lane Park'|t }}
-          <span class="nav__brand-sub">{{ '1000 Islands · New York'|t }}</span>
-        </div>
-      </a>
-
-      {# Mobile toggle #}
-      <button
-        class="nav__toggle"
-        aria-expanded="false"
-        aria-controls="primary-nav"
-        aria-label="{{ 'Toggle menu'|t }}"
-      >
-        <span class="nav__toggle-bar"></span>
-        <span class="nav__toggle-bar"></span>
-        <span class="nav__toggle-bar"></span>
-      </button>
-
-      {# Primary menu region #}
-      <ul class="nav__menu" id="primary-nav" role="list">
-        {% if page.primary_menu %}
-          {{ page.primary_menu }}
-        {% else %}
-          {# Fallback static links — replace with a Drupal menu block #}
-          <li class="nav__menu-item"><a href="/about">{{ 'About Us'|t }}</a></li>
-          <li class="nav__menu-item"><a href="/amenities">{{ 'Amenities'|t }}</a></li>
-          <li class="nav__menu-item"><a href="/homes-for-sale">{{ 'Homes for Sale'|t }}</a></li>
-          <li class="nav__menu-item"><a href="/location">{{ 'Location'|t }}</a></li>
-          <li class="nav__menu-item"><a href="/contact">{{ 'Contact'|t }}</a></li>
-        {% endif %}
-
-        {% if show_member_login %}
-          <li class="nav__menu-item">
-            <a href="/member" class="nav__member-btn">{{ 'Member Login'|t }}</a>
-          </li>
-        {% endif %}
-      </ul>
-
-    </nav>
-
-    {% if page.header_top %}
-      <div class="header-top">{{ page.header_top }}</div>
-    {% endif %}
-  </header>
-
-  {# ── Hero (front page only) ──────────────────────────── #}
-  {% if is_front %}
-    <div class="layout-hero">
-      {% if page.hero %}
-        {{ page.hero }}
-      {% else %}
-        {{ include('@meadow_lane/partials/hero-default.html.twig') }}
-      {% endif %}
-    </div>
-  {% endif %}
-
-  {# ── Highlighted messages ────────────────────────────── #}
   {% if page.highlighted %}
     <div class="layout-highlighted" role="complementary">
       {{ page.highlighted }}
     </div>
   {% endif %}
 
-  {# ── Breadcrumb ──────────────────────────────────────── #}
-  {% if page.breadcrumb and not is_front %}
+  {% if page.breadcrumb %}
     <div class="layout-breadcrumb container">
       {{ page.breadcrumb }}
     </div>
   {% endif %}
 
-  {# ── Main content ────────────────────────────────────── #}
   <main id="main-content" class="layout-main" role="main" tabindex="-1">
 
     {% if page.content_top %}
@@ -112,75 +42,6 @@
 
   </main>
 
-  {# ── Footer ──────────────────────────────────────────── #}
-  <footer class="site-footer" role="contentinfo">
-    <div class="footer__top">
-
-      {# Brand column #}
-      <div class="footer__brand">
-        <div class="footer__brand-name">{{ 'Meadow Lane Park'|t }}</div>
-        <p class="footer__brand-desc">{{ footer_tagline|default('Proud to be co-owned by the people who call it home.')|t }}</p>
-        {% if social_facebook %}
-          <a href="{{ social_facebook }}" aria-label="{{ 'Follow us on Facebook'|t }}" class="footer__social-link" target="_blank" rel="noopener noreferrer">
-            {{ 'Facebook'|t }}
-          </a>
-        {% endif %}
-      </div>
-
-      {# Footer menu columns — assign blocks in Structure > Block layout #}
-      <div class="footer__col">
-        <h2 class="footer__col-heading">{{ 'Community'|t }}</h2>
-        {% if page.footer_first %}
-          {{ page.footer_first }}
-        {% else %}
-          <ul>
-            <li><a href="/about">{{ 'About Us'|t }}</a></li>
-            <li><a href="/amenities">{{ 'Amenities'|t }}</a></li>
-            <li><a href="/community-rules">{{ 'Community Rules'|t }}</a></li>
-            <li><a href="/board">{{ 'Board of Directors'|t }}</a></li>
-          </ul>
-        {% endif %}
-      </div>
-
-      <div class="footer__col">
-        <h2 class="footer__col-heading">{{ 'Real Estate'|t }}</h2>
-        {% if page.footer_second %}
-          {{ page.footer_second }}
-        {% else %}
-          <ul>
-            <li><a href="/homes-for-sale">{{ 'Homes for Sale'|t }}</a></li>
-            <li><a href="/how-to-buy">{{ 'How to Buy'|t }}</a></li>
-            <li><a href="/ownership">{{ 'Ownership Explained'|t }}</a></li>
-          </ul>
-        {% endif %}
-      </div>
-
-      <div class="footer__col">
-        <h2 class="footer__col-heading">{{ 'Residents'|t }}</h2>
-        {% if page.footer_third %}
-          {{ page.footer_third }}
-        {% else %}
-          <ul>
-            <li><a href="/member">{{ 'Member Login'|t }}</a></li>
-            <li><a href="/documents">{{ 'Documents &amp; Forms'|t }}</a></li>
-            <li><a href="/contact">{{ 'Contact Us'|t }}</a></li>
-          </ul>
-        {% endif %}
-      </div>
-
-    </div>{# /.footer__top #}
-
-    <div class="footer__bottom">
-      <span>
-        &copy; {{ "now"|date("Y") }} {{ 'Meadow Lane Park. All rights reserved.'|t }}
-      </span>
-      <span>{{ 'Alexandria Bay, New York · 1000 Islands Region'|t }}</span>
-    </div>
-
-    {% if page.footer_bottom %}
-      <div class="footer__legal">{{ page.footer_bottom }}</div>
-    {% endif %}
-
-  </footer>
+  {{ include('@meadow_lane/partials/site-footer.html.twig') }}
 
 </div>{# /.site-wrapper #}

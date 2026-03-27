@@ -1,0 +1,66 @@
+{#
+/**
+ * @file site-header.html.twig
+ * Meadow Lane Park — site header and primary navigation partial.
+ *
+ * Included by page.html.twig and page--front.html.twig.
+ *
+ * Variables available from parent template:
+ *   - page.primary_menu: Primary navigation menu region.
+ *   - page.header_top: Optional top-of-header region.
+ *   - show_member_login: Boolean from theme settings.
+ */
+#}
+<header class="layout-header" role="banner">
+  <nav class="site-nav" aria-label="{{ 'Site navigation'|t }}">
+
+    {# ── Logo ──────────────────────────────────────────── #}
+    <a class="nav__logo" href="{{ path('<front>') }}" rel="home" aria-label="{{ 'Meadow Lane Park — home'|t }}">
+      <div class="nav__logo-mark" aria-hidden="true">
+        {{ include('@meadow_lane/partials/logo-mark.svg.twig') }}
+      </div>
+      <div class="nav__brand">
+        {{ 'Meadow Lane Park'|t }}
+        <span class="nav__brand-sub">{{ '1000 Islands · New York'|t }}</span>
+      </div>
+    </a>
+
+    {# ── Mobile hamburger toggle ────────────────────────── #}
+    <button
+      class="nav__toggle"
+      aria-expanded="false"
+      aria-controls="primary-nav"
+      aria-label="{{ 'Toggle navigation menu'|t }}"
+    >
+      <span class="nav__toggle-bar"></span>
+      <span class="nav__toggle-bar"></span>
+      <span class="nav__toggle-bar"></span>
+    </button>
+
+    {# ── Primary menu ──────────────────────────────────── #}
+    <ul class="nav__menu" id="primary-nav" role="list">
+      {% if page.primary_menu %}
+        {{ page.primary_menu }}
+      {% else %}
+        {# Static fallback — replace by assigning a menu block to the
+           Primary Menu region in Structure → Block layout. #}
+        <li class="nav__menu-item"><a href="/about">{{ 'About Us'|t }}</a></li>
+        <li class="nav__menu-item"><a href="/amenities">{{ 'Amenities'|t }}</a></li>
+        <li class="nav__menu-item"><a href="/homes-for-sale">{{ 'Homes for Sale'|t }}</a></li>
+        <li class="nav__menu-item"><a href="/location">{{ 'Location'|t }}</a></li>
+        <li class="nav__menu-item"><a href="/contact">{{ 'Contact'|t }}</a></li>
+      {% endif %}
+
+      {% if show_member_login %}
+        <li class="nav__menu-item">
+          <a href="/member" class="nav__member-btn">{{ 'Member Login'|t }}</a>
+        </li>
+      {% endif %}
+    </ul>
+
+  </nav>
+
+  {% if page.header_top %}
+    <div class="header-top">{{ page.header_top }}</div>
+  {% endif %}
+</header>

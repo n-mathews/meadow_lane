@@ -1,0 +1,89 @@
+{#
+/**
+ * @file site-footer.html.twig
+ * Meadow Lane Park — site footer partial.
+ *
+ * Included by page.html.twig and page--front.html.twig.
+ *
+ * Variables available from parent template:
+ *   - footer_tagline: From theme settings.
+ *   - social_facebook: From theme settings.
+ *   - page.footer_first … footer_third: Menu region blocks.
+ *   - page.footer_bottom: Legal / copyright region.
+ */
+#}
+<footer class="site-footer" role="contentinfo">
+  <div class="footer__top">
+
+    {# ── Brand column ────────────────────────────────────── #}
+    <div class="footer__brand">
+      <div class="footer__brand-name">{{ 'Meadow Lane Park'|t }}</div>
+      <p class="footer__brand-desc">
+        {{ footer_tagline|default('Proud to be co-owned by the people who call it home.')|t }}
+      </p>
+      {% if social_facebook %}
+        <a
+          href="{{ social_facebook }}"
+          class="footer__social-link"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="{{ 'Follow Meadow Lane Park on Facebook'|t }}"
+        >{{ 'Facebook'|t }}</a>
+      {% endif %}
+    </div>
+
+    {# ── Community links ─────────────────────────────────── #}
+    <div class="footer__col">
+      <h2 class="footer__col-heading">{{ 'Community'|t }}</h2>
+      {% if page.footer_first %}
+        {{ page.footer_first }}
+      {% else %}
+        <ul>
+          <li><a href="/about">{{ 'About Us'|t }}</a></li>
+          <li><a href="/amenities">{{ 'Amenities'|t }}</a></li>
+          <li><a href="/community-rules">{{ 'Community Rules'|t }}</a></li>
+          <li><a href="/board">{{ 'Board of Directors'|t }}</a></li>
+        </ul>
+      {% endif %}
+    </div>
+
+    {# ── Real estate links ───────────────────────────────── #}
+    <div class="footer__col">
+      <h2 class="footer__col-heading">{{ 'Real Estate'|t }}</h2>
+      {% if page.footer_second %}
+        {{ page.footer_second }}
+      {% else %}
+        <ul>
+          <li><a href="/homes-for-sale">{{ 'Homes for Sale'|t }}</a></li>
+          <li><a href="/how-to-buy">{{ 'How to Buy'|t }}</a></li>
+          <li><a href="/ownership">{{ 'Ownership Explained'|t }}</a></li>
+        </ul>
+      {% endif %}
+    </div>
+
+    {# ── Residents links ─────────────────────────────────── #}
+    <div class="footer__col">
+      <h2 class="footer__col-heading">{{ 'Residents'|t }}</h2>
+      {% if page.footer_third %}
+        {{ page.footer_third }}
+      {% else %}
+        <ul>
+          <li><a href="/member">{{ 'Member Login'|t }}</a></li>
+          <li><a href="/documents">{{ 'Documents &amp; Forms'|t }}</a></li>
+          <li><a href="/contact">{{ 'Contact Us'|t }}</a></li>
+        </ul>
+      {% endif %}
+    </div>
+
+  </div>{# /.footer__top #}
+
+  <div class="footer__bottom">
+    <span>&copy; {{ "now"|date("Y") }} {{ 'Meadow Lane Park. All rights reserved.'|t }}</span>
+    <span>{{ 'Alexandria Bay, New York · 1000 Islands Region'|t }}</span>
+  </div>
+
+  {% if page.footer_bottom %}
+    <div class="footer__legal">{{ page.footer_bottom }}</div>
+  {% endif %}
+
+</footer>

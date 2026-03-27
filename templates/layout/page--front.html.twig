@@ -2,74 +2,37 @@
 /**
  * @file page--front.html.twig
  * Meadow Lane Park — front/home page layout.
- * Extends the default page but inserts the full homepage sections.
+ *
+ * Delegates header, hero, and footer to shared partials so markup
+ * is never duplicated between page templates.
+ *
+ * Variables:
+ *   - hero_tagline, hero_subtext: From theme settings.
+ *   - show_member_login: From theme settings.
+ *   - footer_tagline, social_facebook: From theme settings.
+ *   - page.*: All Drupal region variables.
  */
 #}
 <div class="site-wrapper page--front">
 
-  {# ── Header (same as default) ────────────────────────── #}
-  {% include '@meadow_lane/layout/partials/site-header.html.twig' %}
+  {{ include('@meadow_lane/partials/site-header.html.twig') }}
 
-  {# ── Hero ────────────────────────────────────────────── #}
-  <section class="hero" aria-label="{{ 'Welcome'|t }}">
-    {# Decorative scenery SVG #}
-    <div class="hero__scenery" aria-hidden="true">
-      {{ include('@meadow_lane/partials/hero-scenery.svg.twig') }}
-    </div>
+  {# Hero: use the Hero region if a block is placed there,
+     otherwise fall back to the default hero partial. #}
+  {% if page.hero %}
+    <div class="layout-hero">{{ page.hero }}</div>
+  {% else %}
+    {{ include('@meadow_lane/partials/hero-default.html.twig') }}
+  {% endif %}
 
-    <div class="hero__content">
-      <div class="hero__badge">
-        <span class="hero__badge-dot"></span>
-        {{ 'Resident-Owned Community'|t }}
-      </div>
-
-      <h1>
-        {{ hero_tagline|default('Life on the'|t) }}<br>
-        <em>{{ 'Thousand Islands'|t }}</em>
-      </h1>
-
-      <p class="hero__lead">
-        {{ hero_subtext|default('A welcoming, resident-owned community nestled along the shores of the St. Lawrence River in the heart of the 1000 Islands region, New York.'|t) }}
-      </p>
-
-      <div class="hero__actions">
-        <a href="/homes-for-sale" class="btn btn--white">{{ 'Explore Homes for Sale'|t }}</a>
-        <a href="/about" class="btn btn--ghost-light">{{ 'Learn about us'|t }}</a>
-      </div>
-    </div>
-  </section>
-
-  {# ── Stats strip ─────────────────────────────────────── #}
-  <div class="stats-strip" aria-label="{{ 'Community at a glance'|t }}">
-    <div class="stats-strip__item">
-      <div class="stats-strip__number">{{ 'Est. 1972'|t }}</div>
-      <div class="stats-strip__label">{{ 'Year founded'|t }}</div>
-    </div>
-    <div class="stats-strip__item">
-      <div class="stats-strip__number">100%</div>
-      <div class="stats-strip__label">{{ 'Resident owned'|t }}</div>
-    </div>
-    <div class="stats-strip__item">
-      <div class="stats-strip__number">1000+</div>
-      <div class="stats-strip__label">{{ 'Islands nearby'|t }}</div>
-    </div>
-    <div class="stats-strip__item">
-      <div class="stats-strip__number">{{ '4 Seasons'|t }}</div>
-      <div class="stats-strip__label">{{ 'Year-round living'|t }}</div>
-    </div>
-  </div>
-
-  {# ── Highlighted messages ────────────────────────────── #}
   {% if page.highlighted %}
     <div class="layout-highlighted container">{{ page.highlighted }}</div>
   {% endif %}
 
-  {# ── Main content (Drupal blocks/views injected here) ── #}
   <main id="main-content" class="layout-main" role="main" tabindex="-1">
     {{ page.content }}
   </main>
 
-  {# ── Footer ──────────────────────────────────────────── #}
-  {% include '@meadow_lane/layout/partials/site-footer.html.twig' %}
+  {{ include('@meadow_lane/partials/site-footer.html.twig') }}
 
-</div>
+</div>{# /.site-wrapper #}
