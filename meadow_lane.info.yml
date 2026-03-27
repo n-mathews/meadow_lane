@@ -33,3 +33,12 @@ regions:
 features:
   - logo
   - favicon
+
+# Default logo and favicon — overridable via Appearance > Settings
+logo:
+  path: images/logo.svg
+  use_default: false
+
+favicon:
+  path: images/logo-icon.svg
+  use_default: false

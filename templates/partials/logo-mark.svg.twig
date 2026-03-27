@@ -1,13 +1,17 @@
 {#
 /**
  * @file logo-mark.svg.twig
- * Meadow Lane Park — inline SVG logo mark used in the nav.
- * Renders a stylised water-drop / leaf shape.
+ * Meadow Lane Park — nav logo mark.
+ * Renders the community illustration icon (bridge, freighter, river).
+ * Text has been removed from the oval for accessibility and clean rendering.
+ * Alt text is provided on the parent <a> element in site-header.html.twig.
  */
 #}
-<svg viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg" width="22" height="22" aria-hidden="true" focusable="false">
-  <path d="M11 3C11 3 5 7 5 13C5 16.3 7.7 19 11 19C14.3 19 17 16.3 17 13C17 7 11 3 11 3Z"
-        fill="white" fill-opacity="0.9"/>
-  <path d="M5 13 Q8 11 11 13 Q14 15 17 13"
-        stroke="white" stroke-width="1.2" fill="none" opacity="0.6"/>
-</svg>
+<img
+  src="{{ base_path ~ directory }}/images/logo-icon.svg"
+  alt=""
+  aria-hidden="true"
+  width="44"
+  height="44"
+  loading="eager"
+/>
