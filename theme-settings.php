@@ -76,7 +76,7 @@ function meadow_lane_form_system_theme_settings_alter(array &$form, FormStateInt
   $form['meadow_lane_settings']['footer_tagline'] = [
     '#type' => 'textfield',
     '#title' => t('Footer tagline'),
-    '#default_value' => theme_get_setting('footer_tagline') ?? 'Proud to be co-owned by the people who call it home.',
+    '#default_value' => theme_get_setting('footer_tagline') ?? 'A seasonal, resident-owned community on the St. Lawrence River — incorporated 2018.',
   ];
 
   // Member area toggle.

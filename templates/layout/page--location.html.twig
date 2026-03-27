@@ -2,10 +2,6 @@
 /**
  * @file page--location.html.twig
  * Meadow Lane Park — Location page.
- *
- * Assumes a basic page node with alias /location.
- * The map embed block should be placed in the Content region via
- * Block layout, or added as a field (field_map_embed) on the node.
  */
 #}
 <div class="site-wrapper">
@@ -36,7 +32,7 @@
 
       <section class="inner-page">
         <p class="inner-page__lead">
-          {{ 'Meadow Lane Park sits in the heart of the 1000 Islands region, minutes from the St. Lawrence River and the village of Alexandria Bay, NY.'|t }}
+          {{ 'Meadow Lane Park is minutes from the Thousand Islands Bridge and the village of Alexandria Bay, NY — in the heart of one of the most scenic regions in the northeast.'|t }}
         </p>
 
         {# ── Two-col: info + map ─────────────────────────── #}
@@ -62,11 +58,11 @@
             <div class="location-detail-block">
               <span class="section-label">{{ 'Getting here'|t }}</span>
               <ul class="location-features-list">
-                <li>{{ 'Minutes from the St. Lawrence River and public boat launches'|t }}</li>
-                <li>{{ 'Close to Boldt Castle, Thousand Islands Bridge, and state parks'|t }}</li>
-                <li>{{ 'Easy access to Alexandria Bay village shops and restaurants'|t }}</li>
-                <li>{{ 'Under 2 hours from Ottawa, Syracuse, and the Adirondacks'|t }}</li>
-                <li>{{ 'Year-round access with snow-cleared roads and winter activities'|t }}</li>
+                <li>{{ 'Minutes from I-81'|t }}</li>
+                <li>{{ 'Minutes from the Thousand Islands Bridge'|t }}</li>
+                <li>{{ 'Easy access to the village shops and restaurants of Clayton and Alexandria Bay'|t }}</li>
+                <li>{{ '30 minutes from the Watertown International Airport'|t }}</li>
+                <li>{{ '90 minutes from the NYS Thruway'|t }}</li>
               </ul>
             </div>
 
@@ -77,27 +73,27 @@
               <div class="nearby-grid">
                 <div class="nearby-item">
                   <div class="nearby-item__name">{{ 'Boldt Castle'|t }}</div>
-                  <div class="nearby-item__dist">{{ '5 min by boat'|t }}</div>
-                </div>
-                <div class="nearby-item">
-                  <div class="nearby-item__name">{{ 'Alexandria Bay'|t }}</div>
-                  <div class="nearby-item__dist">{{ '5 min by car'|t }}</div>
+                  <div class="nearby-item__dist">{{ '10 min by boat'|t }}</div>
                 </div>
                 <div class="nearby-item">
                   <div class="nearby-item__name">{{ 'Thousand Islands Bridge'|t }}</div>
+                  <div class="nearby-item__dist">{{ '2 min'|t }}</div>
+                </div>
+                <div class="nearby-item">
+                  <div class="nearby-item__name">{{ 'Alexandria Bay'|t }}</div>
+                  <div class="nearby-item__dist">{{ '10 min'|t }}</div>
+                </div>
+                <div class="nearby-item">
+                  <div class="nearby-item__name">{{ 'Clayton, NY'|t }}</div>
                   <div class="nearby-item__dist">{{ '10 min'|t }}</div>
                 </div>
                 <div class="nearby-item">
                   <div class="nearby-item__name">{{ 'Wellesley Island State Park'|t }}</div>
-                  <div class="nearby-item__dist">{{ '15 min'|t }}</div>
+                  <div class="nearby-item__dist">{{ '5 min'|t }}</div>
                 </div>
                 <div class="nearby-item">
-                  <div class="nearby-item__name">{{ 'Syracuse, NY'|t }}</div>
-                  <div class="nearby-item__dist">{{ '1 hr 20 min'|t }}</div>
-                </div>
-                <div class="nearby-item">
-                  <div class="nearby-item__name">{{ 'Ottawa, ON'|t }}</div>
-                  <div class="nearby-item__dist">{{ '1 hr 45 min'|t }}</div>
+                  <div class="nearby-item__name">{{ 'Watertown Airport'|t }}</div>
+                  <div class="nearby-item__dist">{{ '30 min'|t }}</div>
                 </div>
               </div>
             </div>
@@ -116,7 +112,7 @@
                   <path d="M24 30 L24 42" stroke="currentColor" stroke-width="2"/>
                   <circle cx="24" cy="20" r="4" fill="currentColor"/>
                 </svg>
-                <p>{{ 'Add a Google Maps embed block to this region, or add a field_map_embed field to this page type.'|t }}</p>
+                <p>{{ 'Add a Google Maps embed block to this region in Structure → Block layout.'|t }}</p>
               </div>
             {% endif %}
           </div>
@@ -134,10 +130,11 @@
 
       {# ── CTA ─────────────────────────────────────────────── #}
       <div class="cta-band">
-        <h2>{{ 'Ready to visit?'|t }}</h2>
-        <p>{{ 'We\'d be happy to show you around. Contact us to arrange a visit at a time that suits you.'|t }}</p>
+        <h2>{{ 'Ready to see it for yourself?'|t }}</h2>
+        <p>{{ 'Browse seasonal homes for sale or get in touch to arrange a visit.'|t }}</p>
         <div class="cta-band__actions">
-          <a href="/contact" class="btn btn--primary">{{ 'Get in touch'|t }}</a>
+          <a href="/homes-for-sale" class="btn btn--primary">{{ 'View homes for sale'|t }}</a>
+          <a href="/contact" class="btn btn--outline">{{ 'Contact us'|t }}</a>
         </div>
       </div>
 

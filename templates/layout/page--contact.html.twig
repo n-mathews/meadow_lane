@@ -3,9 +3,10 @@
  * @file page--contact.html.twig
  * Meadow Lane Park — Contact page.
  *
- * Assumes a basic page node with alias /contact.
- * The contact form block (Webform or Contact module) should be placed
- * in the Content region via Block layout, or rendered via page.content.
+ * No public-facing contact form. Prospective members contact the
+ * community via phone or email listed in theme settings.
+ * The page.content region can hold any additional blocks placed
+ * by editors (e.g. a Webform accessible only to members later).
  */
 #}
 <div class="site-wrapper">
@@ -36,71 +37,20 @@
 
       <section class="inner-page">
         <p class="inner-page__lead">
-          {{ 'Whether you\'re interested in buying a home, learning about our community, or just have a question — we\'d love to hear from you.'|t }}
+          {{ 'Interested in a seasonal home at Meadow Lane Park? We\'d love to hear from you. Reach us by phone or email and we\'ll be happy to answer any questions or arrange a visit.'|t }}
         </p>
 
         <div class="contact-layout">
 
-          {# ── Contact form ──────────────────────────────── #}
-          <div class="contact-layout__form">
-            <h2 style="font-size: var(--text-2xl); margin-bottom: var(--space-6);">
-              {{ 'Send us a message'|t }}
-            </h2>
-
-            {# Render Webform / Contact form block from page.content.
-               If no form is placed, show a styled fallback. #}
-            {% if page.content %}
-              <div class="contact-form-wrapper">
-                {{ page.content }}
-              </div>
-            {% else %}
-              {# Fallback static form — wire up to Webform or Contact module #}
-              <form class="contact-form" novalidate>
-                <div class="form-row">
-                  <div class="form-group">
-                    <label for="contact-name">{{ 'Your name'|t }}</label>
-                    <input type="text" id="contact-name" name="name" autocomplete="name" required>
-                  </div>
-                  <div class="form-group">
-                    <label for="contact-email">{{ 'Email address'|t }}</label>
-                    <input type="email" id="contact-email" name="email" autocomplete="email" required>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label for="contact-subject">{{ 'Subject'|t }}</label>
-                  <select id="contact-subject" name="subject">
-                    <option value="">{{ '— Please select —'|t }}</option>
-                    <option value="homes">{{ 'Homes for sale'|t }}</option>
-                    <option value="ownership">{{ 'Resident ownership'|t }}</option>
-                    <option value="visit">{{ 'Arrange a visit'|t }}</option>
-                    <option value="general">{{ 'General enquiry'|t }}</option>
-                  </select>
-                </div>
-                <div class="form-group">
-                  <label for="contact-message">{{ 'Message'|t }}</label>
-                  <textarea id="contact-message" name="message" rows="6" required></textarea>
-                </div>
-                <button type="submit" class="btn btn--primary">
-                  {{ 'Send message'|t }}
-                </button>
-                <p class="form-hint" style="margin-top: var(--space-4);">
-                  {{ 'We typically respond within one business day.'|t }}
-                </p>
-              </form>
-            {% endif %}
-          </div>
-
-          {# ── Contact details sidebar ────────────────────── #}
-          <aside class="contact-layout__sidebar">
+          {# ── Contact details ───────────────────────────── #}
+          <div class="contact-layout__details">
 
             <div class="card" style="margin-bottom: var(--space-5);">
               <span class="section-label">{{ 'Contact details'|t }}</span>
               <dl class="contact-details">
                 {% if contact_address %}
                   <dt>{{ 'Address'|t }}</dt>
-                  <dd>
-                    <address>{{ contact_address }}</address>
-                  </dd>
+                  <dd><address>{{ contact_address }}</address></dd>
                 {% endif %}
                 {% if contact_phone %}
                   <dt>{{ 'Phone'|t }}</dt>
@@ -113,7 +63,7 @@
               </dl>
             </div>
 
-            <div class="card">
+            <div class="card" style="margin-bottom: var(--space-5);">
               <span class="section-label">{{ 'Office hours'|t }}</span>
               <dl class="contact-details">
                 <dt>{{ 'Monday – Friday'|t }}</dt>
@@ -126,7 +76,7 @@
             </div>
 
             {% if social_facebook %}
-              <div class="card" style="margin-top: var(--space-5);">
+              <div class="card">
                 <span class="section-label">{{ 'Follow us'|t }}</span>
                 <a
                   href="{{ social_facebook }}"
@@ -140,9 +90,36 @@
               </div>
             {% endif %}
 
-          </aside>
+          </div>
+
+          {# ── Seasonal homes CTA ────────────────────────── #}
+          <div class="contact-layout__cta">
+            <div class="card card--raised" style="padding: var(--space-10);">
+              <span class="section-label">{{ 'Seasonal homes'|t }}</span>
+              <h2 style="font-family: var(--font-serif); font-size: var(--text-3xl); font-weight: 500; color: var(--clr-slate); margin-bottom: var(--space-4); line-height: 1.2;">
+                {{ 'Looking for a seasonal home on the river?'|t }}
+              </h2>
+              <p style="color: var(--clr-text-mid); margin-bottom: var(--space-6);">
+                {{ 'Browse our available manufactured homes for sale. Each one is member-owned on resident land — a real stake in one of the most beautiful spots in the 1000 Islands.'|t }}
+              </p>
+              <a href="/homes-for-sale" class="btn btn--primary" style="width:100%; justify-content:center;">
+                {{ 'View homes for sale'|t }}
+              </a>
+              <a href="/ownership" class="btn btn--outline" style="width:100%; justify-content:center; margin-top: var(--space-3);">
+                {{ 'How ownership works'|t }}
+              </a>
+            </div>
+          </div>
 
         </div>{# /.contact-layout #}
+
+        {# Any additional blocks placed by editors #}
+        {% if page.content %}
+          <div class="prose" style="margin-top: var(--space-12);">
+            {{ page.content }}
+          </div>
+        {% endif %}
+
       </section>
 
     </div>{# /.container #}

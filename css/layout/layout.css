@@ -3,11 +3,16 @@
  * Page wrapper, site shell, regions, and section spacing.
  */
 
-/* ── Site wrapper ────────────────────────────────────── */
+/* ── Site wrapper — full viewport width ──────────────── */
 .site-wrapper {
+  width: 100%;
+  background: var(--clr-cream);
+}
+
+/* Header nav centred within full-width header */
+.layout-header .site-nav {
   max-width: var(--container-max);
   margin: 0 auto;
-  background: var(--clr-cream);
 }
 
 /* ── Container ───────────────────────────────────────── */
