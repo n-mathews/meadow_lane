@@ -1,31 +1,35 @@
-
-# Global styles loaded on every page
+# Global styles — auto-attached on every page via meadow_lane.info.yml
 global-styling:
   version: VERSION
   css:
+    # SMACSS base bucket — weight controls load order within the bucket.
+    # Lower weight = loaded earlier. variables.css must come first so all
+    # custom properties are defined before reset and typography consume them.
     base:
-      css/base/reset.css: {}
-      css/base/typography.css: {}
-      css/base/variables.css: {}
+      css/base/variables.css:  { weight: -40 }
+      css/base/reset.css:      { weight: -30 }
+      css/base/typography.css: { weight: -20 }
     layout:
       css/layout/layout.css: {}
-      css/layout/grid.css: {}
+      css/layout/grid.css:   {}
     component:
       css/components/navigation.css: {}
-      css/components/hero.css: {}
-      css/components/cards.css: {}
-      css/components/buttons.css: {}
-      css/components/forms.css: {}
-      css/components/amenities.css: {}
-      css/components/listings.css: {}
-      css/components/footer.css: {}
+      css/components/hero.css:       {}
+      css/components/cards.css:      {}
+      css/components/buttons.css:    {}
+      css/components/forms.css:      {}
+      css/components/amenities.css:  {}
+      css/components/listings.css:   {}
+      css/components/footer.css:     {}
+      css/components/page-banner.css: {}
+      css/components/inner-pages.css: {}
   js:
     js/global.js: {}
   dependencies:
     - core/drupal
     - core/once
 
-# Navigation / mobile menu
+# Mobile navigation — auto-attached on every page via meadow_lane.info.yml
 navigation:
   version: VERSION
   js:
@@ -35,28 +39,16 @@ navigation:
     - core/once
     - meadow_lane/global-styling
 
-# Hero region enhancements
-hero:
-  version: VERSION
-  css:
-    component:
-      css/components/hero.css: {}
-  dependencies:
-    - meadow_lane/global-styling
-
-# Homes for sale / listings
+# Homes for sale listing pages — attach via preprocess or page template
 listings:
   version: VERSION
-  css:
-    component:
-      css/components/listings.css: {}
   js:
     js/listings.js: {}
   dependencies:
     - meadow_lane/global-styling
     - core/drupal
 
-# Member login area (placeholder for future secure section)
+# Member portal — attach when member area pages are active
 member-area:
   version: VERSION
   css:

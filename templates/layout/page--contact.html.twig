@@ -1,0 +1,153 @@
+{#
+/**
+ * @file page--contact.html.twig
+ * Meadow Lane Park — Contact page.
+ *
+ * Assumes a basic page node with alias /contact.
+ * The contact form block (Webform or Contact module) should be placed
+ * in the Content region via Block layout, or rendered via page.content.
+ */
+#}
+<div class="site-wrapper">
+
+  {{ include('@meadow_lane/partials/site-header.html.twig') }}
+
+  {# ── Page banner ──────────────────────────────────────── #}
+  <div class="page-banner">
+    <div class="page-banner__inner container">
+      {% if page.breadcrumb %}
+        <nav class="page-banner__breadcrumb" aria-label="{{ 'Breadcrumb'|t }}">
+          {{ page.breadcrumb }}
+        </nav>
+      {% endif %}
+      <span class="section-label" style="color:rgba(255,255,255,0.55);">
+        {{ 'Get in touch'|t }}
+      </span>
+      <h1 class="page-banner__title">{{ 'Contact Us'|t }}</h1>
+    </div>
+  </div>
+
+  {% if page.highlighted %}
+    <div class="layout-highlighted container">{{ page.highlighted }}</div>
+  {% endif %}
+
+  <main id="main-content" class="layout-main" role="main" tabindex="-1">
+    <div class="container">
+
+      <section class="inner-page">
+        <p class="inner-page__lead">
+          {{ 'Whether you\'re interested in buying a home, learning about our community, or just have a question — we\'d love to hear from you.'|t }}
+        </p>
+
+        <div class="contact-layout">
+
+          {# ── Contact form ──────────────────────────────── #}
+          <div class="contact-layout__form">
+            <h2 style="font-size: var(--text-2xl); margin-bottom: var(--space-6);">
+              {{ 'Send us a message'|t }}
+            </h2>
+
+            {# Render Webform / Contact form block from page.content.
+               If no form is placed, show a styled fallback. #}
+            {% if page.content %}
+              <div class="contact-form-wrapper">
+                {{ page.content }}
+              </div>
+            {% else %}
+              {# Fallback static form — wire up to Webform or Contact module #}
+              <form class="contact-form" novalidate>
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="contact-name">{{ 'Your name'|t }}</label>
+                    <input type="text" id="contact-name" name="name" autocomplete="name" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="contact-email">{{ 'Email address'|t }}</label>
+                    <input type="email" id="contact-email" name="email" autocomplete="email" required>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="contact-subject">{{ 'Subject'|t }}</label>
+                  <select id="contact-subject" name="subject">
+                    <option value="">{{ '— Please select —'|t }}</option>
+                    <option value="homes">{{ 'Homes for sale'|t }}</option>
+                    <option value="ownership">{{ 'Resident ownership'|t }}</option>
+                    <option value="visit">{{ 'Arrange a visit'|t }}</option>
+                    <option value="general">{{ 'General enquiry'|t }}</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="contact-message">{{ 'Message'|t }}</label>
+                  <textarea id="contact-message" name="message" rows="6" required></textarea>
+                </div>
+                <button type="submit" class="btn btn--primary">
+                  {{ 'Send message'|t }}
+                </button>
+                <p class="form-hint" style="margin-top: var(--space-4);">
+                  {{ 'We typically respond within one business day.'|t }}
+                </p>
+              </form>
+            {% endif %}
+          </div>
+
+          {# ── Contact details sidebar ────────────────────── #}
+          <aside class="contact-layout__sidebar">
+
+            <div class="card" style="margin-bottom: var(--space-5);">
+              <span class="section-label">{{ 'Contact details'|t }}</span>
+              <dl class="contact-details">
+                {% if contact_address %}
+                  <dt>{{ 'Address'|t }}</dt>
+                  <dd>
+                    <address>{{ contact_address }}</address>
+                  </dd>
+                {% endif %}
+                {% if contact_phone %}
+                  <dt>{{ 'Phone'|t }}</dt>
+                  <dd><a href="tel:{{ contact_phone }}">{{ contact_phone }}</a></dd>
+                {% endif %}
+                {% if contact_email %}
+                  <dt>{{ 'Email'|t }}</dt>
+                  <dd><a href="mailto:{{ contact_email }}">{{ contact_email }}</a></dd>
+                {% endif %}
+              </dl>
+            </div>
+
+            <div class="card">
+              <span class="section-label">{{ 'Office hours'|t }}</span>
+              <dl class="contact-details">
+                <dt>{{ 'Monday – Friday'|t }}</dt>
+                <dd>{{ '9:00 am – 4:00 pm'|t }}</dd>
+                <dt>{{ 'Saturday'|t }}</dt>
+                <dd>{{ '10:00 am – 2:00 pm'|t }}</dd>
+                <dt>{{ 'Sunday'|t }}</dt>
+                <dd>{{ 'Closed'|t }}</dd>
+              </dl>
+            </div>
+
+            {% if social_facebook %}
+              <div class="card" style="margin-top: var(--space-5);">
+                <span class="section-label">{{ 'Follow us'|t }}</span>
+                <a
+                  href="{{ social_facebook }}"
+                  class="btn btn--outline"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style="width:100%; justify-content:center; margin-top: var(--space-3);"
+                >
+                  {{ 'Facebook'|t }}
+                </a>
+              </div>
+            {% endif %}
+
+          </aside>
+
+        </div>{# /.contact-layout #}
+      </section>
+
+    </div>{# /.container #}
+  </main>
+
+  {{ include('@meadow_lane/partials/site-footer.html.twig') }}
+
+</div>

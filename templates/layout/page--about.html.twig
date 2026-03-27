@@ -1,0 +1,120 @@
+{#
+/**
+ * @file page--about.html.twig
+ * Meadow Lane Park — About Us page.
+ *
+ * Assumes a Drupal basic page node with alias /about.
+ * The main body content is rendered via page.content as usual;
+ * this template adds structured sections around it.
+ */
+#}
+<div class="site-wrapper">
+
+  {{ include('@meadow_lane/partials/site-header.html.twig') }}
+
+  {# ── Page banner ──────────────────────────────────────── #}
+  <div class="page-banner">
+    <div class="page-banner__inner container">
+      {% if page.breadcrumb %}
+        <nav class="page-banner__breadcrumb" aria-label="{{ 'Breadcrumb'|t }}">
+          {{ page.breadcrumb }}
+        </nav>
+      {% endif %}
+      <span class="section-label" style="color:rgba(255,255,255,0.55);">
+        {{ 'Our community'|t }}
+      </span>
+      <h1 class="page-banner__title">{{ 'About Meadow Lane Park'|t }}</h1>
+    </div>
+  </div>
+
+  {% if page.highlighted %}
+    <div class="layout-highlighted container">{{ page.highlighted }}</div>
+  {% endif %}
+
+  <main id="main-content" class="layout-main" role="main" tabindex="-1">
+    <div class="container">
+
+      {# ── Intro ──────────────────────────────────────────── #}
+      <section class="inner-page" aria-label="{{ 'About us introduction'|t }}">
+        <p class="inner-page__lead">
+          {{ 'Meadow Lane Park is a resident-owned community located in the heart of the 1000 Islands region of New York State. When you buy a home here, you become a co-owner of the land beneath it — a stake in the community itself.'|t }}
+        </p>
+
+        <div class="inner-two-col">
+          <div class="inner-two-col__text">
+            <span class="section-label">{{ 'What makes us different'|t }}</span>
+            <h2>{{ 'Owned by the people who live here'|t }}</h2>
+            <p>{{ 'Unlike traditional land-lease parks, Meadow Lane Park is structured as a resident-owned community. Residents collectively own the land, which means there\'s no landlord, no arbitrary rent increases, and no risk of the land being sold out from under you.'|t }}</p>
+            <p>{{ 'Every homeowner has a vote in how the community is governed. Decisions are made by an elected board of directors drawn from the resident pool, and annual meetings give every owner a direct voice.'|t }}</p>
+            <a href="/ownership" class="btn btn--outline">{{ 'How ownership works'|t }}</a>
+          </div>
+          <div class="inner-two-col__image">
+            {{ page.content['field_about_image'] ?? '' }}
+          </div>
+        </div>
+
+        <div class="inner-two-col inner-two-col--reversed">
+          <div class="inner-two-col__text">
+            <span class="section-label">{{ 'Our history'|t }}</span>
+            <h2>{{ 'Established 1972'|t }}</h2>
+            <p>{{ 'Meadow Lane Park has been a home to families and individuals in the 1000 Islands region for over fifty years. What started as a small seasonal community has grown into a year-round neighbourhood with deep roots in the region.'|t }}</p>
+            <p>{{ 'The transition to resident ownership was one of the most significant milestones in our history — putting long-term stability and community control firmly in the hands of those who live here.'|t }}</p>
+          </div>
+          <div class="inner-two-col__image">
+            {{ page.content['field_history_image'] ?? '' }}
+          </div>
+        </div>
+      </section>
+
+      <hr class="section-divider">
+
+      {# ── Board of directors ─────────────────────────────── #}
+      <section class="inner-page" aria-label="{{ 'Board of directors'|t }}">
+        <span class="section-label">{{ 'Leadership'|t }}</span>
+        <h2 style="margin-bottom: var(--space-3);">{{ 'Board of Directors'|t }}</h2>
+        <p style="max-width:600px; margin-bottom: var(--space-10);">
+          {{ 'Meadow Lane Park is governed by a volunteer board of directors elected annually by resident-owners. The board oversees community finances, maintenance, and policy.'|t }}
+        </p>
+
+        {# Board member cards — populate via Views or a paragraph field #}
+        {% if page.content['field_board_members'] %}
+          {{ page.content['field_board_members'] }}
+        {% else %}
+          <div class="board-grid">
+            {# Placeholder — replace with a View or field output #}
+            {% for i in 1..3 %}
+              <div class="board-card card">
+                <div class="board-card__avatar" aria-hidden="true"></div>
+                <div class="board-card__name card__title">{{ 'Board Member'|t }}</div>
+                <div class="board-card__role card__body">{{ 'Role'|t }}</div>
+              </div>
+            {% endfor %}
+          </div>
+        {% endif %}
+      </section>
+
+      <hr class="section-divider">
+
+      {# ── Drupal body content (rich text from the node) ─── #}
+      {% if page.content %}
+        <section class="inner-page prose">
+          {{ page.content }}
+        </section>
+      {% endif %}
+
+      {# ── CTA ────────────────────────────────────────────── #}
+      <div class="cta-band">
+        <h2>{{ 'Interested in joining our community?'|t }}</h2>
+        <p>{{ 'Browse available homes or get in touch — we\'re happy to answer any questions.'|t }}</p>
+        <div class="cta-band__actions">
+          <a href="/homes-for-sale" class="btn btn--primary">{{ 'View homes for sale'|t }}</a>
+          <a href="/contact" class="btn btn--outline">{{ 'Contact us'|t }}</a>
+        </div>
+      </div>
+
+    </div>{# /.container #}
+  </main>
+
+  {{ include('@meadow_lane/partials/site-footer.html.twig') }}
+
+</div>

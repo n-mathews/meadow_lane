@@ -1,0 +1,149 @@
+{#
+/**
+ * @file page--location.html.twig
+ * Meadow Lane Park — Location page.
+ *
+ * Assumes a basic page node with alias /location.
+ * The map embed block should be placed in the Content region via
+ * Block layout, or added as a field (field_map_embed) on the node.
+ */
+#}
+<div class="site-wrapper">
+
+  {{ include('@meadow_lane/partials/site-header.html.twig') }}
+
+  {# ── Page banner ──────────────────────────────────────── #}
+  <div class="page-banner">
+    <div class="page-banner__inner container">
+      {% if page.breadcrumb %}
+        <nav class="page-banner__breadcrumb" aria-label="{{ 'Breadcrumb'|t }}">
+          {{ page.breadcrumb }}
+        </nav>
+      {% endif %}
+      <span class="section-label" style="color:rgba(255,255,255,0.55);">
+        {{ 'Find us'|t }}
+      </span>
+      <h1 class="page-banner__title">{{ 'Location'|t }}</h1>
+    </div>
+  </div>
+
+  {% if page.highlighted %}
+    <div class="layout-highlighted container">{{ page.highlighted }}</div>
+  {% endif %}
+
+  <main id="main-content" class="layout-main" role="main" tabindex="-1">
+    <div class="container">
+
+      <section class="inner-page">
+        <p class="inner-page__lead">
+          {{ 'Meadow Lane Park sits in the heart of the 1000 Islands region, minutes from the St. Lawrence River and the village of Alexandria Bay, NY.'|t }}
+        </p>
+
+        {# ── Two-col: info + map ─────────────────────────── #}
+        <div class="location-layout">
+
+          <div class="location-layout__info">
+
+            <div class="location-detail-block">
+              <span class="section-label">{{ 'Address'|t }}</span>
+              <address class="location-address">
+                {{ contact_address|default('Meadow Lane Park, Alexandria Bay, NY 13607')|t }}
+              </address>
+              {% if contact_phone %}
+                <p><a href="tel:{{ contact_phone }}">{{ contact_phone }}</a></p>
+              {% endif %}
+              {% if contact_email %}
+                <p><a href="mailto:{{ contact_email }}">{{ contact_email }}</a></p>
+              {% endif %}
+            </div>
+
+            <hr class="section-divider" style="margin: var(--space-8) 0;">
+
+            <div class="location-detail-block">
+              <span class="section-label">{{ 'Getting here'|t }}</span>
+              <ul class="location-features-list">
+                <li>{{ 'Minutes from the St. Lawrence River and public boat launches'|t }}</li>
+                <li>{{ 'Close to Boldt Castle, Thousand Islands Bridge, and state parks'|t }}</li>
+                <li>{{ 'Easy access to Alexandria Bay village shops and restaurants'|t }}</li>
+                <li>{{ 'Under 2 hours from Ottawa, Syracuse, and the Adirondacks'|t }}</li>
+                <li>{{ 'Year-round access with snow-cleared roads and winter activities'|t }}</li>
+              </ul>
+            </div>
+
+            <hr class="section-divider" style="margin: var(--space-8) 0;">
+
+            <div class="location-detail-block">
+              <span class="section-label">{{ 'Nearby'|t }}</span>
+              <div class="nearby-grid">
+                <div class="nearby-item">
+                  <div class="nearby-item__name">{{ 'Boldt Castle'|t }}</div>
+                  <div class="nearby-item__dist">{{ '5 min by boat'|t }}</div>
+                </div>
+                <div class="nearby-item">
+                  <div class="nearby-item__name">{{ 'Alexandria Bay'|t }}</div>
+                  <div class="nearby-item__dist">{{ '5 min by car'|t }}</div>
+                </div>
+                <div class="nearby-item">
+                  <div class="nearby-item__name">{{ 'Thousand Islands Bridge'|t }}</div>
+                  <div class="nearby-item__dist">{{ '10 min'|t }}</div>
+                </div>
+                <div class="nearby-item">
+                  <div class="nearby-item__name">{{ 'Wellesley Island State Park'|t }}</div>
+                  <div class="nearby-item__dist">{{ '15 min'|t }}</div>
+                </div>
+                <div class="nearby-item">
+                  <div class="nearby-item__name">{{ 'Syracuse, NY'|t }}</div>
+                  <div class="nearby-item__dist">{{ '1 hr 20 min'|t }}</div>
+                </div>
+                <div class="nearby-item">
+                  <div class="nearby-item__name">{{ 'Ottawa, ON'|t }}</div>
+                  <div class="nearby-item__dist">{{ '1 hr 45 min'|t }}</div>
+                </div>
+              </div>
+            </div>
+
+          </div>{# /.location-layout__info #}
+
+          {# Map embed — place a Google Map block in the Content region
+             or add a field_map_embed iframe field to the page node. #}
+          <div class="location-layout__map">
+            {% if page.content['field_map_embed'] %}
+              {{ page.content['field_map_embed'] }}
+            {% else %}
+              <div class="map-placeholder" role="img" aria-label="{{ 'Map of Meadow Lane Park location'|t }}">
+                <svg width="48" height="48" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+                  <circle cx="24" cy="20" r="10" stroke="currentColor" stroke-width="2"/>
+                  <path d="M24 30 L24 42" stroke="currentColor" stroke-width="2"/>
+                  <circle cx="24" cy="20" r="4" fill="currentColor"/>
+                </svg>
+                <p>{{ 'Add a Google Maps embed block to this region, or add a field_map_embed field to this page type.'|t }}</p>
+              </div>
+            {% endif %}
+          </div>
+
+        </div>{# /.location-layout #}
+
+        {# ── Body content from node ───────────────────── #}
+        {% if page.content['body'] %}
+          <div class="prose" style="margin-top: var(--space-12);">
+            {{ page.content['body'] }}
+          </div>
+        {% endif %}
+
+      </section>
+
+      {# ── CTA ─────────────────────────────────────────────── #}
+      <div class="cta-band">
+        <h2>{{ 'Ready to visit?'|t }}</h2>
+        <p>{{ 'We\'d be happy to show you around. Contact us to arrange a visit at a time that suits you.'|t }}</p>
+        <div class="cta-band__actions">
+          <a href="/contact" class="btn btn--primary">{{ 'Get in touch'|t }}</a>
+        </div>
+      </div>
+
+    </div>{# /.container #}
+  </main>
+
+  {{ include('@meadow_lane/partials/site-footer.html.twig') }}
+
+</div>

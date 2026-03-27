@@ -77,12 +77,27 @@ function meadow_lane_preprocess_menu(array &$variables): void {
 
 /**
  * Implements hook_theme_suggestions_HOOK_alter() for page templates.
+ * Adds suggestions based on the current path alias so that templates like
+ * page--about.html.twig, page--contact.html.twig etc. are picked up
+ * automatically when a node has the matching alias.
  */
 function meadow_lane_theme_suggestions_page_alter(array &$suggestions, array $variables): void {
+  // Node bundle suggestion (existing).
   if ($node = \Drupal::routeMatch()->getParameter('node')) {
     if (is_object($node)) {
       $suggestions[] = 'page__node__' . $node->bundle();
     }
+  }
+
+  // Path-alias suggestion — turns /about into page__about,
+  // /homes-for-sale into page__homes_for_sale, etc.
+  $current_path = \Drupal::service('path.current')->getPath();
+  $alias = \Drupal::service('path_alias.manager')->getAliasByPath($current_path);
+  $alias = trim($alias, '/');
+  if ($alias) {
+    // Convert hyphens and slashes to underscores for Twig template naming.
+    $alias_suggestion = preg_replace('/[\/\-]/', '_', $alias);
+    $suggestions[] = 'page__' . $alias_suggestion;
   }
 }
 

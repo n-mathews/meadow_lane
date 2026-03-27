@@ -1,0 +1,174 @@
+/**
+ * inner-pages.css — Meadow Lane Park
+ * Layouts specific to About, Amenities, Location, and Contact pages.
+ */
+
+/* ── Board grid (About page) ─────────────────────────── */
+.board-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-5);
+  margin-top: var(--space-6);
+}
+
+.board-card {
+  text-align: center;
+}
+
+.board-card__avatar {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: var(--clr-teal-pale);
+  margin: 0 auto var(--space-4);
+}
+
+/* ── Location page layout ────────────────────────────── */
+.location-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-16);
+  align-items: start;
+  margin-top: var(--space-8);
+}
+
+.location-address {
+  font-style: normal;
+  color: var(--clr-text-dark);
+  font-size: var(--text-base);
+  line-height: var(--leading-normal);
+  margin-bottom: var(--space-3);
+}
+
+.location-features-list {
+  list-style: none;
+  padding: 0;
+  margin: var(--space-4) 0 0;
+}
+
+.location-features-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  font-size: var(--text-sm);
+  color: var(--clr-text-mid);
+  padding: var(--space-2) 0;
+  border-bottom: 1px solid var(--clr-stone);
+  line-height: var(--leading-snug);
+}
+
+.location-features-list li::before {
+  content: '';
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--clr-teal);
+  margin-top: 6px;
+  flex-shrink: 0;
+}
+
+/* ── Nearby grid ─────────────────────────────────────── */
+.nearby-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-3);
+  margin-top: var(--space-4);
+}
+
+.nearby-item {
+  background: var(--clr-stone-light);
+  border-radius: var(--radius-md);
+  padding: var(--space-3) var(--space-4);
+}
+
+.nearby-item__name {
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--clr-slate);
+  margin-bottom: 2px;
+}
+
+.nearby-item__dist {
+  font-size: var(--text-xs);
+  color: var(--clr-text-light);
+}
+
+/* ── Map placeholder ─────────────────────────────────── */
+.map-placeholder {
+  background: var(--clr-stone-light);
+  border: 1px dashed var(--clr-stone);
+  border-radius: var(--radius-lg);
+  min-height: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-4);
+  padding: var(--space-8);
+  color: var(--clr-text-light);
+  text-align: center;
+}
+
+.map-placeholder svg {
+  color: var(--clr-teal-mid);
+  opacity: 0.5;
+}
+
+.map-placeholder p {
+  font-size: var(--text-sm);
+  max-width: 280px;
+  color: var(--clr-text-light);
+}
+
+/* Live map embed sizing */
+.location-layout__map iframe {
+  width: 100%;
+  min-height: 440px;
+  border-radius: var(--radius-lg);
+  border: none;
+  display: block;
+}
+
+/* ── Contact page layout ─────────────────────────────── */
+.contact-layout {
+  display: grid;
+  grid-template-columns: 1fr 360px;
+  gap: var(--space-16);
+  align-items: start;
+  margin-top: var(--space-8);
+}
+
+.contact-details {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: var(--space-2) var(--space-5);
+  font-size: var(--text-sm);
+  margin-top: var(--space-4);
+}
+
+.contact-details dt {
+  color: var(--clr-text-light);
+  font-weight: 400;
+  white-space: nowrap;
+}
+
+.contact-details dd {
+  color: var(--clr-text-dark);
+}
+
+.contact-details dd a {
+  color: var(--clr-teal);
+}
+
+/* ── Responsive ──────────────────────────────────────── */
+@media (max-width: 1023px) {
+  .location-layout  { grid-template-columns: 1fr; }
+  .contact-layout   { grid-template-columns: 1fr; }
+  .board-grid       { grid-template-columns: repeat(2, 1fr); }
+  .nearby-grid      { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 560px) {
+  .board-grid  { grid-template-columns: 1fr; }
+  .nearby-grid { grid-template-columns: 1fr; }
+}
