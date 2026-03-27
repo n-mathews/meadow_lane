@@ -281,3 +281,131 @@ a.nav__member-btn::after {
   .nav__brand-sub { display: none; }
   .site-nav { gap: var(--space-4); }
 }
+
+/* ── Drupal account menu ──────────────────────────────── */
+/*
+ * Drupal renders the user account menu as a block with class
+ * .block--plugin-id--system-menu-block--account
+ * Target it wherever it appears (header region or nav).
+ */
+.block--menu--account,
+.block--plugin-id--system-menu-block--account {
+  display: flex;
+  align-items: center;
+}
+
+.block--menu--account ul,
+.block--plugin-id--system-menu-block--account ul {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  list-style: none;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.block--menu--account li,
+.block--plugin-id--system-menu-block--account li {
+  list-style: none;
+  list-style-type: none;
+}
+
+/* Generic account links — Log in, Register */
+.block--menu--account a,
+.block--plugin-id--system-menu-block--account a {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--text-sm);
+  font-weight: 400;
+  color: var(--clr-text-mid);
+  text-decoration: none;
+  padding: var(--space-2) 0;
+  transition: color var(--transition-fast);
+  white-space: nowrap;
+}
+
+.block--menu--account a:hover,
+.block--plugin-id--system-menu-block--account a:hover {
+  color: var(--clr-teal);
+  text-decoration: none;
+}
+
+/* "My account" link when logged in — style as a pill */
+.block--menu--account .menu-item--active-trail > a,
+.block--plugin-id--system-menu-block--account .menu-item--active-trail > a {
+  color: var(--clr-teal);
+}
+
+/* Log out link — subtle danger colour */
+.block--menu--account a[href*="logout"],
+.block--plugin-id--system-menu-block--account a[href*="logout"] {
+  color: var(--clr-text-light);
+  font-size: var(--text-xs);
+}
+
+.block--menu--account a[href*="logout"]:hover,
+.block--plugin-id--system-menu-block--account a[href*="logout"]:hover {
+  color: var(--clr-error);
+}
+
+/* ── User account avatar / label block ───────────────── */
+.nav__account {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--text-sm);
+  color: var(--clr-text-mid);
+}
+
+.nav__account-avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: var(--clr-teal-pale);
+  border: 1.5px solid var(--clr-teal-mid);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.nav__account-avatar svg {
+  width: 16px;
+  height: 16px;
+  color: var(--clr-teal);
+}
+
+/* ── Drupal messages (status / error / warning) ──────── */
+.messages-list {
+  margin: 0;
+  padding: 0;
+}
+
+.messages {
+  padding: var(--space-4) var(--space-5);
+  border-radius: var(--radius-md);
+  margin: var(--space-4) 0;
+  font-size: var(--text-sm);
+  border-left: 3px solid transparent;
+}
+
+.messages--status {
+  background: var(--clr-teal-pale);
+  border-left-color: var(--clr-teal);
+  color: var(--clr-slate-mid);
+}
+
+.messages--warning {
+  background: var(--clr-gold-light);
+  border-left-color: var(--clr-gold);
+  color: #5C3A00;
+}
+
+.messages--error {
+  background: #FDECEA;
+  border-left-color: var(--clr-error);
+  color: #7A1010;
+}

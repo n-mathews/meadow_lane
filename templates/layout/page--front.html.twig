@@ -3,8 +3,15 @@
  * @file page--front.html.twig
  * Meadow Lane Park — front/home page layout.
  *
- * Delegates header, hero, and footer to shared partials so markup
- * is never duplicated between page templates.
+ * Homepage section blocks (About, Amenities, Location) should be
+ * placed in the Content region via Structure > Block layout.
+ *
+ * Recommended block order in Content region:
+ *   1. meadow_lane_about     → block--meadow-lane-about.html.twig
+ *   2. meadow_lane_amenities → block--meadow-lane-amenities.html.twig
+ *   3. meadow_lane_location  → block--meadow-lane-location.html.twig
+ *   4. (Optional) Homes for sale View block
+ *   5. (Optional) CTA / contact block
  *
  * Variables:
  *   - hero_tagline, hero_subtext: From theme settings.
@@ -17,21 +24,40 @@
 
   {{ include('@meadow_lane/partials/site-header.html.twig') }}
 
-  {# Hero: use the Hero region if a block is placed there,
-     otherwise fall back to the default hero partial. #}
+  {# ── Hero: use Hero region block if placed, else default partial ── #}
   {% if page.hero %}
     <div class="layout-hero">{{ page.hero }}</div>
   {% else %}
     {{ include('@meadow_lane/partials/hero-default.html.twig') }}
   {% endif %}
 
+  {# ── Status messages ──────────────────────────────────── #}
   {% if page.highlighted %}
-    <div class="layout-highlighted container">{{ page.highlighted }}</div>
+    <div class="layout-highlighted container" role="complementary">
+      {{ page.highlighted }}
+    </div>
   {% endif %}
 
+  {# ── Main content — homepage section blocks live here ─── #}
   <main id="main-content" class="layout-main" role="main" tabindex="-1">
     {{ page.content }}
   </main>
+
+  {# ── Front page CTA band ──────────────────────────────── #}
+  <section class="fp-cta" aria-label="{{ 'Get in touch'|t }}">
+    <div class="container">
+      <div class="fp-cta__inner">
+        <div class="fp-cta__text">
+          <h2>{{ 'Ready to spend your summer on the river?'|t }}</h2>
+          <p>{{ 'Browse seasonal homes for sale or get in touch — we\'d love to show you around Meadow Lane Park.'|t }}</p>
+        </div>
+        <div class="fp-cta__actions">
+          <a href="/homes-for-sale" class="btn btn--primary">{{ 'View homes for sale'|t }}</a>
+          <a href="/contact" class="btn btn--outline">{{ 'Contact us'|t }}</a>
+        </div>
+      </div>
+    </div>
+  </section>
 
   {{ include('@meadow_lane/partials/site-footer.html.twig') }}
 

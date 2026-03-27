@@ -17,9 +17,15 @@
 
     {# ── Brand column ────────────────────────────────────── #}
     <div class="footer__brand">
+      <div class="footer__brand-logo">
+        <img src="{{ base_path ~ directory }}/images/logo-icon.svg"
+             alt="Meadow Lane Park"
+             width="56" height="56"
+             loading="lazy"/>
+      </div>
       <div class="footer__brand-name">{{ 'Meadow Lane Park'|t }}</div>
       <p class="footer__brand-desc">
-        {{ footer_tagline|default('Proud to be co-owned by the people who call it home.')|t }}
+        {{ footer_tagline|default('A seasonal, resident-owned community on the St. Lawrence River. Incorporated 2018.')|t }}
       </p>
       {% if social_facebook %}
         <a
@@ -41,15 +47,15 @@
         <ul>
           <li><a href="/about">{{ 'About Us'|t }}</a></li>
           <li><a href="/amenities">{{ 'Amenities'|t }}</a></li>
-          <li><a href="/community-rules">{{ 'Community Rules'|t }}</a></li>
-          <li><a href="/board">{{ 'Board of Directors'|t }}</a></li>
+          <li><a href="/location">{{ 'Location'|t }}</a></li>
+          <li><a href="/contact">{{ 'Contact Us'|t }}</a></li>
         </ul>
       {% endif %}
     </div>
 
-    {# ── Real estate links ───────────────────────────────── #}
+    {# ── Homes links ─────────────────────────────────────── #}
     <div class="footer__col">
-      <h2 class="footer__col-heading">{{ 'Real Estate'|t }}</h2>
+      <h2 class="footer__col-heading">{{ 'Seasonal Homes'|t }}</h2>
       {% if page.footer_second %}
         {{ page.footer_second }}
       {% else %}
@@ -61,16 +67,16 @@
       {% endif %}
     </div>
 
-    {# ── Residents links ─────────────────────────────────── #}
+    {# ── Members links ───────────────────────────────────── #}
     <div class="footer__col">
-      <h2 class="footer__col-heading">{{ 'Residents'|t }}</h2>
+      <h2 class="footer__col-heading">{{ 'Members'|t }}</h2>
       {% if page.footer_third %}
         {{ page.footer_third }}
       {% else %}
         <ul>
           <li><a href="/member">{{ 'Member Login'|t }}</a></li>
           <li><a href="/documents">{{ 'Documents &amp; Forms'|t }}</a></li>
-          <li><a href="/contact">{{ 'Contact Us'|t }}</a></li>
+          <li><a href="/board">{{ 'Board of Directors'|t }}</a></li>
         </ul>
       {% endif %}
     </div>

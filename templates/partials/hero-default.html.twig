@@ -4,7 +4,7 @@
  * Meadow Lane Park — default hero section content.
  *
  * Used as fallback when no block is assigned to the Hero region.
- * Included by page--front.html.twig (and optionally page.html.twig).
+ * Included by page--front.html.twig.
  *
  * Variables available from parent template:
  *   - hero_tagline: Main headline (from theme settings).
@@ -20,20 +20,20 @@
   <div class="hero__content">
     <div class="hero__badge">
       <span class="hero__badge-dot"></span>
-      {{ '1000 Islands, New York'|t }}
+      {{ 'Resident-Owned Since 2018'|t }}
     </div>
 
     <h1>
-      {{ hero_tagline|default('Meadow Lane Park'|t) }}<br>
-      <em>{{ 'A Resident-Owned Community.'|t }}</em>
+      {{ hero_tagline|default('Life on the'|t) }}<br>
+      <em>{{ 'Thousand Islands'|t }}</em>
     </h1>
 
     <p class="hero__lead">
-      {{ hero_subtext|default('A welcoming, resident-owned community nestled along the shores of the St. Lawrence River in the heart of the 1000 Islands region, New York.'|t) }}
+      {{ hero_subtext|default('A seasonal community on the St. Lawrence River — resident-owned and proudly run by the people who call it home.'|t) }}
     </p>
 
     <div class="hero__actions">
-      <a href="/homes-for-sale" class="btn btn--white">{{ 'Explore Homes for Sale'|t }}</a>
+      <a href="/homes-for-sale" class="btn btn--white">{{ 'View Seasonal Homes'|t }}</a>
       <a href="/about" class="btn btn--ghost-light">{{ 'Learn about us'|t }}</a>
     </div>
   </div>
@@ -43,19 +43,19 @@
 {# ── Stats strip ──────────────────────────────────────── #}
 <div class="stats-strip" aria-label="{{ 'Community at a glance'|t }}">
   <div class="stats-strip__item">
-    <div class="stats-strip__number">{{ 'Est. 2018'|t }}</div>
-    <div class="stats-strip__label">{{ 'Year founded'|t }}</div>
+    <div class="stats-strip__number">{{ 'Inc. 2018'|t }}</div>
+    <div class="stats-strip__label">{{ 'Resident-owned'|t }}</div>
   </div>
   <div class="stats-strip__item">
     <div class="stats-strip__number">100%</div>
-    <div class="stats-strip__label">{{ 'Resident owned'|t }}</div>
+    <div class="stats-strip__label">{{ 'Member owned'|t }}</div>
   </div>
   <div class="stats-strip__item">
     <div class="stats-strip__number">1000+</div>
     <div class="stats-strip__label">{{ 'Islands nearby'|t }}</div>
   </div>
   <div class="stats-strip__item">
-    <div class="stats-strip__number">{{ '3 Seasons'|t }}</div>
-    <div class="stats-strip__label">{{ 'Seasonal living'|t }}</div>
+    <div class="stats-strip__number">{{ 'Seasonal'|t }}</div>
+    <div class="stats-strip__label">{{ 'Homes &amp; community'|t }}</div>
   </div>
 </div>

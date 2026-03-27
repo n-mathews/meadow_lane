@@ -21,8 +21,9 @@ global-styling:
       css/components/amenities.css:  {}
       css/components/listings.css:   {}
       css/components/footer.css:     {}
-      css/components/page-banner.css: {}
-      css/components/inner-pages.css: {}
+      css/components/page-banner.css:       {}
+      css/components/inner-pages.css:       {}
+      css/components/homepage-sections.css: {}
   js:
     js/global.js: {}
   dependencies:
