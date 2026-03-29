@@ -1,0 +1,103 @@
+<?php
+
+/**
+ * @file
+ * Install, update, and uninstall functions for the Meadow Lane Park theme.
+ *
+ * NOTE: Drupal themes do not have .install files executed automatically
+ * the way modules do. To run this setup, call the helper function below
+ * via Drush after enabling the theme:
+ *
+ *   drush php:eval "meadow_lane_create_default_content();"
+ *
+ * Or create a small helper module that calls it on hook_install().
+ */
+
+/**
+ * Creates default pages for Meadow Lane Park if they don't already exist.
+ *
+ * Pages created (Basic page content type):
+ *   /about          — About Us
+ *   /amenities      — Amenities
+ *   /location       — Location
+ *   /homes-for-sale — Seasonal Homes for Sale (Views page — created by view)
+ *   /ownership      — Ownership Explained
+ *   /documents      — Documents & Forms (member area placeholder)
+ *   /member         — Member Login (placeholder)
+ */
+function meadow_lane_create_default_content(): void {
+  $pages = [
+    [
+      'title'  => 'About Us',
+      'alias'  => '/about',
+      'body'   => '<p>Meadow Lane Park is a seasonal, resident-owned community incorporated in 2018, located in the heart of the 1000 Islands region of New York State.</p>',
+    ],
+    [
+      'title'  => 'Amenities',
+      'alias'  => '/amenities',
+      'body'   => '<p>Meadow Lane Park offers a range of amenities for members to enjoy throughout the season on the St. Lawrence River.</p>',
+    ],
+    [
+      'title'  => 'Location',
+      'alias'  => '/location',
+      'body'   => '<p>Meadow Lane Park is located minutes from the Thousand Islands Bridge and the village of Alexandria Bay, NY.</p>',
+    ],
+    [
+      'title'  => 'Ownership Explained',
+      'alias'  => '/ownership',
+      'body'   => '<p>When you purchase a home at Meadow Lane Park, you become a co-owner of the community land — incorporated in 2018. There is no landlord and no land lease.</p>',
+    ],
+    [
+      'title'  => 'Documents & Forms',
+      'alias'  => '/documents',
+      'body'   => '<p>Member documents and forms are available here. Please log in to access the full library.</p>',
+    ],
+    [
+      'title'  => 'Member Login',
+      'alias'  => '/member',
+      'body'   => '<p>The member portal is coming soon. Please check back for access to community documents and resources.</p>',
+    ],
+  ];
+
+  $alias_manager = \Drupal::service('path_alias.manager');
+  $alias_storage = \Drupal::entityTypeManager()->getStorage('path_alias');
+  $node_storage  = \Drupal::entityTypeManager()->getStorage('node');
+
+  foreach ($pages as $page) {
+    // Skip if a node already exists at this alias.
+    $existing_path = $alias_manager->getPathByAlias($page['alias']);
+    if ($existing_path !== $page['alias']) {
+      \Drupal::logger('meadow_lane')->info(
+        'Skipping @alias — already exists.',
+        ['@alias' => $page['alias']]
+      );
+      continue;
+    }
+
+    // Create the node.
+    $node = $node_storage->create([
+      'type'   => 'page',
+      'title'  => $page['title'],
+      'status' => 1,
+      'body'   => [
+        'value'  => $page['body'],
+        'format' => 'basic_html',
+      ],
+    ]);
+    $node->save();
+
+    // Create the path alias.
+    $path_alias = $alias_storage->create([
+      'path'  => '/node/' . $node->id(),
+      'alias' => $page['alias'],
+    ]);
+    $path_alias->save();
+
+    \Drupal::logger('meadow_lane')->info(
+      'Created page "@title" at @alias.',
+      ['@title' => $page['title'], '@alias' => $page['alias']]
+    );
+  }
+
+  \Drupal::messenger()->addStatus(t('Meadow Lane Park: default pages created successfully.'));
+}

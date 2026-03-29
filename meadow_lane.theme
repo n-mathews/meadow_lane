@@ -183,3 +183,14 @@ function meadow_lane_theme_suggestions_views_view_unformatted_alter(array &$sugg
   $view = $variables['view'];
   $suggestions[] = 'views_view_unformatted__' . $view->id();
 }
+
+/**
+ * Implements hook_preprocess_HOOK() for the listing signup block.
+ * Passes Kit form ID and API key from theme settings to the template.
+ */
+function meadow_lane_preprocess_block__meadow_lane_listing_signup(array &$variables): void {
+  $variables['kit_form_id'] = theme_get_setting('kit_form_id') ?? '';
+  $variables['kit_api_key'] = theme_get_setting('kit_api_key') ?? '';
+  // Attach the JS library for this block.
+  $variables['#attached']['library'][] = 'meadow_lane/listing-signup';
+}

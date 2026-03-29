@@ -86,4 +86,28 @@ function meadow_lane_form_system_theme_settings_alter(array &$form, FormStateInt
     '#default_value' => theme_get_setting('show_member_login') ?? TRUE,
     '#description' => t('When enabled, a Member Login button appears in the primary navigation. Disable until your secure member area is ready.'),
   ];
+  // ── Kit (ConvertKit) integration ─────────────────────────────────────
+  $form['meadow_lane_settings']['kit'] = [
+    '#type'  => 'details',
+    '#title' => t('Kit (ConvertKit) — listing notifications'),
+    '#open'  => TRUE,
+    '#description' => t('Used for the "Notify me of new listings" signup form on the Homes for Sale page. Find these values in your Kit account under Forms → your form → Settings.'),
+  ];
+
+  $form['meadow_lane_settings']['kit']['kit_form_id'] = [
+    '#type'          => 'textfield',
+    '#title'         => t('Kit Form ID'),
+    '#default_value' => theme_get_setting('kit_form_id') ?? '',
+    '#description'   => t('The numeric form ID from your Kit form URL, e.g. <code>1234567</code>.'),
+    '#placeholder'   => '1234567',
+  ];
+
+  $form['meadow_lane_settings']['kit']['kit_api_key'] = [
+    '#type'          => 'textfield',
+    '#title'         => t('Kit public API key'),
+    '#default_value' => theme_get_setting('kit_api_key') ?? '',
+    '#description'   => t('Your Kit public API key (not the secret key). Found in Kit → Settings → API.'),
+    '#placeholder'   => 'xxxxxxxxxxxxxxxxxxxxxxxx',
+  ];
+
 }

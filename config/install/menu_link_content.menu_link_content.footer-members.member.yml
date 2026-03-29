@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - system.menu.footer-members
+id: meadow_lane_footer_members_member
+title: 'Member Login'
+description: ''
+menu_name: footer-members
+link:
+  uri: 'internal:/member'
+  title: ''
+  options: []
+external: false
+rediscover: false
+weight: 1
+expanded: false
+enabled: true
+parent: ''
+changed: 0

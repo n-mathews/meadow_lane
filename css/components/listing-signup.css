@@ -1,0 +1,166 @@
+/**
+ * listing-signup.css — Meadow Lane Park
+ * Email notification signup block on the Homes for Sale page.
+ */
+
+.listing-signup {
+  background: var(--clr-slate);
+  border-radius: var(--radius-xl);
+  padding: var(--space-8) var(--space-10);
+  margin: var(--space-10) 0;
+}
+
+.listing-signup__inner {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: var(--space-6);
+  align-items: center;
+}
+
+/* ── Icon ────────────────────────────────────────────── */
+.listing-signup__icon {
+  width: 48px;
+  height: 48px;
+  background: rgba(255,255,255,0.1);
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255,255,255,0.8);
+  flex-shrink: 0;
+}
+
+/* ── Text ─────────────────────────────────────────────── */
+.listing-signup__heading {
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  font-weight: 500;
+  color: white;
+  margin-bottom: var(--space-1);
+}
+
+.listing-signup__desc {
+  font-size: var(--text-sm);
+  color: rgba(255,255,255,0.6);
+  margin: 0;
+  line-height: var(--leading-snug);
+}
+
+/* ── Form area ───────────────────────────────────────── */
+.listing-signup__form-area {
+  min-width: 300px;
+}
+
+.listing-signup__field-row {
+  display: flex;
+  gap: var(--space-3);
+  align-items: stretch;
+}
+
+.listing-signup__input {
+  flex: 1;
+  padding: 10px 14px;
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  color: var(--clr-text-dark);
+  background: white;
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: var(--radius-md);
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+  min-width: 0;
+}
+
+.listing-signup__input:focus {
+  outline: none;
+  border-color: var(--clr-teal-mid);
+  box-shadow: 0 0 0 3px rgba(110,158,146,0.3);
+}
+
+.listing-signup__input::placeholder {
+  color: var(--clr-text-light);
+}
+
+.listing-signup__input:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* ── Submit button ───────────────────────────────────── */
+.listing-signup__btn {
+  white-space: nowrap;
+  position: relative;
+  min-width: 100px;
+}
+
+/* Loading spinner (CSS only) */
+.listing-signup__btn-spinner {
+  display: none;
+  width: 14px;
+  height: 14px;
+  border: 2px solid rgba(255,255,255,0.4);
+  border-top-color: white;
+  border-radius: 50%;
+  animation: mlp-spin 0.7s linear infinite;
+}
+
+.listing-signup__btn.is-loading .listing-signup__btn-label { display: none; }
+.listing-signup__btn.is-loading .listing-signup__btn-spinner { display: block; }
+.listing-signup__btn.is-loading { pointer-events: none; }
+
+@keyframes mlp-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ── Error message ───────────────────────────────────── */
+.listing-signup__error {
+  margin-top: var(--space-2);
+  font-size: var(--text-xs);
+  color: #FFBCB0;
+  margin-bottom: 0;
+}
+
+/* ── Success state ───────────────────────────────────── */
+.listing-signup__success {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  font-size: var(--text-sm);
+  color: rgba(255,255,255,0.9);
+  padding: var(--space-3) 0;
+}
+
+.listing-signup__success svg {
+  color: var(--clr-teal-mid);
+  flex-shrink: 0;
+}
+
+/* ── Responsive ──────────────────────────────────────── */
+@media (max-width: 900px) {
+  .listing-signup__inner {
+    grid-template-columns: auto 1fr;
+    grid-template-rows: auto auto;
+  }
+
+  .listing-signup__form-area {
+    grid-column: 1 / -1;
+    min-width: 0;
+  }
+}
+
+@media (max-width: 560px) {
+  .listing-signup {
+    padding: var(--space-6);
+  }
+
+  .listing-signup__inner {
+    grid-template-columns: 1fr;
+  }
+
+  .listing-signup__icon { display: none; }
+
+  .listing-signup__field-row {
+    flex-direction: column;
+  }
+
+  .listing-signup__btn { width: 100%; justify-content: center; }
+}

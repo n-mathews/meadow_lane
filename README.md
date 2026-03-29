@@ -220,9 +220,67 @@ Make sure `meadow_lane_preprocess_node()` in `meadow_lane.theme` is populating
 
 ---
 
-## Menu setup
+## Full setup — menus, pages, and blocks in one go
 
-All navigation is managed through Drupal's admin UI. No menus are hardcoded in the theme templates.
+After installing the theme, run these three commands and everything is ready:
+
+```bash
+# 1. Import menus, menu links, and block placements from theme config
+drush config:import --partial --source=themes/custom/meadow_lane/config/install
+
+# 2. Create the default pages (About, Amenities, Location, etc.)
+drush php:eval "meadow_lane_create_default_content();"
+
+# 3. Clear cache
+drush cache:rebuild
+```
+
+That's it. The following are created automatically:
+
+**Pages** (Basic page nodes with path aliases):
+
+| Page | Path |
+|---|---|
+| About Us | `/about` |
+| Amenities | `/amenities` |
+| Location | `/location` |
+| Homes for Sale | `/homes-for-sale` (Views page) |
+| Ownership Explained | `/ownership` |
+| Documents & Forms | `/documents` |
+| Member Login | `/member` |
+
+**Menus** (ready to edit in Structure → Menus):
+
+| Menu | Machine name | Links |
+|---|---|---|
+| Main navigation | `main` | About Us, Amenities, Seasonal Homes, Location |
+| Footer — Community | `footer-community` | About Us, Amenities, Location |
+| Footer — Seasonal Homes | `footer-seasonal-homes` | Homes for Sale, Ownership Explained |
+| Footer — Members | `footer-members` | Member Login, Documents & Forms |
+
+**Block placements** (assigned automatically to theme regions):
+
+| Block | Region |
+|---|---|
+| Main navigation | Primary Menu |
+| User account menu | Header |
+| Footer — Community | Footer First |
+| Footer — Seasonal Homes | Footer Second |
+| Footer — Members | Footer Third |
+
+---
+
+## Editing menus after setup
+
+All menus are managed at **Structure → Menus** (`/admin/structure/menu`).
+To add, remove, or reorder links, click **Edit menu** next to the relevant menu.
+Changes take effect immediately — no cache clear needed for menu edits.
+
+---
+
+## Menu setup (manual alternative)
+
+If you prefer to set up menus manually without importing config:
 
 ### Step 1 — Create the menus
 

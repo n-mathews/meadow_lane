@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - system.menu.footer-members
+id: meadow_lane_footer_members_documents
+title: 'Documents & Forms'
+description: ''
+menu_name: footer-members
+link:
+  uri: 'internal:/documents'
+  title: ''
+  options: []
+external: false
+rediscover: false
+weight: 2
+expanded: false
+enabled: true
+parent: ''
+changed: 0

@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - system.menu.footer-seasonal-homes
+id: meadow_lane_footer_seasonal_ownership
+title: 'Ownership Explained'
+description: ''
+menu_name: footer-seasonal-homes
+link:
+  uri: 'internal:/ownership'
+  title: ''
+  options: []
+external: false
+rediscover: false
+weight: 2
+expanded: false
+enabled: true
+parent: ''
+changed: 0

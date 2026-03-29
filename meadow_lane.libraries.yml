@@ -25,6 +25,7 @@ global-styling:
       css/components/inner-pages.css:       {}
       css/components/homepage-sections.css: {}
       css/components/homes-for-sale.css:    {}
+      css/components/listing-signup.css:  {}
   js:
     js/global.js: {}
   dependencies:
@@ -58,3 +59,16 @@ member-area:
       css/components/member-area.css: {}
   dependencies:
     - meadow_lane/global-styling
+
+# Email signup block — attached only on homes-for-sale page
+listing-signup:
+  version: VERSION
+  css:
+    component:
+      css/components/listing-signup.css: {}
+  js:
+    js/listing-signup.js: {}
+  dependencies:
+    - meadow_lane/global-styling
+    - core/drupal
+    - core/once
