@@ -2,10 +2,6 @@
 /**
  * @file page--about.html.twig
  * Meadow Lane Park — About Us page.
- *
- * Assumes a Drupal basic page node with alias /about.
- * The main body content is rendered via page.content as usual;
- * this template adds structured sections around it.
  */
 #}
 <div class="site-wrapper">
@@ -45,7 +41,7 @@
             <span class="section-label">{{ 'What makes us different'|t }}</span>
             <h2>{{ 'Owned by the people who live here'|t }}</h2>
             <p>{{ 'Unlike traditional land-lease parks, Meadow Lane Park is structured as a resident-owned community. Residents collectively own the land, which means there\'s no landlord, no arbitrary rent increases, and no risk of the land being sold out from under you.'|t }}</p>
-            <p>{{ 'Every homeowner has a vote in how the community is governed. Decisions are made by an elected board of directors drawn from the resident pool, and annual meetings give every owner a direct voice.'|t }}</p>
+            <p>{{ 'Every homeowner has a vote in how the community is governed, with annual meetings giving every owner a direct voice.'|t }}</p>
             <a href="/ownership" class="btn btn--outline">{{ 'How ownership works'|t }}</a>
           </div>
           <div class="inner-two-col__image">
@@ -66,37 +62,9 @@
         </div>
       </section>
 
-      <hr class="section-divider">
-
-      {# ── Board of directors ─────────────────────────────── #}
-      <section class="inner-page" aria-label="{{ 'Board of directors'|t }}">
-        <span class="section-label">{{ 'Leadership'|t }}</span>
-        <h2 style="margin-bottom: var(--space-3);">{{ 'Board of Directors'|t }}</h2>
-        <p style="max-width:600px; margin-bottom: var(--space-10);">
-          {{ 'Meadow Lane Park is governed by a volunteer board of directors elected annually by resident-owners. The board oversees community finances, maintenance, and policy.'|t }}
-        </p>
-
-        {# Board member cards — populate via Views or a paragraph field #}
-        {% if page.content['field_board_members'] %}
-          {{ page.content['field_board_members'] }}
-        {% else %}
-          <div class="board-grid">
-            {# Placeholder — replace with a View or field output #}
-            {% for i in 1..3 %}
-              <div class="board-card card">
-                <div class="board-card__avatar" aria-hidden="true"></div>
-                <div class="board-card__name card__title">{{ 'Board Member'|t }}</div>
-                <div class="board-card__role card__body">{{ 'Role'|t }}</div>
-              </div>
-            {% endfor %}
-          </div>
-        {% endif %}
-      </section>
-
-      <hr class="section-divider">
-
       {# ── Drupal body content (rich text from the node) ─── #}
       {% if page.content %}
+        <hr class="section-divider">
         <section class="inner-page prose">
           {{ page.content }}
         </section>
@@ -104,11 +72,10 @@
 
       {# ── CTA ────────────────────────────────────────────── #}
       <div class="cta-band">
-        <h2>{{ 'Interested in joining our community?'|t }}</h2>
-        <p>{{ 'Browse available homes or get in touch — we\'re happy to answer any questions.'|t }}</p>
+        <h2>{{ 'Interested in a seasonal home on the river?'|t }}</h2>
+        <p>{{ 'Browse our available manufactured homes for sale at Meadow Lane Park.'|t }}</p>
         <div class="cta-band__actions">
           <a href="/homes-for-sale" class="btn btn--primary">{{ 'View seasonal homes'|t }}</a>
-          <a href="/contact" class="btn btn--outline">{{ 'Contact us'|t }}</a>
         </div>
       </div>
 

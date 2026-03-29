@@ -174,3 +174,46 @@ drush cr
 ---
 
 *Theme built for Drupal 11 · Meadow Lane Park · Alexandria Bay, NY*
+
+---
+
+## Homes for Sale
+
+### Page template
+`templates/layout/page--homes-for-sale.html.twig` is automatically used when
+a node or View is served at the path `/homes-for-sale`.
+
+### Views
+`config/install/views.view.homes_for_sale.yml` defines the listing View.
+Import it via:
+```bash
+drush config:import --partial --source=themes/custom/meadow_lane/config/install
+drush cache:rebuild
+```
+Or import manually at `/admin/config/development/configuration/single/import`.
+
+### Content type fields
+The `config/install/` directory contains field storage definitions for the
+`home_listing` content type. Create the content type first at
+`/admin/structure/types/add` (machine name: `home_listing`), then import
+the field config or add fields manually:
+
+| Label | Machine name | Type |
+|---|---|---|
+| Price | `field_price` | Decimal |
+| Bedrooms | `field_bedrooms` | Integer |
+| Bathrooms | `field_bathrooms` | Decimal |
+| Square footage | `field_sqft` | Integer |
+| Street address | `field_address` | Text (plain) |
+| Status | `field_status` | List (text): available, pending, sold |
+| Photos | `field_images` | Image (unlimited) |
+
+### Filter bar
+The filter bar in `page--homes-for-sale.html.twig` is driven by
+`js/listings.js`. It reads `data-price`, `data-beds`, and `data-status`
+attributes on each `.listing-card`. These are set in
+`node--home-listing--teaser.html.twig` via the preprocessed variables.
+
+Make sure `meadow_lane_preprocess_node()` in `meadow_lane.theme` is populating
+`listing_price`, `listing_beds`, `listing_baths`, `listing_sqft`,
+`listing_address`, and `listing_status` from the node fields.

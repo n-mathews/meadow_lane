@@ -24,6 +24,7 @@ global-styling:
       css/components/page-banner.css:       {}
       css/components/inner-pages.css:       {}
       css/components/homepage-sections.css: {}
+      css/components/homes-for-sale.css:    {}
   js:
     js/global.js: {}
   dependencies:

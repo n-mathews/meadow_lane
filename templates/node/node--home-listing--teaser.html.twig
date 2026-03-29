@@ -12,7 +12,11 @@
  *   - content: Rendered fields (use if needed for images, body, etc.)
  */
 #}
-<article{{ attributes.addClass('listing-card') }}>
+<article{{ attributes.addClass('listing-card')
+  .setAttribute('data-price', listing_price|default(0))
+  .setAttribute('data-beds', listing_beds|default(0))
+  .setAttribute('data-status', listing_status|default('available'))
+}}>
   <a href="{{ url }}" class="listing-card__link" aria-label="{{ label }}">
 
     {# Image #}

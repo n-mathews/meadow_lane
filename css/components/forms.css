@@ -68,17 +68,3 @@ select.error {
   border-color: var(--clr-error);
 }
 
-/* ── Contact form wrapper ────────────────────────────── */
-.contact-form {
-  max-width: 580px;
-}
-
-.contact-form .form-row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: var(--space-4);
-}
-
-@media (max-width: 560px) {
-  .contact-form .form-row { grid-template-columns: 1fr; }
-}

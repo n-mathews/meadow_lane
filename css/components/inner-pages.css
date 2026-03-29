@@ -3,26 +3,6 @@
  * Layouts specific to About, Amenities, Location, and Contact pages.
  */
 
-/* ── Board grid (About page) ─────────────────────────── */
-.board-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: var(--space-5);
-  margin-top: var(--space-6);
-}
-
-.board-card {
-  text-align: center;
-}
-
-.board-card__avatar {
-  width: 64px;
-  height: 64px;
-  border-radius: 50%;
-  background: var(--clr-teal-pale);
-  margin: 0 auto var(--space-4);
-}
-
 /* ── Location page layout ────────────────────────────── */
 .location-layout {
   display: grid;
@@ -129,46 +109,12 @@
   display: block;
 }
 
-/* ── Contact page layout ─────────────────────────────── */
-.contact-layout {
-  display: grid;
-  grid-template-columns: 1fr 360px;
-  gap: var(--space-16);
-  align-items: start;
-  margin-top: var(--space-8);
-}
-
-.contact-details {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  gap: var(--space-2) var(--space-5);
-  font-size: var(--text-sm);
-  margin-top: var(--space-4);
-}
-
-.contact-details dt {
-  color: var(--clr-text-light);
-  font-weight: 400;
-  white-space: nowrap;
-}
-
-.contact-details dd {
-  color: var(--clr-text-dark);
-}
-
-.contact-details dd a {
-  color: var(--clr-teal);
-}
-
 /* ── Responsive ──────────────────────────────────────── */
 @media (max-width: 1023px) {
   .location-layout  { grid-template-columns: 1fr; }
-  .contact-layout   { grid-template-columns: 1fr; }
-  .board-grid       { grid-template-columns: repeat(2, 1fr); }
   .nearby-grid      { grid-template-columns: repeat(2, 1fr); }
 }
 
 @media (max-width: 560px) {
-  .board-grid  { grid-template-columns: 1fr; }
   .nearby-grid { grid-template-columns: 1fr; }
 }
