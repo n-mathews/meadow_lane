@@ -7,7 +7,7 @@
   min-height: 600px;
   /* Aerial photo: framed to show marina and community in lower-centre.
      object-position keeps the docks and waterfront visible. */
-  background-image: url('../images/hero-aerial.jpg');
+  background-image: url('../../images/hero-aerial.jpg');
   background-size: cover;
   background-position: center 40%;
   background-repeat: no-repeat;
