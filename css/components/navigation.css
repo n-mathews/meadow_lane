@@ -409,3 +409,90 @@ a.nav__member-btn::after {
   border-left-color: var(--clr-error);
   color: #7A1010;
 }
+
+/* ── Admin hint in nav (visible only to logged-in admins) */
+.nav__admin-hint {
+  list-style: none;
+}
+
+.nav__admin-hint-link {
+  font-size: var(--text-xs);
+  color: rgba(255,160,0,0.8);
+  text-decoration: none;
+  border: 1px dashed rgba(255,160,0,0.4);
+  padding: 4px 10px;
+  border-radius: var(--radius-md);
+  white-space: nowrap;
+}
+
+.nav__admin-hint-link:hover {
+  color: rgba(255,160,0,1);
+  text-decoration: none;
+}
+
+/* ── Nav menu blocks (Drupal-rendered markup) ─────────── */
+/*
+ * Drupal's menu block renders a <ul class="menu"> inside the region.
+ * These rules ensure the items integrate cleanly with .nav__menu
+ * without needing extra wrapper divs.
+ */
+.nav__menu > .block { display: contents; }
+
+.nav__menu .menu {
+  display: contents;
+  list-style: none;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav__menu .menu-item {
+  list-style: none;
+  list-style-type: none;
+}
+
+.nav__menu .menu-item > a {
+  display: inline-block;
+  font-size: var(--text-sm);
+  font-weight: 400;
+  color: var(--clr-text-mid);
+  text-decoration: none;
+  letter-spacing: 0.01em;
+  padding: var(--space-2) 0;
+  transition: color var(--transition-fast);
+  position: relative;
+  white-space: nowrap;
+}
+
+.nav__menu .menu-item > a::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  right: 0;
+  height: 1.5px;
+  background: var(--clr-teal);
+  transform: scaleX(0);
+  transition: transform var(--transition-fast);
+  transform-origin: left;
+}
+
+.nav__menu .menu-item > a:hover,
+.nav__menu .menu-item > a:focus-visible {
+  color: var(--clr-teal);
+  text-decoration: none;
+}
+
+.nav__menu .menu-item > a:hover::after,
+.nav__menu .menu-item--active-trail > a::after {
+  transform: scaleX(1);
+}
+
+.nav__menu .menu-item--active-trail > a {
+  color: var(--clr-teal);
+}
+
+@media (max-width: 900px) {
+  .nav__menu .menu { display: flex; flex-direction: column; align-items: center; gap: var(--space-5); }
+  .nav__menu .menu-item > a { font-size: var(--text-xl); font-family: var(--font-serif); color: var(--clr-slate); }
+}

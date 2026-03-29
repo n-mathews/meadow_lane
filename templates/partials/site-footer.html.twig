@@ -3,13 +3,22 @@
  * @file site-footer.html.twig
  * Meadow Lane Park — site footer partial.
  *
- * Included by page.html.twig and page--front.html.twig.
+ * ALL footer menus are managed through Drupal's Block layout UI.
+ * Go to: Structure → Block layout → Meadow Lane Park
  *
- * Variables available from parent template:
- *   - footer_tagline: From theme settings.
- *   - social_facebook: From theme settings.
- *   - page.footer_first … footer_third: Menu region blocks.
- *   - page.footer_bottom: Legal / copyright region.
+ * Required block assignments:
+ *   Footer First region  → Community menu
+ *                          (System menu block, menu: Footer — Community)
+ *   Footer Second region → Seasonal Homes menu
+ *                          (System menu block, menu: Footer — Seasonal Homes)
+ *   Footer Third region  → Members menu
+ *                          (System menu block, menu: Footer — Members)
+ *
+ * Recommended Drupal menus to create:
+ *   /admin/structure/menu/add
+ *   - "Footer — Community"      (machine: footer-community)
+ *   - "Footer — Seasonal Homes" (machine: footer-seasonal-homes)
+ *   - "Footer — Members"        (machine: footer-members)
  */
 #}
 <footer class="site-footer" role="contentinfo">
@@ -19,7 +28,7 @@
     <div class="footer__brand">
       <div class="footer__brand-logo">
         <img src="{{ base_path ~ directory }}/images/logo-icon.svg"
-             alt="Meadow Lane Park"
+             alt="{{ 'Meadow Lane Park'|t }}"
              width="56" height="56"
              loading="lazy"/>
       </div>
@@ -38,44 +47,48 @@
       {% endif %}
     </div>
 
-    {# ── Community links ─────────────────────────────────── #}
+    {# ── Community column ────────────────────────────────── #}
+    {# Assign: Footer First region → System menu block (Footer — Community) #}
     <div class="footer__col">
       <h2 class="footer__col-heading">{{ 'Community'|t }}</h2>
       {% if page.footer_first %}
         {{ page.footer_first }}
-      {% else %}
-        <ul>
-          <li><a href="/about">{{ 'About Us'|t }}</a></li>
-          <li><a href="/amenities">{{ 'Amenities'|t }}</a></li>
-          <li><a href="/location">{{ 'Location'|t }}</a></li>
-        </ul>
+      {% elseif logged_in %}
+        <p class="footer__admin-hint">
+          <a href="{{ path('block.admin_demo', {'theme': 'meadow_lane'}) }}">
+            {{ 'Assign a menu block to Footer First'|t }}
+          </a>
+        </p>
       {% endif %}
     </div>
 
-    {# ── Homes links ─────────────────────────────────────── #}
+    {# ── Seasonal Homes column ───────────────────────────── #}
+    {# Assign: Footer Second region → System menu block (Footer — Seasonal Homes) #}
     <div class="footer__col">
       <h2 class="footer__col-heading">{{ 'Seasonal Homes'|t }}</h2>
       {% if page.footer_second %}
         {{ page.footer_second }}
-      {% else %}
-        <ul>
-          <li><a href="/homes-for-sale">{{ 'Homes for Sale'|t }}</a></li>
-          <li><a href="/how-to-buy">{{ 'How to Buy'|t }}</a></li>
-          <li><a href="/ownership">{{ 'Ownership Explained'|t }}</a></li>
-        </ul>
+      {% elseif logged_in %}
+        <p class="footer__admin-hint">
+          <a href="{{ path('block.admin_demo', {'theme': 'meadow_lane'}) }}">
+            {{ 'Assign a menu block to Footer Second'|t }}
+          </a>
+        </p>
       {% endif %}
     </div>
 
-    {# ── Members links ───────────────────────────────────── #}
+    {# ── Members column ──────────────────────────────────── #}
+    {# Assign: Footer Third region → System menu block (Footer — Members) #}
     <div class="footer__col">
       <h2 class="footer__col-heading">{{ 'Members'|t }}</h2>
       {% if page.footer_third %}
         {{ page.footer_third }}
-      {% else %}
-        <ul>
-          <li><a href="/member">{{ 'Member Login'|t }}</a></li>
-          <li><a href="/documents">{{ 'Documents &amp; Forms'|t }}</a></li>
-        </ul>
+      {% elseif logged_in %}
+        <p class="footer__admin-hint">
+          <a href="{{ path('block.admin_demo', {'theme': 'meadow_lane'}) }}">
+            {{ 'Assign a menu block to Footer Third'|t }}
+          </a>
+        </p>
       {% endif %}
     </div>
 

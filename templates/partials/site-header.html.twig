@@ -3,18 +3,20 @@
  * @file site-header.html.twig
  * Meadow Lane Park — site header and primary navigation partial.
  *
- * Included by page.html.twig and page--front.html.twig.
+ * ALL navigation is managed through Drupal's Block layout UI.
+ * Go to: Structure → Block layout → Meadow Lane Park
  *
- * Variables available from parent template:
- *   - page.primary_menu: Primary navigation menu region.
- *   - page.header: Header region (account menu block lives here).
- *   - page.header_top: Optional top-of-header utility bar.
- *   - show_member_login: Boolean from theme settings.
+ * Required block assignments:
+ *   Primary Menu region  → Main navigation (System menu block, menu: Main)
+ *   Header region        → User account menu (System menu block, menu: Account)
+ *
+ * The Member Login button is toggled via:
+ *   Appearance → Settings → Meadow Lane Park → Show Member Login button
  */
 #}
 <header class="layout-header" role="banner">
 
-  {# ── Optional utility bar (header_top region) ──────── #}
+  {# ── Optional utility bar ──────────────────────────── #}
   {% if page.header_top %}
     <div class="header-utility">
       <div class="header-utility__inner container">
@@ -48,30 +50,29 @@
       <span class="nav__toggle-bar"></span>
     </button>
 
-    {# ── Primary menu + account menu ───────────────────── #}
+    {# ── Primary menu ──────────────────────────────────── #}
+    {# Assign: Structure → Block layout → Primary Menu region
+       Block: Main navigation (System menu block, menu: Main) #}
     <ul class="nav__menu" id="primary-nav" role="list">
 
-      {# Primary navigation items #}
       {% if page.primary_menu %}
         {{ page.primary_menu }}
-      {% else %}
-        <li class="nav__menu-item"><a href="/about">{{ 'About Us'|t }}</a></li>
-        <li class="nav__menu-item"><a href="/amenities">{{ 'Amenities'|t }}</a></li>
-        <li class="nav__menu-item"><a href="/homes-for-sale">{{ 'Seasonal Homes'|t }}</a></li>
-        <li class="nav__menu-item"><a href="/location">{{ 'Location'|t }}</a></li>
+      {% elseif logged_in %}
+        <li class="nav__admin-hint">
+          <a href="{{ path('block.admin_demo', {'theme': 'meadow_lane'}) }}" class="nav__admin-hint-link">
+            ⚙ {{ 'Assign a menu block to the Primary Menu region'|t }}
+          </a>
+        </li>
       {% endif %}
 
-      {# Account menu — rendered inline in the nav on desktop,
-         stacked below primary links on mobile. Assign the Account
-         menu block to the Header region in Structure > Block layout. #}
+      {# Account menu — assign System menu block (Account) to Header region #}
       {% if page.header %}
         <li class="nav__menu-item nav__menu-item--account">
           {{ page.header }}
         </li>
       {% endif %}
 
-      {# Member login CTA — shown when member area is enabled
-         and the user is not already logged in. #}
+      {# Member Login CTA — toggle in Appearance → Settings #}
       {% if show_member_login %}
         <li class="nav__menu-item">
           <a href="/member" class="nav__member-btn">{{ 'Member Login'|t }}</a>

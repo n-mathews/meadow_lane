@@ -217,3 +217,68 @@ attributes on each `.listing-card`. These are set in
 Make sure `meadow_lane_preprocess_node()` in `meadow_lane.theme` is populating
 `listing_price`, `listing_beds`, `listing_baths`, `listing_sqft`,
 `listing_address`, and `listing_status` from the node fields.
+
+---
+
+## Menu setup
+
+All navigation is managed through Drupal's admin UI. No menus are hardcoded in the theme templates.
+
+### Step 1 — Create the menus
+
+Go to **Structure → Menus → Add menu** (`/admin/structure/menu/add`) and create the following four menus:
+
+| Label | Machine name | Used in |
+|---|---|---|
+| Main navigation | `main` | Primary nav (already exists in Drupal) |
+| Footer — Community | `footer-community` | Footer First region |
+| Footer — Seasonal Homes | `footer-seasonal-homes` | Footer Second region |
+| Footer — Members | `footer-members` | Footer Third region |
+
+### Step 2 — Add links to each menu
+
+Go to **Structure → Menus**, click **Edit menu** next to each one, and add links:
+
+**Main navigation** (`/admin/structure/menu/manage/main`):
+- About Us → `/about`
+- Amenities → `/amenities`
+- Seasonal Homes → `/homes-for-sale`
+- Location → `/location`
+
+**Footer — Community** (`/admin/structure/menu/manage/footer-community`):
+- About Us → `/about`
+- Amenities → `/amenities`
+- Location → `/location`
+
+**Footer — Seasonal Homes** (`/admin/structure/menu/manage/footer-seasonal-homes`):
+- Homes for Sale → `/homes-for-sale`
+- How to Buy → `/how-to-buy`
+- Ownership Explained → `/ownership`
+
+**Footer — Members** (`/admin/structure/menu/manage/footer-members`):
+- Member Login → `/member`
+- Documents & Forms → `/documents`
+
+### Step 3 — Assign menu blocks to regions
+
+Go to **Structure → Block layout** (`/admin/structure/block`) and select the **Meadow Lane Park** theme tab. Assign:
+
+| Block | Region |
+|---|---|
+| System menu block — Main navigation | **Primary Menu** |
+| System menu block — Account menu | **Header** |
+| System menu block — Footer — Community | **Footer First** |
+| System menu block — Footer — Seasonal Homes | **Footer Second** |
+| System menu block — Footer — Members | **Footer Third** |
+
+For each menu block, set **Display title: No** in the block configuration so the block title doesn't appear above the links.
+
+### Step 4 — Clear cache
+
+```bash
+drush cache:rebuild
+```
+
+### Admin hints
+
+When you are logged in as an admin and a menu region has no block assigned, a subtle amber dashed hint link appears in that region directing you to the Block layout page. These hints are invisible to anonymous visitors.
