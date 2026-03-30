@@ -3,47 +3,200 @@
  * @file page--front.html.twig
  * Meadow Lane Park — front/home page layout.
  *
- * Homepage section blocks (About, Amenities, Location) should be
- * placed in the Content region via Structure > Block layout.
+ * Homepage sections (About, Amenities, Location) are rendered directly
+ * in this template so they always appear without needing block placement.
  *
- * Recommended block order in Content region:
- *   1. meadow_lane_about     → block--meadow-lane-about.html.twig
- *   2. meadow_lane_amenities → block--meadow-lane-amenities.html.twig
- *   3. meadow_lane_location  → block--meadow-lane-location.html.twig
- *   4. (Optional) Homes for sale View block
- * *
- * Variables:
- *   - hero_tagline, hero_subtext: From theme settings.
- *   - show_member_login: From theme settings.
- *   - footer_tagline, social_facebook: From theme settings.
- *   - page.*: All Drupal region variables.
+ * The Content region (page.content) is still rendered after the sections
+ * for any additional blocks placed by editors (e.g. homes-for-sale View).
  */
 #}
 <div class="site-wrapper page--front">
 
   {{ include('@meadow_lane/partials/site-header.html.twig') }}
 
-  {# ── Hero: use Hero region block if placed, else default partial ── #}
+  {# ── Hero ─────────────────────────────────────────────── #}
   {% if page.hero %}
     <div class="layout-hero">{{ page.hero }}</div>
   {% else %}
     {{ include('@meadow_lane/partials/hero-default.html.twig') }}
   {% endif %}
 
-  {# ── Status messages ──────────────────────────────────── #}
   {% if page.highlighted %}
     <div class="layout-highlighted container" role="complementary">
       {{ page.highlighted }}
     </div>
   {% endif %}
 
-  {# ── Main content — homepage section blocks live here ─── #}
   <main id="main-content" class="layout-main" role="main" tabindex="-1">
-    {{ page.content }}
+
+    {# ── About section ────────────────────────────────────── #}
+    <section class="hp-about" aria-label="{{ 'About Meadow Lane Park'|t }}">
+      <div class="container">
+        <div class="hp-about__grid">
+
+          <div class="hp-about__text">
+            <span class="section-label">{{ 'About our community'|t }}</span>
+            <h2>{{ 'Own your home.<br>Own your community.'|t|raw }}</h2>
+            <p>{{ 'Meadow Lane Park is a seasonal, resident-owned community — incorporated in 2018. The land beneath your home is owned collectively by the members, keeping costs stable and giving every homeowner a real voice in how the community is run.'|t }}</p>
+            <p>{{ 'Unlike traditional land-lease parks, buying here makes you a co-owner of the community itself. That\'s security, belonging, and a true stake in where you spend your summers.'|t }}</p>
+            <a href="/ownership" class="btn btn--outline" style="margin-top: var(--space-4);">
+              {{ 'What does resident-owned mean?'|t }}
+            </a>
+          </div>
+
+          <div class="hp-about__image-col">
+            <div class="hp-about__image hp-about__image--placeholder" aria-hidden="true">
+              <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
+                <rect width="400" height="300" fill="#DCF0EB"/>
+                <ellipse cx="200" cy="180" rx="200" ry="60" fill="#B8D4E8" opacity="0.6"/>
+                <rect x="140" y="60" width="20" height="120" fill="#4A7C6F" opacity="0.5"/>
+                <polygon points="130,80 150,20 170,80" fill="#2C5F3A" opacity="0.6"/>
+                <rect x="200" y="80" width="18" height="100" fill="#4A7C6F" opacity="0.4"/>
+                <polygon points="191,98 209,38 227,98" fill="#2C5F3A" opacity="0.5"/>
+                <rect x="240" y="95" width="16" height="85" fill="#4A7C6F" opacity="0.4"/>
+                <polygon points="232,110 248,55 264,110" fill="#2C5F3A" opacity="0.5"/>
+              </svg>
+            </div>
+            <div class="hp-about__stat-card">
+              <div class="hp-about__stat-number">2018</div>
+              <div class="hp-about__stat-label">{{ 'Year incorporated as resident-owned'|t }}</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    {# ── Amenities section ────────────────────────────────── #}
+    <section class="hp-amenities" aria-label="{{ 'Community amenities'|t }}">
+      <div class="container">
+
+        <div class="hp-amenities__header">
+          <span class="section-label">{{ 'What we offer'|t }}</span>
+          <h2>{{ 'Community amenities'|t }}</h2>
+          <p>{{ 'Everything you need for a great seasonal getaway on the St. Lawrence River.'|t }}</p>
+        </div>
+
+        <div class="hp-amenities__grid">
+
+          <div class="hp-amenity-card">
+            <div class="hp-amenity-card__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none"><path d="M4 20 Q7 15 12 17 Q17 19 20 15" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"/><path d="M2 17 Q6 13 10 15 Q14 17 18 13 Q20 11 22 13" stroke="currentColor" stroke-width="1.2" fill="none" stroke-linecap="round" opacity="0.6"/><circle cx="12" cy="7" r="3.5" stroke="currentColor" stroke-width="1.5"/></svg>
+            </div>
+            <h3 class="hp-amenity-card__title">{{ 'River access'|t }}</h3>
+            <p class="hp-amenity-card__desc">{{ 'Private waterfront access to the St. Lawrence River with docking and boat launch for members.'|t }}</p>
+          </div>
+
+          <div class="hp-amenity-card">
+            <div class="hp-amenity-card__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none"><path d="M2 18 L12 4 L22 18 Z" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linejoin="round"/><path d="M6 18 L6 12 Q6 10 12 10 Q18 10 18 12 L18 18" stroke="currentColor" stroke-width="1.2" fill="none"/></svg>
+            </div>
+            <h3 class="hp-amenity-card__title">{{ 'Community tent'|t }}</h3>
+            <p class="hp-amenity-card__desc">{{ 'A large community tent hosts member events, socials, and seasonal gatherings throughout the summer.'|t }}</p>
+          </div>
+
+          <div class="hp-amenity-card">
+            <div class="hp-amenity-card__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="8" stroke="currentColor" stroke-width="1.5"/><path d="M9 12 Q12 8 15 12 Q12 16 9 12Z" fill="currentColor" opacity="0.4"/></svg>
+            </div>
+            <h3 class="hp-amenity-card__title">{{ 'Recreation'|t }}</h3>
+            <p class="hp-amenity-card__desc">{{ 'Walking paths, green spaces, and seasonal recreational areas in beautifully maintained grounds.'|t }}</p>
+          </div>
+
+          <div class="hp-amenity-card">
+            <div class="hp-amenity-card__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="17" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M3 10 L21 10" stroke="currentColor" stroke-width="1.2"/><path d="M8 4 L8 10" stroke="currentColor" stroke-width="1.2"/><path d="M16 4 L16 10" stroke="currentColor" stroke-width="1.2"/></svg>
+            </div>
+            <h3 class="hp-amenity-card__title">{{ 'Seasonal events'|t }}</h3>
+            <p class="hp-amenity-card__desc">{{ 'A full season of community events — openings, socials, and celebrations for members and their families.'|t }}</p>
+          </div>
+
+          <div class="hp-amenity-card">
+            <div class="hp-amenity-card__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none"><path d="M12 2 L14.5 9 L22 9.5 L17 14.5 L18.5 22 L12 18.5 L5.5 22 L7 14.5 L2 9.5 L9.5 9 Z" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linejoin="round"/></svg>
+            </div>
+            <h3 class="hp-amenity-card__title">{{ 'Member ownership'|t }}</h3>
+            <p class="hp-amenity-card__desc">{{ 'Annual meetings and member voting rights — every owner has a direct voice in community decisions.'|t }}</p>
+          </div>
+
+          <div class="hp-amenity-card">
+            <div class="hp-amenity-card__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none"><path d="M3 21 L3 10 L12 4 L21 10 L21 21 Z" stroke="currentColor" stroke-width="1.5" fill="none"/><rect x="9" y="14" width="6" height="7" stroke="currentColor" stroke-width="1.2"/></svg>
+            </div>
+            <h3 class="hp-amenity-card__title">{{ 'Manufactured homes'|t }}</h3>
+            <p class="hp-amenity-card__desc">{{ 'Well-maintained manufactured homes in a range of sizes — affordable seasonal living right on the water.'|t }}</p>
+          </div>
+
+        </div>
+
+        <div class="hp-amenities__cta">
+          <a href="/amenities" class="btn btn--outline">{{ 'See all amenities'|t }}</a>
+        </div>
+
+      </div>
+    </section>
+
+    {# ── Location section ─────────────────────────────────── #}
+    <section class="hp-location" aria-label="{{ 'Location'|t }}">
+      <div class="hp-location__inner">
+
+        <div class="hp-location__text">
+          <span class="section-label">{{ 'Where we are'|t }}</span>
+          <h2>{{ 'The heart of the 1000 Islands'|t }}</h2>
+          <p>{{ 'Minutes from the Thousand Islands Bridge and the village of Alexandria Bay — Meadow Lane Park is perfectly placed for a summer on the St. Lawrence River.'|t }}</p>
+          <ul class="hp-location__features">
+            <li>{{ 'Minutes from I-81 and the Thousand Islands Bridge'|t }}</li>
+            <li>{{ 'Easy access to the shops and restaurants of Clayton and Alexandria Bay'|t }}</li>
+            <li>{{ '30 minutes from Watertown International Airport'|t }}</li>
+            <li>{{ '90 minutes from the NYS Thruway'|t }}</li>
+            <li>{{ 'Close to Boldt Castle, Wellesley Island State Park, and the river'|t }}</li>
+          </ul>
+          <a href="/location" class="btn btn--primary" style="margin-top: var(--space-6);">
+            {{ 'Get directions'|t }}
+          </a>
+        </div>
+
+        <div class="hp-location__map-area" aria-hidden="true">
+          <svg viewBox="0 0 420 340" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
+            <rect width="420" height="340" fill="#1B4A6B" rx="12"/>
+            <ellipse cx="210" cy="170" rx="190" ry="140" fill="#2A6B9C" opacity="0.5"/>
+            <ellipse cx="120" cy="140" rx="65" ry="38" fill="#2C5F3A"/>
+            <ellipse cx="120" cy="135" rx="55" ry="30" fill="#3d7040"/>
+            <ellipse cx="290" cy="160" rx="80" ry="44" fill="#2C5F3A"/>
+            <ellipse cx="290" cy="154" rx="68" ry="34" fill="#3d7040"/>
+            <ellipse cx="210" cy="240" rx="50" ry="28" fill="#2C5F3A"/>
+            <ellipse cx="50"  cy="220" rx="38" ry="22" fill="#2C5F3A"/>
+            <ellipse cx="370" cy="230" rx="42" ry="24" fill="#2C5F3A"/>
+            <polygon points="100,140 112,108 124,140" fill="#1a4428"/>
+            <polygon points="116,140 128,104 140,140" fill="#254d2e"/>
+            <polygon points="270,158 284,122 298,158" fill="#1a4428"/>
+            <polygon points="288,158 302,118 316,158" fill="#254d2e"/>
+            <rect x="145" y="92" width="6" height="55" fill="#B08828"/>
+            <rect x="269" y="92" width="6" height="55" fill="#B08828"/>
+            <rect x="138" y="128" width="144" height="5" fill="#A07820"/>
+            <path d="M148 97 Q210 72 272 97" stroke="#C09030" stroke-width="2.5" fill="none"/>
+            <circle cx="210" cy="178" r="10" fill="#E05040"/>
+            <circle cx="210" cy="178" r="5" fill="white"/>
+            <path d="M210 188 L210 200" stroke="#E05040" stroke-width="2.5" stroke-linecap="round"/>
+            <rect x="155" y="206" width="110" height="24" rx="4" fill="rgba(255,255,255,0.15)"/>
+            <text x="210" y="222" text-anchor="middle" font-family="Georgia,serif" font-size="11" fill="white" letter-spacing="0.04em">Alexandria Bay, NY</text>
+          </svg>
+        </div>
+
+      </div>
+    </section>
+
+    {# ── Additional blocks from Content region (e.g. homes View) ── #}
+    {% if page.content %}
+      <div class="front-page-content">
+        {{ page.content }}
+      </div>
+    {% endif %}
+
   </main>
 
-  {# ── Front page CTA band ──────────────────────────────── #}
-  <section class="fp-cta" aria-label="{{ 'Get in touch'|t }}">
+  {# ── CTA band ─────────────────────────────────────────── #}
+  <section class="fp-cta">
     <div class="container">
       <div class="fp-cta__inner">
         <div class="fp-cta__text">
@@ -59,4 +212,4 @@
 
   {{ include('@meadow_lane/partials/site-footer.html.twig') }}
 
-</div>{# /.site-wrapper #}
+</div>

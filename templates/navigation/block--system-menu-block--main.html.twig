@@ -1,24 +1,14 @@
 {#
 /**
  * @file block--system-menu-block--main.html.twig
- * Meadow Lane Park — renders the main navigation menu items
- * as nav__menu-item list entries (without the outer <ul>,
- * which lives in page.html.twig).
+ * Meadow Lane Park — Main navigation menu block.
+ *
+ * Drupal renders this block into the Primary Menu region, which the
+ * site-header partial outputs as {{ page.primary_menu }} inside the
+ * <ul class="nav__menu"> element.
+ *
+ * The block wrapper div is suppressed so only the <ul class="menu">
+ * rendered by menu.html.twig lands inside the nav's flex container.
  */
 #}
-{% for item in items %}
-  <li{{ item.attributes.addClass('nav__menu-item', item.is_expanded ? 'has-children' : '', item.in_active_trail ? 'is-active' : '') }}>
-    <a{{ item.url ? ' href="' ~ item.url ~ '"' }} {{ item.attributes }}>
-      {{ item.title }}
-    </a>
-    {% if item.below %}
-      <ul class="nav__submenu">
-        {% for child in item.below %}
-          <li{{ child.attributes.addClass('nav__submenu-item', child.in_active_trail ? 'is-active' : '') }}>
-            <a href="{{ child.url }}">{{ child.title }}</a>
-          </li>
-        {% endfor %}
-      </ul>
-    {% endif %}
-  </li>
-{% endfor %}
+{{ content }}
