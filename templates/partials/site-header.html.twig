@@ -53,33 +53,33 @@
     {# ── Primary menu ──────────────────────────────────── #}
     {# Assign: Structure → Block layout → Primary Menu region
        Block: Main navigation (System menu block, menu: Main) #}
-    <ul class="nav__menu" id="primary-nav" role="list">
+    <div class="nav__menu" id="primary-nav">
 
       {% if page.primary_menu %}
         {{ page.primary_menu }}
       {% elseif logged_in %}
-        <li class="nav__admin-hint">
+        <div class="nav__admin-hint">
           <a href="{{ path('block.admin_demo', {'theme': 'meadow_lane'}) }}" class="nav__admin-hint-link">
             ⚙ {{ 'Assign a menu block to the Primary Menu region'|t }}
           </a>
-        </li>
+        </div>
       {% endif %}
 
       {# Account menu — assign System menu block (Account) to Header region #}
       {% if page.header %}
-        <li class="nav__menu-item nav__menu-item--account">
+        <div class="nav__menu-item nav__menu-item--account">
           {{ page.header }}
-        </li>
+        </div>
       {% endif %}
 
       {# Member Login CTA — toggle in Appearance → Settings #}
       {% if show_member_login %}
-        <li class="nav__menu-item">
+        <div class="nav__menu-item nav__menu-item--member">
           <a href="/member" class="nav__member-btn">{{ 'Member Login'|t }}</a>
-        </li>
+        </div>
       {% endif %}
 
-    </ul>
+    </div>
 
   </nav>
 </header>
