@@ -45,7 +45,17 @@
             <a href="/ownership" class="btn btn--outline">{{ 'How ownership works'|t }}</a>
           </div>
           <div class="inner-two-col__image">
-            {{ page.content['field_about_image'] ?? '' }}
+            {% if page.content['field_about_image'] %}
+              {{ page.content['field_about_image'] }}
+            {% else %}
+              <img
+                src="{{ base_path ~ directory }}/images/about-community.jpg"
+                alt="{{ 'Meadow Lane Park community grounds and entrance'|t }}"
+                width="1200" height="800"
+                loading="lazy"
+                style="width:100%; height:100%; object-fit:cover; border-radius:var(--radius-xl); display:block;"
+              />
+            {% endif %}
           </div>
         </div>
 
@@ -57,7 +67,17 @@
             <p>{{ 'As a seasonal community, Meadow Lane Park comes alive each spring and summer, offering a relaxed pace of life on the St. Lawrence River with all the natural beauty the region is known for.'|t }}</p>
           </div>
           <div class="inner-two-col__image">
-            {{ page.content['field_history_image'] ?? '' }}
+            {% if page.content['field_history_image'] %}
+              {{ page.content['field_history_image'] }}
+            {% else %}
+              <img
+                src="{{ base_path ~ directory }}/images/about-aerial.jpg"
+                alt="{{ 'Aerial view of Meadow Lane Park marina and community'|t }}"
+                width="1400" height="787"
+                loading="lazy"
+                style="width:100%; height:100%; object-fit:cover; object-position:center 40%; border-radius:var(--radius-xl); display:block;"
+              />
+            {% endif %}
           </div>
         </div>
       </section>

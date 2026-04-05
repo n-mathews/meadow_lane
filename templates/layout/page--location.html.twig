@@ -100,19 +100,17 @@
 
           </div>{# /.location-layout__info #}
 
-          {# Map embed — place a Google Map block in the Content region
-             or add a field_map_embed iframe field to the page node. #}
           <div class="location-layout__map">
             {% if page.content['field_map_embed'] %}
               {{ page.content['field_map_embed'] }}
             {% else %}
-              <div class="map-placeholder" role="img" aria-label="{{ 'Map of Meadow Lane Park location'|t }}">
-                <svg width="48" height="48" viewBox="0 0 48 48" fill="none" aria-hidden="true">
-                  <circle cx="24" cy="20" r="10" stroke="currentColor" stroke-width="2"/>
-                  <path d="M24 30 L24 42" stroke="currentColor" stroke-width="2"/>
-                  <circle cx="24" cy="20" r="4" fill="currentColor"/>
-                </svg>
-                <p>{{ 'Add a Google Maps embed block to this region in Structure → Block layout.'|t }}</p>
+              <div class="location-map-embed">
+                <img
+                  src="{{ base_path ~ directory }}/images/location-bridge.jpg"
+                  alt="{{ 'Aerial view of the Thousand Islands Bridge and St. Lawrence River near Meadow Lane Park'|t }}"
+                  width="1250" height="900"
+                  loading="lazy"
+                />
               </div>
             {% endif %}
           </div>

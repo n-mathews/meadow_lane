@@ -89,6 +89,23 @@
   text-align: center;
 }
 
+.location-map-embed {
+  width: 100%;
+  height: 100%;
+  min-height: 380px;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.location-map-embed img {
+  width: 100%;
+  height: 100%;
+  min-height: 380px;
+  object-fit: cover;
+  object-position: center 30%;
+  display: block;
+}
+
 .map-placeholder svg {
   color: var(--clr-teal-mid);
   opacity: 0.5;
