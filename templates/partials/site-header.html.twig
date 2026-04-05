@@ -71,14 +71,7 @@
         </li>
       {% endif %}
 
-      {# Account menu #}
-      {% if page.header %}
-        <li class="nav__menu-item nav__menu-item--account">
-          {{ page.header }}
-        </li>
-      {% endif %}
-
-      {# Member Login CTA #}
+{# Member Login CTA #}
       {% if show_member_login %}
         <li class="nav__menu-item">
           <a href="/member" class="nav__member-btn">{{ 'Member Login'|t }}</a>

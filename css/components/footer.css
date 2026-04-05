@@ -135,3 +135,39 @@
 .footer__admin-hint a:hover {
   color: rgba(255,200,100,1) !important;
 }
+
+/* ── Account menu in footer Members column ───────────── */
+.footer__account-menu {
+  margin-top: var(--space-3);
+  padding-top: var(--space-3);
+  border-top: 1px solid rgba(255,255,255,0.08);
+}
+
+.footer__account-menu ul,
+.footer__account-menu .menu {
+  list-style: none;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.footer__account-menu li,
+.footer__account-menu .menu-item {
+  list-style: none;
+  margin-bottom: var(--space-2);
+}
+
+.footer__account-menu a {
+  font-size: var(--text-sm);
+  color: rgba(255,255,255,0.6);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+.footer__account-menu a:hover {
+  color: rgba(255,255,255,0.9);
+  text-decoration: none;
+}
+
+/* Suppress any block title the account menu block might render */
+.footer__account-menu .block-title { display: none; }

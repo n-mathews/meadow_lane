@@ -37,10 +37,48 @@ function meadow_lane_preprocess_page(array &$variables): void {
   $variables['contact_phone']  = theme_get_setting('contact_phone')  ?? '';
   $variables['contact_email']  = theme_get_setting('contact_email')  ?? '';
   $variables['contact_address']= theme_get_setting('contact_address')?? 'Alexandria Bay, New York';
-  $variables['footer_tagline'] = theme_get_setting('footer_tagline') ?? 'Proud to be co-owned by the people who call it home.';
+  $variables['footer_tagline'] = theme_get_setting('footer_tagline') ?? 'A seasonal, resident-owned community on the St. Lawrence River. Incorporated 2018.';
   $variables['social_facebook']= theme_get_setting('social_facebook')?? '';
   $variables['show_member_login'] = theme_get_setting('show_member_login') ?? TRUE;
   $variables['is_front'] = \Drupal::service('path.matcher')->isFrontPage();
+
+  // Load the main menu tree directly so site-header.html.twig can render
+  // menu items as plain <li> elements without Drupal's block wrapper divs.
+  $variables['primary_menu_items'] = _meadow_lane_get_menu_items('main');
+}
+
+/**
+ * Returns top-level menu link items for a given menu name.
+ * Each item: title, url (Url object), in_active_trail.
+ */
+function _meadow_lane_get_menu_items(string $menu_name): array {
+  try {
+    $menu_tree = \Drupal::service('menu.link_tree');
+    $parameters = $menu_tree->getCurrentRouteMenuTreeParameters($menu_name);
+    $parameters->setMaxDepth(1);
+    $tree = $menu_tree->load($menu_name, $parameters);
+    $manipulators = [
+      ['callable' => 'menu.default_tree_manipulators:checkAccess'],
+      ['callable' => 'menu.default_tree_manipulators:generateIndexAndSort'],
+    ];
+    $tree = $menu_tree->transform($tree, $manipulators);
+    $items = [];
+    foreach ($tree as $element) {
+      if (!$element->access->isAllowed()) {
+        continue;
+      }
+      $link = $element->link;
+      $items[] = [
+        'title'           => $link->getTitle(),
+        'url'             => $link->getUrlObject(),
+        'in_active_trail' => $element->inActiveTrail,
+      ];
+    }
+    return $items;
+  }
+  catch (\Exception $e) {
+    return [];
+  }
 }
 
 /**

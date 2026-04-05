@@ -78,7 +78,6 @@
     </div>
 
     {# ── Members column ──────────────────────────────────── #}
-    {# Assign: Footer Third region → System menu block (Footer — Members) #}
     <div class="footer__col">
       <h2 class="footer__col-heading">{{ 'Members'|t }}</h2>
       {% if page.footer_third %}
@@ -89,6 +88,12 @@
             {{ 'Assign a menu block to Footer Third'|t }}
           </a>
         </p>
+      {% endif %}
+      {# Account menu (Log in / Log out) appended below member links #}
+      {% if page.header %}
+        <div class="footer__account-menu">
+          {{ page.header }}
+        </div>
       {% endif %}
     </div>
 
