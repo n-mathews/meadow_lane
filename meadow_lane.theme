@@ -230,3 +230,91 @@ function meadow_lane_theme_suggestions_views_view_unformatted_alter(array &$sugg
 function meadow_lane_preprocess_node__home_listing__full(array &$variables): void {
   $variables['#attached']['library'][] = 'meadow_lane/gallery';
 }
+
+/**
+ * Implements hook_form_alter().
+ *
+ * The Simplenews subscription block form doesn't render an email input
+ * for anonymous users when configured as a single-newsletter block.
+ * This injects the email field directly into the form render array.
+ */
+function meadow_lane_form_alter(array &$form, \Drupal\Core\Form\FormStateInterface $form_state, string $form_id): void {
+  // Target any Simplenews subscription block form.
+  if (strpos($form_id, 'simplenews_subscriptions_block_') !== 0) {
+    return;
+  }
+
+  // Only alter for anonymous users — logged-in users see the management form.
+  if (\Drupal::currentUser()->isAuthenticated()) {
+    return;
+  }
+
+  // Inject an email field before the actions.
+  $form['mail'] = [
+    '#type'          => 'email',
+    '#title'         => t('Email address'),
+    '#title_display' => 'invisible',
+    '#required'      => TRUE,
+    '#placeholder'   => t('Your email address'),
+    '#attributes'    => [
+      'class'        => ['simplenews-email-field'],
+      'autocomplete' => 'email',
+    ],
+    '#weight'        => 5,
+  ];
+
+  // Move actions after the email field.
+  $form['actions']['#weight'] = 10;
+
+  // Add a custom submit handler to process the email.
+  $form['#submit'][] = 'meadow_lane_simplenews_block_submit';
+
+  // Suppress the default message item — our CSS handles heading/description.
+  if (isset($form['message'])) {
+    $form['message']['#access'] = FALSE;
+  }
+}
+
+/**
+ * Custom submit handler for the Simplenews subscription block form.
+ *
+ * Passes the entered email to Simplenews's subscription service.
+ */
+function meadow_lane_simplenews_block_submit(array &$form, \Drupal\Core\Form\FormStateInterface $form_state): void {
+  $email = $form_state->getValue('mail');
+  if (!$email) {
+    return;
+  }
+
+  // Find the newsletter ID from the form — it's stored in the block config.
+  // Simplenews stores subscriptions via its subscriber manager service.
+  try {
+    /** @var \Drupal\simplenews\Subscription\SubscriptionManagerInterface $subscription_manager */
+    $subscription_manager = \Drupal::service('simplenews.subscription_manager');
+
+    // Get all newsletters this block is configured for.
+    $newsletters = $form_state->getValue('subscriptions');
+    if (empty($newsletters)) {
+      // Fall back: subscribe to all newsletters associated with this form.
+      // Get newsletter IDs from the form object's block config.
+      $build_info = $form_state->getBuildInfo();
+      $callback   = $build_info['callback_object'] ?? NULL;
+      if ($callback && method_exists($callback, 'getNewsletterIds')) {
+        $newsletter_ids = $callback->getNewsletterIds();
+      }
+      else {
+        // Last resort — subscribe to all available newsletters.
+        $newsletter_ids = array_keys(\Drupal::entityTypeManager()
+          ->getStorage('simplenews_newsletter')
+          ->loadMultiple());
+      }
+
+      foreach ($newsletter_ids as $newsletter_id) {
+        $subscription_manager->subscribe($email, $newsletter_id, FALSE, 'website');
+      }
+    }
+  }
+  catch (\Exception $e) {
+    \Drupal::logger('meadow_lane')->error('Simplenews subscription error: @msg', ['@msg' => $e->getMessage()]);
+  }
+}
