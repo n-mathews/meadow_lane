@@ -79,12 +79,20 @@ function meadow_lane_form_system_theme_settings_alter(array &$form, FormStateInt
     '#default_value' => theme_get_setting('footer_tagline') ?? 'A seasonal, resident-owned community on the St. Lawrence River — incorporated 2018.',
   ];
 
-  // Member area toggle.
+  // Member area settings.
+  $form['meadow_lane_settings']['member_login_url'] = [
+    '#type'          => 'url',
+    '#title'         => t('Member login URL'),
+    '#default_value' => theme_get_setting('member_login_url') ?? 'https://app.easyhoa.com',
+    '#description'   => t('Where the Member Login button points. Use an external URL (e.g. https://app.easyhoa.com) until the on-site member area is ready, then change to /member.'),
+    '#placeholder'   => 'https://app.easyhoa.com',
+  ];
+
   $form['meadow_lane_settings']['show_member_login'] = [
-    '#type' => 'checkbox',
-    '#title' => t('Show "Member Login" button in navigation'),
+    '#type'          => 'checkbox',
+    '#title'         => t('Show "Member Login" button in navigation'),
     '#default_value' => theme_get_setting('show_member_login') ?? TRUE,
-    '#description' => t('When enabled, a Member Login button appears in the primary navigation. Disable until your secure member area is ready.'),
+    '#description'   => t('Toggle the Member Login button in the primary navigation.'),
   ];
 
 }

@@ -40,6 +40,7 @@ function meadow_lane_preprocess_page(array &$variables): void {
   $variables['footer_tagline'] = theme_get_setting('footer_tagline') ?? 'A seasonal, resident-owned community on the St. Lawrence River. Incorporated 2018.';
   $variables['social_facebook']= theme_get_setting('social_facebook')?? '';
   $variables['show_member_login'] = theme_get_setting('show_member_login') ?? TRUE;
+  $variables['member_login_url'] = theme_get_setting('member_login_url') ?? 'https://app.easyhoa.com';
   $variables['is_front'] = \Drupal::service('path.matcher')->isFrontPage();
 
   // Load the main menu tree directly so site-header.html.twig can render

@@ -74,7 +74,7 @@
 {# Member Login CTA #}
       {% if show_member_login %}
         <li class="nav__menu-item">
-          <a href="/member" class="nav__member-btn">{{ 'Member Login'|t }}</a>
+          <a href="{{ member_login_url|default('https://app.easyhoa.com') }}" class="nav__member-btn"{% if member_login_url starts with 'http' %} target="_blank" rel="noopener noreferrer"{% endif %}>{{ 'Member Login'|t }}</a>
         </li>
       {% endif %}
 
