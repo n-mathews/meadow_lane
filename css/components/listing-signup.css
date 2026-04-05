@@ -1,94 +1,85 @@
 /**
  * listing-signup.css — Meadow Lane Park
- * Styles the new listing email notification signup block.
- * The form itself is rendered by the Simplenews module.
+ * Styles the Simplenews subscription block on the Homes for Sale page.
+ *
+ * Simplenews renders roughly:
+ *   div.block-simplenews-subscription-block (or similar)
+ *     form.simplenews-subscribe-form
+ *       div.form-item  (email field wrapper)
+ *         label
+ *         input[type="email"]
+ *         div.description
+ *       div.form-actions
+ *         input[type="submit"]
+ *       div.form-item.js-form-type-honeypot (hidden spam trap)
+ *       a  (Manage existing subscriptions link)
  */
 
-/* ── Outer card ──────────────────────────────────────── */
-.listing-signup {
+/* ── Wrapper card ────────────────────────────────────── */
+/* Target the Simplenews block wherever it appears on this page */
+.path-homes-for-sale .block-simplenews-subscription-block,
+.page--homes-for-sale .block-simplenews-subscription-block,
+[class*="simplenews-subscription"] {
   background: var(--clr-slate);
   border-radius: var(--radius-xl);
   padding: var(--space-8) var(--space-10);
   margin: var(--space-10) 0;
 }
 
-.listing-signup__inner {
-  display: grid;
-  grid-template-columns: auto 1fr auto;
-  gap: var(--space-6);
-  align-items: center;
-}
-
-/* ── Icon ────────────────────────────────────────────── */
-.listing-signup__icon {
-  width: 48px;
-  height: 48px;
-  background: rgba(255,255,255,0.1);
-  border-radius: var(--radius-md);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: rgba(255,255,255,0.8);
-  flex-shrink: 0;
-}
-
-/* ── Heading + description ───────────────────────────── */
-.listing-signup__heading {
+/* ── Block title ─────────────────────────────────────── */
+.path-homes-for-sale .block-simplenews-subscription-block h2,
+.path-homes-for-sale .block-simplenews-subscription-block .block-title {
   font-family: var(--font-sans);
   font-size: var(--text-base);
   font-weight: 500;
   color: white;
-  margin-bottom: var(--space-1);
+  margin-bottom: var(--space-2);
 }
 
-.listing-signup__desc {
+/* ── Description text above the form ────────────────── */
+.path-homes-for-sale .block-simplenews-subscription-block > p,
+.path-homes-for-sale .block-simplenews-subscription-block .description:not(.form-item .description) {
   font-size: var(--text-sm);
   color: rgba(255,255,255,0.6);
-  margin: 0;
+  margin-bottom: var(--space-5);
   line-height: var(--leading-snug);
 }
 
-/* ── Form area ───────────────────────────────────────── */
-.listing-signup__form-area {
-  min-width: 300px;
-}
-
-/*
- * Simplenews renders a form with these elements:
- *   .simplenews-subscribe-form
- *     .form-item (wrapping the email input)
- *       input[type="email"]
- *     input[type="submit"] or button[type="submit"]
- *
- * We override all of these to match the dark card design.
- */
-
-/* Hide the default Simplenews label — our heading above serves that purpose */
-.listing-signup__form-area .simplenews-subscribe-form .form-item label,
-.listing-signup__form-area .form-item label[for*="mail"],
-.listing-signup__form-area .form-item label[for*="email"] {
-  display: none;
-}
-
-/* Hide newsletter checkboxes if multiple newsletters are shown */
-.listing-signup__form-area .form-type-checkbox {
-  display: none;
-}
-
-/* The form itself — flex row */
-.listing-signup__form-area form,
-.listing-signup__form-area .simplenews-subscribe-form {
+/* ── Form layout — inline row ────────────────────────── */
+.path-homes-for-sale .simplenews-subscribe-form,
+.page--homes-for-sale .simplenews-subscribe-form {
   display: flex;
+  align-items: flex-end;
   gap: var(--space-3);
-  align-items: stretch;
   flex-wrap: wrap;
 }
 
-/* Email input */
-.listing-signup__form-area input[type="email"],
-.listing-signup__form-area input[type="text"][name*="mail"] {
+/* ── Email field wrapper ─────────────────────────────── */
+.path-homes-for-sale .simplenews-subscribe-form .form-item,
+.page--homes-for-sale .simplenews-subscribe-form .form-item {
   flex: 1;
-  min-width: 200px;
+  min-width: 220px;
+  margin: 0;
+}
+
+/* Hide the "Email" label — context is obvious */
+.path-homes-for-sale .simplenews-subscribe-form .form-item label,
+.page--homes-for-sale .simplenews-subscribe-form .form-item label {
+  display: none;
+}
+
+/* Hide the field description below the input */
+.path-homes-for-sale .simplenews-subscribe-form .form-item .description,
+.page--homes-for-sale .simplenews-subscribe-form .form-item .description {
+  display: none;
+}
+
+/* ── Email input ─────────────────────────────────────── */
+.path-homes-for-sale .simplenews-subscribe-form input[type="email"],
+.path-homes-for-sale .simplenews-subscribe-form input[type="text"],
+.page--homes-for-sale .simplenews-subscribe-form input[type="email"],
+.page--homes-for-sale .simplenews-subscribe-form input[type="text"] {
+  width: 100%;
   padding: 10px 14px;
   font-family: var(--font-sans);
   font-size: var(--text-sm);
@@ -99,26 +90,33 @@
   transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
   appearance: none;
   margin: 0;
+  height: 42px;
 }
 
-.listing-signup__form-area input[type="email"]:focus,
-.listing-signup__form-area input[type="text"][name*="mail"]:focus {
+.path-homes-for-sale .simplenews-subscribe-form input[type="email"]:focus,
+.page--homes-for-sale .simplenews-subscribe-form input[type="email"]:focus {
   outline: none;
   border-color: var(--clr-teal-mid);
   box-shadow: 0 0 0 3px rgba(110,158,146,0.3);
 }
 
-.listing-signup__form-area input[type="email"]::placeholder {
-  color: var(--clr-text-light);
+/* ── Submit button area ──────────────────────────────── */
+.path-homes-for-sale .simplenews-subscribe-form .form-actions,
+.page--homes-for-sale .simplenews-subscribe-form .form-actions {
+  flex-shrink: 0;
+  margin: 0;
 }
 
-/* Submit button */
-.listing-signup__form-area input[type="submit"],
-.listing-signup__form-area button[type="submit"] {
+/* ── Submit button ───────────────────────────────────── */
+.path-homes-for-sale .simplenews-subscribe-form input[type="submit"],
+.path-homes-for-sale .simplenews-subscribe-form button[type="submit"],
+.page--homes-for-sale .simplenews-subscribe-form input[type="submit"],
+.page--homes-for-sale .simplenews-subscribe-form button[type="submit"] {
   background: var(--clr-teal);
   color: white;
   border: none;
   padding: 10px 22px;
+  height: 42px;
   border-radius: var(--radius-md);
   font-family: var(--font-sans);
   font-size: var(--text-sm);
@@ -130,42 +128,70 @@
   margin: 0;
 }
 
-.listing-signup__form-area input[type="submit"]:hover,
-.listing-signup__form-area button[type="submit"]:hover {
+.path-homes-for-sale .simplenews-subscribe-form input[type="submit"]:hover,
+.page--homes-for-sale .simplenews-subscribe-form input[type="submit"]:hover {
   background: var(--clr-teal-mid);
 }
 
-/* Status messages rendered by Simplenews inside the block */
-.listing-signup__form-area .messages,
-.listing-signup__form-area .status {
+/* ── Hide honeypot and "Manage existing" link ────────── */
+.path-homes-for-sale .simplenews-subscribe-form .js-form-type-honeypot,
+.path-homes-for-sale .simplenews-subscribe-form [data-drupal-selector*="honeypot"],
+.path-homes-for-sale .simplenews-subscribe-form a[href*="simplenews"],
+.path-homes-for-sale .simplenews-subscribe-form a[href*="validate"],
+.page--homes-for-sale .simplenews-subscribe-form .js-form-type-honeypot,
+.page--homes-for-sale .simplenews-subscribe-form a[href*="simplenews"],
+.page--homes-for-sale .simplenews-subscribe-form a[href*="validate"] {
+  display: none !important;
+}
+
+/* ── Newsletter checkbox (hide if multiple lists shown) ─ */
+.path-homes-for-sale .simplenews-subscribe-form .form-checkboxes,
+.path-homes-for-sale .simplenews-subscribe-form .form-type-checkbox,
+.page--homes-for-sale .simplenews-subscribe-form .form-checkboxes,
+.page--homes-for-sale .simplenews-subscribe-form .form-type-checkbox {
+  display: none;
+}
+
+/* ── Success / status messages ───────────────────────── */
+.path-homes-for-sale .block-simplenews-subscription-block .messages,
+.page--homes-for-sale .block-simplenews-subscription-block .messages {
   color: rgba(255,255,255,0.85);
   font-size: var(--text-sm);
-  padding: var(--space-3) 0;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: var(--radius-md);
+  padding: var(--space-3) var(--space-4);
+  margin-top: var(--space-3);
+}
+
+/* ── Footer double heading fix ───────────────────────── */
+/* Drupal renders both the region label and block title in footer cols —
+   suppress the block title since the footer__col-heading already shows */
+.site-footer .footer__col .block-title,
+.site-footer .footer__col h2.block-title {
+  display: none;
 }
 
 /* ── Responsive ──────────────────────────────────────── */
-@media (max-width: 900px) {
-  .listing-signup__inner {
-    grid-template-columns: auto 1fr;
+@media (max-width: 767px) {
+  .path-homes-for-sale .block-simplenews-subscription-block,
+  .page--homes-for-sale .block-simplenews-subscription-block {
+    padding: var(--space-6);
   }
-  .listing-signup__form-area {
-    grid-column: 1 / -1;
-    min-width: 0;
-  }
-}
 
-@media (max-width: 560px) {
-  .listing-signup { padding: var(--space-6); }
-  .listing-signup__inner { grid-template-columns: 1fr; }
-  .listing-signup__icon { display: none; }
-
-  .listing-signup__form-area form,
-  .listing-signup__form-area .simplenews-subscribe-form {
+  .path-homes-for-sale .simplenews-subscribe-form,
+  .page--homes-for-sale .simplenews-subscribe-form {
     flex-direction: column;
+    align-items: stretch;
   }
 
-  .listing-signup__form-area input[type="submit"],
-  .listing-signup__form-area button[type="submit"] {
+  .path-homes-for-sale .simplenews-subscribe-form .form-actions,
+  .page--homes-for-sale .simplenews-subscribe-form .form-actions {
+    width: 100%;
+  }
+
+  .path-homes-for-sale .simplenews-subscribe-form input[type="submit"],
+  .page--homes-for-sale .simplenews-subscribe-form input[type="submit"] {
     width: 100%;
   }
 }

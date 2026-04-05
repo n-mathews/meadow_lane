@@ -171,3 +171,12 @@
 
 /* Suppress any block title the account menu block might render */
 .footer__account-menu .block-title { display: none; }
+
+/* ── Suppress all block titles inside footer columns ──── */
+/* Drupal renders both our .footer__col-heading h2 AND the block's own
+   h2.block-title — hide the block title to avoid doubling up */
+.site-footer .footer__col .block-title,
+.site-footer .footer__col .block > h2,
+.site-footer .footer__col > .block > h2 {
+  display: none;
+}
