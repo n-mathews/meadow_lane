@@ -99,10 +99,12 @@
         {{ page.content }}
       </div>
 
-      <div id="notify"></div>
-      {# ── Email signup block ─────────────────────────── #}
-      {# Place the meadow_lane_listing_signup block in the Content region,
-         restricted to /homes-for-sale in Structure → Block layout. #}
+      {# ── Email signup block (Simplenews) ────────────────── #}
+      {# Place the Simplenews subscription block in the Content region,
+         restricted to /homes-for-sale via Structure → Block layout.
+         Wrap it in a Custom block using the listing-signup block type
+         for the styled card treatment, or rely on the CSS selectors
+         in listing-signup.css which target Simplenews form elements. #}
 
       {# ── Ownership explainer strip ─────────────────────── #}
       <div class="listings-ownership-strip">

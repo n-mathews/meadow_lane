@@ -1,20 +1,26 @@
 {#
 /**
  * @file block--meadow-lane-listing-signup.html.twig
- * Meadow Lane Park — "Notify me of new listings" email signup block.
+ * Meadow Lane Park — "Notify me of new listings" signup wrapper.
  *
- * Place in the Content region on the Homes for Sale page via
- * Structure → Block layout, restricted to /homes-for-sale.
+ * This block is now a styled container. Place the Simplenews
+ * subscription block inside it via Structure → Block layout,
+ * restricted to /homes-for-sale.
  *
- * Requires:
- *   - meadow_lane/listing-signup library (attached automatically when
- *     this block renders via hook_preprocess_block in meadow_lane.theme)
- *   - A Kit (ConvertKit) form ID configured in theme settings
- *     Appearance → Settings → Meadow Lane Park → Kit form ID
+ * Simplenews setup:
+ *   1. Install: composer require drupal/simplenews
+ *              drush en simplenews
+ *   2. Create a newsletter: /admin/config/services/simplenews/add
+ *      e.g. "New Listing Alerts"
+ *   3. Place the "Simplenews subscription" block in the Content
+ *      region, restricted to /homes-for-sale.
+ *   4. Configure the block to subscribe to "New Listing Alerts" only.
+ *   5. Set up a Simplenews newsletter issue to send when a new
+ *      Home Listing node is published (use Rules or the
+ *      Simplenews Scheduler module).
  */
 #}
-<div class="listing-signup" data-kit-form-id="{{ kit_form_id|default('') }}">
-
+<div class="listing-signup">
   <div class="listing-signup__inner">
 
     <div class="listing-signup__icon" aria-hidden="true">
@@ -30,40 +36,9 @@
     </div>
 
     <div class="listing-signup__form-area">
-
-      {# Signup form — posts to Kit via JS, no page reload #}
-      <form class="listing-signup__form" novalidate aria-label="{{ 'New listing notification signup'|t }}">
-        <div class="listing-signup__field-row">
-          <label for="listing-signup-email" class="sr-only">{{ 'Email address'|t }}</label>
-          <input
-            type="email"
-            id="listing-signup-email"
-            name="email_address"
-            class="listing-signup__input"
-            placeholder="{{ 'Your email address'|t }}"
-            autocomplete="email"
-            required
-            aria-required="true"
-          />
-          <button type="submit" class="listing-signup__btn btn btn--primary">
-            <span class="listing-signup__btn-label">{{ 'Notify me'|t }}</span>
-            <span class="listing-signup__btn-spinner" aria-hidden="true"></span>
-          </button>
-        </div>
-        <p class="listing-signup__error" role="alert" aria-live="polite" hidden></p>
-      </form>
-
-      {# Success state — hidden until form submitted #}
-      <div class="listing-signup__success" hidden role="status" aria-live="polite">
-        <svg viewBox="0 0 20 20" fill="none" width="18" height="18" aria-hidden="true">
-          <circle cx="10" cy="10" r="9" stroke="currentColor" stroke-width="1.5"/>
-          <path d="M6 10L9 13L14 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-        {{ 'You\'re on the list — we\'ll email you when a new home is listed.'|t }}
-      </div>
-
+      {# Simplenews subscription block content renders here #}
+      {{ content }}
     </div>
 
   </div>
-
 </div>

@@ -340,3 +340,57 @@ drush cache:rebuild
 ### Admin hints
 
 When you are logged in as an admin and a menu region has no block assigned, a subtle amber dashed hint link appears in that region directing you to the Block layout page. These hints are invisible to anonymous visitors.
+
+---
+
+## Email notifications — Simplenews
+
+The listing notification signup form is powered by the **Simplenews** contrib module. This replaces the previous Kit/ConvertKit integration entirely — no third-party service or paid plan required.
+
+### Installation
+
+```bash
+composer require drupal/simplenews
+drush en simplenews
+drush cache:rebuild
+```
+
+### Setup
+
+**1. Create a newsletter list**
+Go to `/admin/config/services/simplenews/add` and create:
+- Name: `New Listing Alerts`
+- Description: `Get notified when a new seasonal home is listed at Meadow Lane Park.`
+- Subject: `New home listed at Meadow Lane Park`
+
+You can create additional lists for member communications (board updates, seasonal news, etc.).
+
+**2. Place the subscription block**
+Go to Structure → Block layout → place the **Simplenews subscription** block:
+- Region: Content
+- Page visibility: `/homes-for-sale` only
+- Configure it to subscribe to "New Listing Alerts" only
+- Set the block title to hidden (the theme's listing-signup card provides its own heading)
+
+**3. Sending notifications when a listing is published**
+Simplenews doesn't automatically send on node publish — you have two options:
+
+Option A — **Manual newsletter issue** (simplest):
+When you publish a new listing, go to Content → Add content → Simplenews issue, write a brief email, attach it to the "New Listing Alerts" newsletter, and send.
+
+Option B — **Automated with Rules module** (recommended):
+```bash
+composer require drupal/rules
+drush en rules
+```
+Create a Rule: Event = "After saving a new content item" (type: Home Listing, status: published) → Action = "Send newsletter issue" to the New Listing Alerts list.
+
+**4. Member communications**
+Create additional Simplenews newsletters (Board Updates, Seasonal News, etc.) and place their subscription blocks in the member portal area. Members can manage their own subscriptions at `/newsletter/subscriptions`.
+
+**5. Managing subscribers**
+View and manage all subscribers at `/admin/config/services/simplenews`.
+Individual newsletter lists show subscriber counts and allow CSV export.
+
+### Styling
+The subscription form is styled by `css/components/listing-signup.css`, which targets Simplenews's rendered form elements (email input, submit button, status messages) and wraps them in the dark slate card design consistent with the rest of the Homes for Sale page.

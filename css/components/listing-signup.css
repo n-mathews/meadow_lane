@@ -1,8 +1,10 @@
 /**
  * listing-signup.css — Meadow Lane Park
- * Email notification signup block on the Homes for Sale page.
+ * Styles the new listing email notification signup block.
+ * The form itself is rendered by the Simplenews module.
  */
 
+/* ── Outer card ──────────────────────────────────────── */
 .listing-signup {
   background: var(--clr-slate);
   border-radius: var(--radius-xl);
@@ -30,7 +32,7 @@
   flex-shrink: 0;
 }
 
-/* ── Text ─────────────────────────────────────────────── */
+/* ── Heading + description ───────────────────────────── */
 .listing-signup__heading {
   font-family: var(--font-sans);
   font-size: var(--text-base);
@@ -51,14 +53,42 @@
   min-width: 300px;
 }
 
-.listing-signup__field-row {
+/*
+ * Simplenews renders a form with these elements:
+ *   .simplenews-subscribe-form
+ *     .form-item (wrapping the email input)
+ *       input[type="email"]
+ *     input[type="submit"] or button[type="submit"]
+ *
+ * We override all of these to match the dark card design.
+ */
+
+/* Hide the default Simplenews label — our heading above serves that purpose */
+.listing-signup__form-area .simplenews-subscribe-form .form-item label,
+.listing-signup__form-area .form-item label[for*="mail"],
+.listing-signup__form-area .form-item label[for*="email"] {
+  display: none;
+}
+
+/* Hide newsletter checkboxes if multiple newsletters are shown */
+.listing-signup__form-area .form-type-checkbox {
+  display: none;
+}
+
+/* The form itself — flex row */
+.listing-signup__form-area form,
+.listing-signup__form-area .simplenews-subscribe-form {
   display: flex;
   gap: var(--space-3);
   align-items: stretch;
+  flex-wrap: wrap;
 }
 
-.listing-signup__input {
+/* Email input */
+.listing-signup__form-area input[type="email"],
+.listing-signup__form-area input[type="text"][name*="mail"] {
   flex: 1;
+  min-width: 200px;
   padding: 10px 14px;
   font-family: var(--font-sans);
   font-size: var(--text-sm);
@@ -67,80 +97,57 @@
   border: 1px solid rgba(255,255,255,0.2);
   border-radius: var(--radius-md);
   transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
-  min-width: 0;
+  appearance: none;
+  margin: 0;
 }
 
-.listing-signup__input:focus {
+.listing-signup__form-area input[type="email"]:focus,
+.listing-signup__form-area input[type="text"][name*="mail"]:focus {
   outline: none;
   border-color: var(--clr-teal-mid);
   box-shadow: 0 0 0 3px rgba(110,158,146,0.3);
 }
 
-.listing-signup__input::placeholder {
+.listing-signup__form-area input[type="email"]::placeholder {
   color: var(--clr-text-light);
 }
 
-.listing-signup__input:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
-}
-
-/* ── Submit button ───────────────────────────────────── */
-.listing-signup__btn {
-  white-space: nowrap;
-  position: relative;
-  min-width: 100px;
-}
-
-/* Loading spinner (CSS only) */
-.listing-signup__btn-spinner {
-  display: none;
-  width: 14px;
-  height: 14px;
-  border: 2px solid rgba(255,255,255,0.4);
-  border-top-color: white;
-  border-radius: 50%;
-  animation: mlp-spin 0.7s linear infinite;
-}
-
-.listing-signup__btn.is-loading .listing-signup__btn-label { display: none; }
-.listing-signup__btn.is-loading .listing-signup__btn-spinner { display: block; }
-.listing-signup__btn.is-loading { pointer-events: none; }
-
-@keyframes mlp-spin {
-  to { transform: rotate(360deg); }
-}
-
-/* ── Error message ───────────────────────────────────── */
-.listing-signup__error {
-  margin-top: var(--space-2);
-  font-size: var(--text-xs);
-  color: #FFBCB0;
-  margin-bottom: 0;
-}
-
-/* ── Success state ───────────────────────────────────── */
-.listing-signup__success {
-  display: flex;
-  align-items: center;
-  gap: var(--space-3);
+/* Submit button */
+.listing-signup__form-area input[type="submit"],
+.listing-signup__form-area button[type="submit"] {
+  background: var(--clr-teal);
+  color: white;
+  border: none;
+  padding: 10px 22px;
+  border-radius: var(--radius-md);
+  font-family: var(--font-sans);
   font-size: var(--text-sm);
-  color: rgba(255,255,255,0.9);
-  padding: var(--space-3) 0;
+  font-weight: 500;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background var(--transition-fast);
+  appearance: none;
+  margin: 0;
 }
 
-.listing-signup__success svg {
-  color: var(--clr-teal-mid);
-  flex-shrink: 0;
+.listing-signup__form-area input[type="submit"]:hover,
+.listing-signup__form-area button[type="submit"]:hover {
+  background: var(--clr-teal-mid);
+}
+
+/* Status messages rendered by Simplenews inside the block */
+.listing-signup__form-area .messages,
+.listing-signup__form-area .status {
+  color: rgba(255,255,255,0.85);
+  font-size: var(--text-sm);
+  padding: var(--space-3) 0;
 }
 
 /* ── Responsive ──────────────────────────────────────── */
 @media (max-width: 900px) {
   .listing-signup__inner {
     grid-template-columns: auto 1fr;
-    grid-template-rows: auto auto;
   }
-
   .listing-signup__form-area {
     grid-column: 1 / -1;
     min-width: 0;
@@ -148,19 +155,17 @@
 }
 
 @media (max-width: 560px) {
-  .listing-signup {
-    padding: var(--space-6);
-  }
-
-  .listing-signup__inner {
-    grid-template-columns: 1fr;
-  }
-
+  .listing-signup { padding: var(--space-6); }
+  .listing-signup__inner { grid-template-columns: 1fr; }
   .listing-signup__icon { display: none; }
 
-  .listing-signup__field-row {
+  .listing-signup__form-area form,
+  .listing-signup__form-area .simplenews-subscribe-form {
     flex-direction: column;
   }
 
-  .listing-signup__btn { width: 100%; justify-content: center; }
+  .listing-signup__form-area input[type="submit"],
+  .listing-signup__form-area button[type="submit"] {
+    width: 100%;
+  }
 }
