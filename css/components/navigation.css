@@ -90,34 +90,54 @@
 
 /* ── Primary menu ─────────────────────────────────────── */
 /*
- * Menu items are rendered directly as <li class="nav__menu-item"> in
- * site-header.html.twig via the primary_menu_items preprocess variable,
- * bypassing Drupal's block wrapper divs entirely.
- *
- * Structure:
- *   ul.nav__menu              — flex row container
- *   └── li.nav__menu-item × N — flex items (one per menu link)
- *       └── a
+ * nav__menu is a <ul> containing <li class="nav__menu-item"> elements.
+ * These rules use high specificity to ensure the flex row layout is
+ * never overridden by Drupal base styles or browser UA defaults.
  */
-.nav__menu {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: var(--space-8);
-  list-style: none;
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  flex: 1;                  /* fills remaining site-nav space */
+ul.nav__menu,
+.site-nav ul.nav__menu,
+nav.site-nav ul.nav__menu {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  gap: var(--space-8) !important;
+  list-style: none !important;
+  list-style-type: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  flex: 1;
   justify-content: flex-end;
   min-width: 0;
 }
 
-.nav__menu-item {
-  list-style: none;
-  list-style-type: none;
-  display: flex;
+ul.nav__menu > li,
+ul.nav__menu > li.nav__menu-item {
+  display: flex !important;
   align-items: center;
+  list-style: none !important;
+  list-style-type: none !important;
+  float: none !important;
+}
+
+/* The region block wraps menu items in a nested <ul> — make that inline too */
+ul.nav__menu > li > ul,
+ul.nav__menu > li > .block > ul,
+ul.nav__menu > li > div > ul {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  gap: var(--space-8) !important;
+  list-style: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+ul.nav__menu > li > ul > li,
+ul.nav__menu > li > .block > ul > li,
+ul.nav__menu > li > div > ul > li {
+  display: flex !important;
+  align-items: center;
+  list-style: none !important;
 }
 
 .nav__menu-item > a {
@@ -236,16 +256,18 @@ a.nav__member-btn::after {
     display: flex;
   }
 
-  .nav__menu {
-    position: fixed;
+  ul.nav__menu,
+  .site-nav ul.nav__menu,
+  nav.site-nav ul.nav__menu {
+    position: fixed !important;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: var(--space-6);
+    flex-direction: column !important;
+    justify-content: center !important;
+    align-items: center !important;
+    gap: var(--space-6) !important;
     background: var(--clr-cream);
     z-index: 499;
     transform: translateX(100%);
@@ -254,18 +276,19 @@ a.nav__member-btn::after {
     overflow-y: auto;
   }
 
-  .nav__menu.is-open {
+  ul.nav__menu.is-open {
     transform: translateX(0);
   }
 
-  /* On mobile, stack items vertically in the full-screen overlay */
-  .nav__menu {
-    flex-direction: column;
-    justify-content: center;
-    gap: var(--space-5);
+  /* Stack nested uls vertically on mobile too */
+  ul.nav__menu > li > ul,
+  ul.nav__menu > li > .block > ul,
+  ul.nav__menu > li > div > ul {
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: var(--space-5) !important;
   }
 
-  .nav__menu .menu-item > a,
   .nav__menu-item > a {
     font-size: var(--text-xl);
     font-family: var(--font-serif);
