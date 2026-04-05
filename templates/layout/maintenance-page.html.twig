@@ -138,12 +138,13 @@
 
     <div class="maintenance-message">
       {#
-        Renders the admin-configured maintenance message from
+        The admin maintenance message is passed via page.highlighted and
+        page.content — set at:
         Configuration → Development → Maintenance mode → Message to display.
-        Falls back to a sensible default if not set.
       #}
-      {% if content %}
-        {{ content }}
+      {% if page.highlighted %}{{ page.highlighted }}{% endif %}
+      {% if page.content %}
+        {{ page.content }}
       {% else %}
         <p>{{ 'Our website is currently undergoing scheduled maintenance. We\'ll be back shortly.'|t }}</p>
       {% endif %}
