@@ -26,6 +26,7 @@ global-styling:
       css/components/homepage-sections.css: {}
       css/components/homes-for-sale.css:    {}
       css/components/listing-signup.css:  {}
+      css/components/gallery.css:          {}
   js:
     js/global.js: {}
   dependencies:
@@ -68,6 +69,16 @@ listing-signup:
       css/components/listing-signup.css: {}
   js:
     js/listing-signup.js: {}
+  dependencies:
+    - meadow_lane/global-styling
+    - core/drupal
+    - core/once
+
+# Photo gallery lightbox — attached on listing detail pages
+gallery:
+  version: VERSION
+  js:
+    js/gallery.js: {}
   dependencies:
     - meadow_lane/global-styling
     - core/drupal

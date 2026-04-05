@@ -114,7 +114,7 @@ display:
           table: views
           field: area_text_custom
           empty: true
-          content: '<p class="listings-empty">No homes are currently listed for sale. Please check back soon or <a href="/contact">contact us</a> to be notified when a home becomes available.</p>'
+          content: '<p class="listings-empty">No homes are currently listed for sale. Add your email below to be notified when a new home becomes available.</p>'
           plugin_id: text_custom
       relationships: {}
       arguments: {}
