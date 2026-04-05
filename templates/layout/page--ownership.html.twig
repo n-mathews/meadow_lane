@@ -95,12 +95,12 @@
                 </td>
               </tr>
               <tr>
-                <td>{{ 'Monthly lot rent'|t }}</td>
+                <td>{{ 'Ongoing costs'|t }}</td>
                 <td class="ownership-table__col--them">
-                  <span class="ownership-badge ownership-badge--no">{{ 'Yes — and it can rise'|t }}</span>
+                  <span class="ownership-badge ownership-badge--no">{{ 'Monthly lot rent — can rise'|t }}</span>
                 </td>
                 <td class="ownership-table__col--us">
-                  <span class="ownership-badge ownership-badge--yes">{{ 'No lot rent'|t }}</span>
+                  <span class="ownership-badge ownership-badge--yes">{{ 'Quarterly assessment only'|t }}</span>
                 </td>
               </tr>
               <tr>
@@ -130,9 +130,19 @@
                   <span class="ownership-badge ownership-badge--yes">{{ 'Home + ownership share'|t }}</span>
                 </td>
               </tr>
+              <tr>
+                <td>{{ 'Sale approval'|t }}</td>
+                <td class="ownership-table__col--them">
+                  <span class="ownership-badge ownership-badge--no">{{ 'Park management only'|t }}</span>
+                </td>
+                <td class="ownership-table__col--us">
+                  <span class="ownership-badge ownership-badge--yes">{{ 'Board of Directors approval'|t }}</span>
+                </td>
+              </tr>
             </tbody>
           </table>
         </div>
+        <p class="ownership-table-note">{{ '* Meadow Lane Park members pay a quarterly assessment covering community operating expenses, grounds maintenance, and property taxes. There is no monthly lot rent.'|t }}</p>
       </section>
 
       <hr class="section-divider">

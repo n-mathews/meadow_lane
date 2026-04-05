@@ -316,3 +316,10 @@
     padding: var(--space-3);
   }
 }
+
+.ownership-table-note {
+  font-size: var(--text-xs);
+  color: var(--clr-text-light);
+  margin-top: var(--space-3);
+  line-height: var(--leading-snug);
+}
