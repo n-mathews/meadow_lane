@@ -1,22 +1,22 @@
 {#
 /**
  * @file site-header.html.twig
- * Meadow Lane Park — site header and primary navigation partial.
+ * Meadow Lane Park — site header and primary navigation.
  *
- * ALL navigation is managed through Drupal's Block layout UI.
- * Go to: Structure → Block layout → Meadow Lane Park
+ * The primary menu is rendered directly from the menu tree rather than
+ * through Drupal's block system, which adds unavoidable wrapper divs that
+ * break the flex nav layout. The menu tree is passed via preprocess.
  *
- * Required block assignments:
- *   Primary Menu region  → Main navigation (System menu block, menu: Main)
- *   Header region        → User account menu (System menu block, menu: Account)
- *
- * The Member Login button is toggled via:
- *   Appearance → Settings → Meadow Lane Park → Show Member Login button
+ * Variables:
+ *   - primary_menu_items: Array of menu link items (from preprocess).
+ *   - page.header: Header region — account menu block lives here.
+ *   - page.header_top: Optional utility bar region.
+ *   - show_member_login: Boolean from theme settings.
+ *   - logged_in: TRUE if user is logged in.
  */
 #}
 <header class="layout-header" role="banner">
 
-  {# ── Optional utility bar ──────────────────────────── #}
   {% if page.header_top %}
     <div class="header-utility">
       <div class="header-utility__inner container">
@@ -38,7 +38,7 @@
       </div>
     </a>
 
-    {# ── Mobile hamburger toggle ────────────────────────── #}
+    {# ── Mobile toggle ──────────────────────────────────── #}
     <button
       class="nav__toggle"
       aria-expanded="false"
@@ -50,36 +50,42 @@
       <span class="nav__toggle-bar"></span>
     </button>
 
-    {# ── Primary menu ──────────────────────────────────── #}
-    {# Assign: Structure → Block layout → Primary Menu region
-       Block: Main navigation (System menu block, menu: Main) #}
-    <div class="nav__menu" id="primary-nav">
+    {# ── Primary menu ───────────────────────────────────── #}
+    {# Rendered directly from menu items — no block wrapper overhead #}
+    <ul class="nav__menu" id="primary-nav" role="list">
 
-      {% if page.primary_menu %}
-        {{ page.primary_menu }}
+      {% if primary_menu_items %}
+        {% for item in primary_menu_items %}
+          <li class="nav__menu-item{{ item.in_active_trail ? ' is-active' : '' }}">
+            {{ link(item.title, item.url) }}
+          </li>
+        {% endfor %}
+      {% elseif page.primary_menu %}
+        {# Fallback: render the region block if preprocess items unavailable #}
+        <li class="nav__menu-item nav__menu-item--region">{{ page.primary_menu }}</li>
       {% elseif logged_in %}
-        <div class="nav__admin-hint">
+        <li class="nav__admin-hint">
           <a href="{{ path('block.admin_demo', {'theme': 'meadow_lane'}) }}" class="nav__admin-hint-link">
-            ⚙ {{ 'Assign a menu block to the Primary Menu region'|t }}
+            ⚙ {{ 'Set up navigation at Structure → Block layout'|t }}
           </a>
-        </div>
+        </li>
       {% endif %}
 
-      {# Account menu — assign System menu block (Account) to Header region #}
+      {# Account menu #}
       {% if page.header %}
-        <div class="nav__menu-item nav__menu-item--account">
+        <li class="nav__menu-item nav__menu-item--account">
           {{ page.header }}
-        </div>
+        </li>
       {% endif %}
 
-      {# Member Login CTA — toggle in Appearance → Settings #}
+      {# Member Login CTA #}
       {% if show_member_login %}
-        <div class="nav__menu-item nav__menu-item--member">
+        <li class="nav__menu-item">
           <a href="/member" class="nav__member-btn">{{ 'Member Login'|t }}</a>
-        </div>
+        </li>
       {% endif %}
 
-    </div>
+    </ul>
 
   </nav>
 </header>

@@ -31,8 +31,9 @@
   justify-content: space-between;
   height: 72px;
   padding: 0 var(--container-pad);
-  gap: var(--space-8);
+  gap: var(--space-6);
   min-width: 0;
+  /* Logo is flex-shrink:0, nav__menu gets flex:1 to fill remaining space */
 }
 
 /* ── Logo ─────────────────────────────────────────────── */
@@ -89,33 +90,32 @@
 
 /* ── Primary menu ─────────────────────────────────────── */
 /*
- * nav__menu is a <div> (not <ul>) so Drupal's block <div> wrapper
- * sits inside it without invalid ul>div nesting. The Drupal menu block
- * renders: .nav__menu > .block > .menu > .menu-item > a
- * We use display:flex on nav__menu and display:contents on .block and
- * .menu so all menu-items participate directly in the flex row.
+ * Menu items are rendered directly as <li class="nav__menu-item"> in
+ * site-header.html.twig via the primary_menu_items preprocess variable,
+ * bypassing Drupal's block wrapper divs entirely.
+ *
+ * Structure:
+ *   ul.nav__menu              — flex row container
+ *   └── li.nav__menu-item × N — flex items (one per menu link)
+ *       └── a
  */
 .nav__menu {
   display: flex;
+  flex-direction: row;
   align-items: center;
   gap: var(--space-8);
-  margin: 0;
-  padding: 0;
-}
-
-/* Collapse Drupal's block wrapper and menu <ul> into the flex row */
-.nav__menu > .block {
-  display: contents;
-}
-
-.nav__menu .menu {
-  display: contents;
   list-style: none;
+  list-style-type: none;
   margin: 0;
   padding: 0;
+  flex: 1;                  /* fills remaining site-nav space */
+  justify-content: flex-end;
+  min-width: 0;
 }
 
 .nav__menu-item {
+  list-style: none;
+  list-style-type: none;
   display: flex;
   align-items: center;
 }
@@ -258,17 +258,11 @@ a.nav__member-btn::after {
     transform: translateX(0);
   }
 
-  /* On mobile, restore block and menu from display:contents so they
-     stack vertically in the full-screen overlay */
-  .nav__menu > .block,
-  .nav__menu .menu {
-    display: flex;
+  /* On mobile, stack items vertically in the full-screen overlay */
+  .nav__menu {
     flex-direction: column;
-    align-items: center;
+    justify-content: center;
     gap: var(--space-5);
-    list-style: none;
-    margin: 0;
-    padding: 0;
   }
 
   .nav__menu .menu-item > a,
