@@ -152,31 +152,13 @@
           </a>
         </div>
 
-        <div class="hp-location__map-area" aria-hidden="true">
-          <svg viewBox="0 0 420 340" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
-            <rect width="420" height="340" fill="#1B4A6B" rx="12"/>
-            <ellipse cx="210" cy="170" rx="190" ry="140" fill="#2A6B9C" opacity="0.5"/>
-            <ellipse cx="120" cy="140" rx="65" ry="38" fill="#2C5F3A"/>
-            <ellipse cx="120" cy="135" rx="55" ry="30" fill="#3d7040"/>
-            <ellipse cx="290" cy="160" rx="80" ry="44" fill="#2C5F3A"/>
-            <ellipse cx="290" cy="154" rx="68" ry="34" fill="#3d7040"/>
-            <ellipse cx="210" cy="240" rx="50" ry="28" fill="#2C5F3A"/>
-            <ellipse cx="50"  cy="220" rx="38" ry="22" fill="#2C5F3A"/>
-            <ellipse cx="370" cy="230" rx="42" ry="24" fill="#2C5F3A"/>
-            <polygon points="100,140 112,108 124,140" fill="#1a4428"/>
-            <polygon points="116,140 128,104 140,140" fill="#254d2e"/>
-            <polygon points="270,158 284,122 298,158" fill="#1a4428"/>
-            <polygon points="288,158 302,118 316,158" fill="#254d2e"/>
-            <rect x="145" y="92" width="6" height="55" fill="#B08828"/>
-            <rect x="269" y="92" width="6" height="55" fill="#B08828"/>
-            <rect x="138" y="128" width="144" height="5" fill="#A07820"/>
-            <path d="M148 97 Q210 72 272 97" stroke="#C09030" stroke-width="2.5" fill="none"/>
-            <circle cx="210" cy="178" r="10" fill="#E05040"/>
-            <circle cx="210" cy="178" r="5" fill="white"/>
-            <path d="M210 188 L210 200" stroke="#E05040" stroke-width="2.5" stroke-linecap="round"/>
-            <rect x="155" y="206" width="110" height="24" rx="4" fill="rgba(255,255,255,0.15)"/>
-            <text x="210" y="222" text-anchor="middle" font-family="Georgia,serif" font-size="11" fill="white" letter-spacing="0.04em">Alexandria Bay, NY</text>
-          </svg>
+        <div class="hp-location__map-area">
+          <img
+            src="{{ base_path ~ directory }}/images/location-bridge.jpg"
+            alt="{{ 'Aerial view of the Thousand Islands Bridge and St. Lawrence River'|t }}"
+            width="1250" height="900"
+            loading="lazy"
+          />
         </div>
 
       </div>

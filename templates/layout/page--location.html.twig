@@ -104,14 +104,47 @@
             {% if page.content['field_map_embed'] %}
               {{ page.content['field_map_embed'] }}
             {% else %}
-              <div class="location-map-embed">
-                <img
-                  src="{{ base_path ~ directory }}/images/location-bridge.jpg"
-                  alt="{{ 'Aerial view of the Thousand Islands Bridge and St. Lawrence River near Meadow Lane Park'|t }}"
-                  width="1250" height="900"
-                  loading="lazy"
-                />
-              </div>
+              {#
+                Google Maps embed — replace YOUR_API_KEY below with your key from
+                Google Cloud Console → APIs & Services → Credentials.
+                Enable: Maps Embed API. Restrict to: meadowlanepark.com/*
+
+                Two options — uncomment the one you want:
+
+                A) Satellite view (dark, no styling needed, shows actual marina):
+                   maptype=satellite
+
+                B) Styled roadmap (dark theme matching site, requires Map ID):
+                   maptype=roadmap&map_id=YOUR_MAP_ID
+
+                If you haven't added an API key yet, the bridge photo shows instead.
+              #}
+              {% set maps_api_key = 'AIzaSyC9sGsgcgb8GoqWbZDQwIrTKk4nbafmLt8' %}
+
+              {% if maps_api_key %}
+                <div class="location-map-embed location-map-embed--iframe">
+                  <iframe
+                    src="https://www.google.com/maps/embed/v1/place?key={{ maps_api_key }}&q=20560+Pinehurst+Rd,+Alexandria+Bay,+NY+13607&zoom=15&maptype=satellite"
+                    width="100%"
+                    height="100%"
+                    style="border:0; display:block;"
+                    allowfullscreen=""
+                    loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"
+                    title="{{ 'Map of Meadow Lane Park — 20560 Pinehurst Rd, Alexandria Bay NY'|t }}"
+                  ></iframe>
+                </div>
+              {% else %}
+                {# Fallback until API key is configured #}
+                <div class="location-map-embed">
+                  <img
+                    src="{{ base_path ~ directory }}/images/location-bridge.jpg"
+                    alt="{{ 'Aerial view of the Thousand Islands Bridge and St. Lawrence River near Meadow Lane Park'|t }}"
+                    width="1250" height="900"
+                    loading="lazy"
+                  />
+                </div>
+              {% endif %}
             {% endif %}
           </div>
 

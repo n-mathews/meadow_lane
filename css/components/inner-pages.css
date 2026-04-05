@@ -106,6 +106,18 @@
   display: block;
 }
 
+.location-map-embed--iframe {
+  min-height: 420px;
+}
+
+.location-map-embed--iframe iframe {
+  width: 100%;
+  height: 100%;
+  min-height: 420px;
+  border: none;
+  display: block;
+}
+
 .map-placeholder svg {
   color: var(--clr-teal-mid);
   opacity: 0.5;
