@@ -128,6 +128,18 @@ function meadow_lane_theme_suggestions_page_alter(array &$suggestions, array $va
     }
   }
 
+  // Path-alias suggestion — turns /about into page__about,
+  // /homes-for-sale into page__homes_for_sale, etc.
+  $current_path = \Drupal::service('path.current')->getPath();
+  $alias = \Drupal::service('path_alias.manager')->getAliasByPath($current_path);
+  $alias = trim($alias, '/');
+
+  if ($alias) {
+    // Convert hyphens and slashes to underscores for Twig template naming.
+    $alias_suggestion = preg_replace('/[\/\-]/', '_', $alias);
+    $suggestions[] = 'page__' . $alias_suggestion;
+  }
+
   // Member portal — all /member/* paths use page--member.html.twig
   if (strpos($alias, 'member') === 0) {
     $suggestions[] = 'page__member';
@@ -136,17 +148,6 @@ function meadow_lane_theme_suggestions_page_alter(array &$suggestions, array $va
   // Events page
   if ($alias === 'events' || strpos($alias, 'events/') === 0) {
     $suggestions[] = 'page__events';
-  }
-
-  // Path-alias suggestion — turns /about into page__about,
-  // /homes-for-sale into page__homes_for_sale, etc.
-  $current_path = \Drupal::service('path.current')->getPath();
-  $alias = \Drupal::service('path_alias.manager')->getAliasByPath($current_path);
-  $alias = trim($alias, '/');
-  if ($alias) {
-    // Convert hyphens and slashes to underscores for Twig template naming.
-    $alias_suggestion = preg_replace('/[\/\-]/', '_', $alias);
-    $suggestions[] = 'page__' . $alias_suggestion;
   }
 }
 
