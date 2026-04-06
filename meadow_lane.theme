@@ -128,6 +128,16 @@ function meadow_lane_theme_suggestions_page_alter(array &$suggestions, array $va
     }
   }
 
+  // Member portal — all /member/* paths use page--member.html.twig
+  if (strpos($alias, 'member') === 0) {
+    $suggestions[] = 'page__member';
+  }
+
+  // Events page
+  if ($alias === 'events' || strpos($alias, 'events/') === 0) {
+    $suggestions[] = 'page__events';
+  }
+
   // Path-alias suggestion — turns /about into page__about,
   // /homes-for-sale into page__homes_for_sale, etc.
   $current_path = \Drupal::service('path.current')->getPath();
