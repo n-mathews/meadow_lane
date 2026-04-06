@@ -30,17 +30,15 @@ global-styling:
       css/components/member-area.css:       {}
   js:
     js/global.js: {}
+    js/navigation.js: {}
   dependencies:
-    - core/drupal
-    - core/once
+    - core/normalized-styles
 
 # Mobile navigation — auto-attached on every page via meadow_lane.info.yml
 navigation:
   version: VERSION
   js:
     js/navigation.js: {}
-  dependencies:
-    - meadow_lane/global-styling
 
 # Homes for sale listing pages — attach via preprocess or page template
 listings:
