@@ -146,9 +146,16 @@
   margin-bottom: var(--space-3);
 }
 
+.member-featured-announcement__body,
+.member-featured-announcement__body p,
+.member-featured-announcement__body li,
+.member-featured-announcement__body a {
+  color: white !important;
+}
+
 .member-featured-announcement__body {
   font-size: var(--text-sm);
-  color: rgba(255, 255, 255, 1);
+  color: white;
   line-height: var(--leading-normal);
   margin-bottom: var(--space-4);
 }
