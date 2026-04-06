@@ -27,6 +27,7 @@ global-styling:
       css/components/homes-for-sale.css:    {}
       css/components/gallery.css:          {}
       css/components/listing-signup.css:  {}
+      css/components/member-area.css:       {}
   js:
     js/global.js: {}
   dependencies:

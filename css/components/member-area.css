@@ -8,13 +8,15 @@
    ═══════════════════════════════════════════════════════ */
 
 .member-layout {
-  display: grid;
-  grid-template-columns: 200px 1fr;
+  display: grid !important;
+  grid-template-columns: 200px 1fr !important;
   align-items: start;
   gap: var(--space-10);
   max-width: var(--container-max);
+  width: 100%;
   margin: 0 auto;
   padding: var(--space-10) var(--container-pad) var(--space-16);
+  box-sizing: border-box;
 }
 
 /* ── Sidebar ──────────────────────────────────────────── */
@@ -22,6 +24,7 @@
 .member-sidebar {
   position: sticky;
   top: 90px;
+  min-width: 0;
   background: var(--clr-teal-light);
   border-radius: var(--radius-xl);
   padding: var(--space-5);
@@ -619,4 +622,14 @@
   .member-portal__grid {
     grid-template-columns: 1fr;
   }
+}
+
+/* ── Neutralise Drupal block/region wrappers inside member layout ── */
+.member-main .region,
+.member-main .block,
+.member-main .block__content {
+  width: 100%;
+  max-width: none;
+  padding: 0;
+  margin: 0;
 }
