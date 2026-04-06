@@ -148,14 +148,14 @@
 
 .member-featured-announcement__body {
   font-size: var(--text-sm);
-  color: rgba(255, 255, 255, 0.8);
+  color: rgba(255, 255, 255, 1);
   line-height: var(--leading-normal);
   margin-bottom: var(--space-4);
 }
 
 .member-featured-announcement__meta {
   font-size: var(--text-xs);
-  color: rgba(255, 255, 255, 0.5);
+  color: rgba(255, 255, 255, 0.75);
 }
 
 /* ── Two-column grid ──────────────────────────────────── */
