@@ -254,6 +254,8 @@ a.nav__member-btn::after {
 @media (max-width: 900px) {
   .nav__toggle {
     display: flex;
+    position: relative;
+    z-index: 601;
   }
 
   ul.nav__menu,
@@ -269,15 +271,17 @@ a.nav__member-btn::after {
     align-items: center !important;
     gap: var(--space-6) !important;
     background: var(--clr-cream);
-    z-index: 499;
+    z-index: 600;
     transform: translateX(100%);
-    transition: transform var(--transition-slow);
+    transition: transform 0.3s ease;
     padding: var(--space-16) var(--space-8);
     overflow-y: auto;
+    visibility: hidden;
   }
 
   ul.nav__menu.is-open {
     transform: translateX(0);
+    visibility: visible;
   }
 
   /* Stack nested uls vertically on mobile too */
