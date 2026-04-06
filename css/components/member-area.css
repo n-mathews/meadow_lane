@@ -52,7 +52,7 @@
 /* ── Dashboard grid ───────────────────────────────────── */
 .member-portal__grid {
   display: grid; grid-template-columns: 1fr 1fr;
-  gap: var(--space-8); margin-bottom: var(--space-8);
+  gap: var(--space-8); margin-bottom: 0;
 }
 
 /* ── Featured announcement ────────────────────────────── */
@@ -110,10 +110,7 @@
 .member-announcement__meta { font-size: var(--text-xs); color: var(--clr-text-light); }
 
 /* ── Quick links ──────────────────────────────────────── */
-.member-quick-links { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-4); margin-top: var(--space-4); }
-.member-quick-link { display: flex; flex-direction: column; align-items: center; gap: var(--space-3); padding: var(--space-6); background: var(--clr-teal-light); border: 1px solid var(--clr-teal-pale); border-radius: var(--radius-xl); text-align: center; color: var(--clr-slate); text-decoration: none; font-size: var(--text-sm); font-weight: 500; transition: background var(--transition-fast); }
-.member-quick-link svg { color: var(--clr-teal); }
-.member-quick-link:hover { background: var(--clr-teal-pale); text-decoration: none; }
+
 
 /* ── Documents ────────────────────────────────────────── */
 .member-documents__header { display: flex; align-items: center; justify-content: space-between; margin-bottom: var(--space-8); gap: var(--space-4); }
