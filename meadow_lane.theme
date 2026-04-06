@@ -41,6 +41,25 @@ function meadow_lane_preprocess_page(array &$variables): void {
   $variables['social_facebook']= theme_get_setting('social_facebook')?? '';
   $variables['show_member_login'] = theme_get_setting('show_member_login') ?? TRUE;
   $variables['member_login_url'] = theme_get_setting('member_login_url') ?? 'https://app.easyhoa.com';
+
+  // Set active member nav item based on current path.
+  $current_path = \Drupal::service('path.current')->getPath();
+  $alias = trim(\Drupal::service('path_alias.manager')->getAliasByPath($current_path), '/');
+  if ($alias === 'member') {
+    $variables['member_active'] = 'dashboard';
+  }
+  elseif (strpos($alias, 'announcements') === 0) {
+    $variables['member_active'] = 'announcements';
+  }
+  elseif (strpos($alias, 'events') === 0) {
+    $variables['member_active'] = 'events';
+  }
+  elseif (strpos($alias, 'member/documents') === 0) {
+    $variables['member_active'] = 'documents';
+  }
+  else {
+    $variables['member_active'] = '';
+  }
   $variables['is_front'] = \Drupal::service('path.matcher')->isFrontPage();
 
   // Load the main menu tree directly so site-header.html.twig can render

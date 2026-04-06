@@ -5,9 +5,7 @@
  * Matches /member and /member/* paths via theme suggestion.
  */
 #}
-{%
-  set current = current_path() is not empty ? current_path() : ''
-%}
+
 <div class="site-wrapper">
 
   {{ include('@meadow_lane/partials/site-header.html.twig') }}
@@ -33,7 +31,7 @@
       <nav class="member-nav" aria-label="{{ 'Member navigation'|t }}">
         <ul class="member-nav__list">
 
-          <li class="member-nav__item{% if current == '/member' %} is-active{% endif %}">
+          <li class="member-nav__item{% if member_active == 'dashboard' %} is-active{% endif %}">
             <a href="/member" class="member-nav__link">
               <svg viewBox="0 0 20 20" fill="none" width="16" height="16" aria-hidden="true">
                 <rect x="2" y="2" width="7" height="7" rx="1" stroke="currentColor" stroke-width="1.5"/>
@@ -45,7 +43,7 @@
             </a>
           </li>
 
-          <li class="member-nav__item{% if '/announcements' in current %} is-active{% endif %}">
+          <li class="member-nav__item{% if member_active == 'announcements' %} is-active{% endif %}">
             <a href="/announcements" class="member-nav__link">
               <svg viewBox="0 0 20 20" fill="none" width="16" height="16" aria-hidden="true">
                 <path d="M15 7A5 5 0 005 7c0 5.83-2.5 7.5-2.5 7.5h15S15 12.83 15 7z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -55,7 +53,7 @@
             </a>
           </li>
 
-          <li class="member-nav__item{% if '/events' in current %} is-active{% endif %}">
+          <li class="member-nav__item{% if member_active == 'events' %} is-active{% endif %}">
             <a href="/events" class="member-nav__link">
               <svg viewBox="0 0 20 20" fill="none" width="16" height="16" aria-hidden="true">
                 <rect x="2" y="3" width="16" height="15" rx="2" stroke="currentColor" stroke-width="1.5"/>
@@ -65,7 +63,7 @@
             </a>
           </li>
 
-          <li class="member-nav__item{% if '/member/documents' in current %} is-active{% endif %}">
+          <li class="member-nav__item{% if member_active == 'documents' %} is-active{% endif %}">
             <a href="/member/documents" class="member-nav__link">
               <svg viewBox="0 0 20 20" fill="none" width="16" height="16" aria-hidden="true">
                 <path d="M11 2H5a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V8l-6-6z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
