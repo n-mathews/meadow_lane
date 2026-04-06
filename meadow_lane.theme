@@ -168,6 +168,11 @@ function meadow_lane_theme_suggestions_page_alter(array &$suggestions, array $va
   if ($alias === 'events' || strpos($alias, 'events/') === 0) {
     $suggestions[] = 'page__events';
   }
+
+  // Announcements page
+  if ($alias === 'announcements' || strpos($alias, 'announcements/') === 0) {
+    $suggestions[] = 'page__announcements';
+  }
 }
 
 /**
