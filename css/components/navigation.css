@@ -279,9 +279,12 @@ a.nav__member-btn::after {
     visibility: hidden;
   }
 
-  ul.nav__menu.is-open {
-    transform: translateX(0);
-    visibility: visible;
+  ul.nav__menu.is-open,
+  ul.nav__menu[data-open],
+  .site-nav ul.nav__menu.is-open,
+  nav.site-nav ul.nav__menu.is-open {
+    transform: translateX(0) !important;
+    visibility: visible !important;
   }
 
   /* Stack nested uls vertically on mobile too */

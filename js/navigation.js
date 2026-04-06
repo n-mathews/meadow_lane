@@ -2,7 +2,6 @@
  * @file navigation.js
  * Meadow Lane Park — mobile navigation toggle.
  */
-
 (function () {
   'use strict';
 
@@ -12,33 +11,45 @@
 
     if (!toggle || !menu) return;
 
-    toggle.addEventListener('click', function () {
-      var isOpen = toggle.getAttribute('aria-expanded') === 'true';
-      toggle.setAttribute('aria-expanded', isOpen ? 'false' : 'true');
-      menu.classList.toggle('is-open', !isOpen);
-      document.body.style.overflow = !isOpen ? 'hidden' : '';
+    // Remove any data-once attribute set by a previous Drupal behavior
+    // so we have clean sole ownership of this element.
+    toggle.removeAttribute('data-once');
+
+    // Replace the node to strip all previously attached event listeners.
+    var fresh = toggle.cloneNode(true);
+    toggle.parentNode.replaceChild(fresh, toggle);
+    toggle = fresh;
+
+    function open()  {
+      toggle.setAttribute('aria-expanded', 'true');
+      menu.setAttribute('data-open', 'true');
+      menu.classList.add('is-open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function close() {
+      toggle.setAttribute('aria-expanded', 'false');
+      menu.removeAttribute('data-open');
+      menu.classList.remove('is-open');
+      document.body.style.overflow = '';
+    }
+
+    toggle.addEventListener('click', function (e) {
+      e.stopPropagation();
+      toggle.getAttribute('aria-expanded') === 'true' ? close() : open();
     });
 
-    // Close on Escape
     document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape' && menu.classList.contains('is-open')) {
-        toggle.setAttribute('aria-expanded', 'false');
-        menu.classList.remove('is-open');
-        document.body.style.overflow = '';
-        toggle.focus();
-      }
+      if (e.key === 'Escape') close();
     });
 
-    // Close when clicking outside
     document.addEventListener('click', function (e) {
       if (
         menu.classList.contains('is-open') &&
         !menu.contains(e.target) &&
         !toggle.contains(e.target)
       ) {
-        toggle.setAttribute('aria-expanded', 'false');
-        menu.classList.remove('is-open');
-        document.body.style.overflow = '';
+        close();
       }
     });
   }
