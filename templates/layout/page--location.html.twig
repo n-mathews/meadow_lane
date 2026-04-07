@@ -119,7 +119,8 @@
 
                 If you haven't added an API key yet, the bridge photo shows instead.
               #}
-              {% set maps_api_key = 'AIzaSyC9sGsgcgb8GoqWbZDQwIrTKk4nbafmLt8' %}
+              {# API key set via Appearance → Settings → Meadow Lane Park → Google Maps API key #}
+              {% set maps_api_key = google_maps_api_key|default('') %}
 
               {% if maps_api_key %}
                 <div class="location-map-embed location-map-embed--iframe">

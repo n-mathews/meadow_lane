@@ -95,4 +95,19 @@ function meadow_lane_form_system_theme_settings_alter(array &$form, FormStateInt
     '#description'   => t('Toggle the Member Login button in the primary navigation.'),
   ];
 
+  // Google Maps API key.
+  $form['meadow_lane_settings']['google_maps_api_key'] = [
+    '#type'          => 'textfield',
+    '#title'         => t('Google Maps API key'),
+    '#default_value' => theme_get_setting('google_maps_api_key') ?? '',
+    '#description'   => t(
+      'API key for the Maps Embed API used on the Location page. ' .
+      'Restrict this key to <strong>HTTP referrers</strong> and add <code>meadowlanepark.com/*</code> in the ' .
+      '<a href="https://console.cloud.google.com/apis/credentials" target="_blank">Google Cloud Console</a>. ' .
+      'Leave blank to show the fallback photo instead.'
+    ),
+    '#placeholder'   => 'AIzaSy...',
+    '#attributes'    => ['autocomplete' => 'off'],
+  ];
+
 }
