@@ -69,18 +69,7 @@
 
     <main id="main-content" class="member-main" role="main" tabindex="-1">
 
-      {# ── FullCalendar interactive calendar ─────────── #}
-      <div class="events-calendar-wrap">
-        <div id="mlp-fullcalendar"></div>
-      </div>
-
-      {# ── Upcoming events list ──────────────────────── #}
-      <section class="events-list-section">
-        <h2 class="events-list-section__title">{{ 'Upcoming events'|t }}</h2>
-        <div class="events-list">
-          {{ page.content }}
-        </div>
-      </section>
+      {{ page.content }}
 
     </main>
 
@@ -89,47 +78,3 @@
   {{ include('@meadow_lane/partials/site-footer.html.twig') }}
 
 </div>
-
-{# FullCalendar — loaded from CDN, no install required #}
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.css">
-<script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js"></script>
-<script>
-(function() {
-  'use strict';
-  document.addEventListener('DOMContentLoaded', function() {
-    var el = document.getElementById('mlp-fullcalendar');
-    if (!el || typeof FullCalendar === 'undefined') return;
-
-    var calendar = new FullCalendar.Calendar(el, {
-      initialView: 'dayGridMonth',
-      headerToolbar: {
-        left:   'prev,next today',
-        center: 'title',
-        right:  'dayGridMonth,listMonth'
-      },
-      buttonText: {
-        today:     'Today',
-        month:     'Month',
-        list:      'List'
-      },
-      // Fetch events from the Drupal JSON feed
-      events: '/events/feed.json',
-      eventColor: '#4A7C6F',
-      eventTextColor: '#ffffff',
-      eventDisplay: 'block',
-      height: 'auto',
-      eventClick: function(info) {
-        // Scroll to the matching event in the list below
-        var id = info.event.id;
-        var target = document.querySelector('[data-event-id="' + id + '"]');
-        if (target) {
-          target.scrollIntoView({ behavior: 'smooth', block: 'center' });
-          target.classList.add('is-highlighted');
-          setTimeout(function() { target.classList.remove('is-highlighted'); }, 2000);
-        }
-      },
-    });
-    calendar.render();
-  });
-})();
-</script>
