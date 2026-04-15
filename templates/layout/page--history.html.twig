@@ -1,7 +1,7 @@
 {#
 /**
- * @file page--announcements.html.twig
- * Meadow Lane Park — announcements page, uses member portal sidebar layout.
+ * @file page--history.html.twig
+ * Meadow Lane Park — community history page.
  */
 #}
 <div class="site-wrapper">
@@ -10,10 +10,8 @@
 
   <div class="page-banner">
     <div class="page-banner__inner container">
-      <span class="section-label" style="color:rgba(255,255,255,0.55);">
-        {{ 'Member portal'|t }}
-      </span>
-      <h1 class="page-banner__title">{{ 'Announcements'|t }}</h1>
+      <span class="section-label" style="color:rgba(255,255,255,0.55);">{{ 'Member portal'|t }}</span>
+      <h1 class="page-banner__title">{{ 'Community History'|t }}</h1>
     </div>
   </div>
 
@@ -32,7 +30,7 @@
               {{ 'Dashboard'|t }}
             </a>
           </li>
-          <li class="member-nav__item is-active">
+          <li class="member-nav__item">
             <a href="/announcements" class="member-nav__link">
               <svg viewBox="0 0 20 20" fill="none" width="16" height="16" aria-hidden="true"><path d="M15 7A5 5 0 005 7c0 5.83-2.5 7.5-2.5 7.5h15S15 12.83 15 7z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M11.44 17.5a2 2 0 01-2.88 0" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
               {{ 'Announcements'|t }}
@@ -50,7 +48,7 @@
               {{ 'Documents'|t }}
             </a>
           </li>
-          <li class="member-nav__item">
+          <li class="member-nav__item is-active">
             <a href="/history" class="member-nav__link">
               <svg viewBox="0 0 20 20" fill="none" width="16" height="16" aria-hidden="true"><path d="M10 2a8 8 0 100 16A8 8 0 0010 2z" stroke="currentColor" stroke-width="1.5"/><path d="M10 6v4l3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
               {{ 'History'|t }}

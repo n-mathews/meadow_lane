@@ -41,7 +41,9 @@ function meadow_lane_preprocess_page(array &$variables): void {
   $variables['social_facebook']= theme_get_setting('social_facebook')?? '';
   $variables['show_member_login'] = theme_get_setting('show_member_login') ?? TRUE;
   $variables['member_login_url'] = theme_get_setting('member_login_url') ?? 'https://app.easyhoa.com';
-  $variables['google_maps_api_key'] = theme_get_setting('google_maps_api_key') ?? '';
+  $variables['google_maps_api_key']   = theme_get_setting('google_maps_api_key') ?? '';
+  $variables['google_photos_url']     = theme_get_setting('google_photos_url') ?? '';
+  $variables['google_photos_join_url'] = theme_get_setting('google_photos_join_url') ?? '';
 
   // Set active member nav item based on current path.
   $current_path = \Drupal::service('path.current')->getPath();
@@ -173,6 +175,11 @@ function meadow_lane_theme_suggestions_page_alter(array &$suggestions, array $va
   // Announcements page
   if ($alias === 'announcements' || strpos($alias, 'announcements/') === 0) {
     $suggestions[] = 'page__announcements';
+  }
+
+  // History page
+  if ($alias === 'history' || strpos($alias, 'history/') === 0) {
+    $suggestions[] = 'page__history';
   }
 }
 

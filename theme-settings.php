@@ -96,6 +96,28 @@ function meadow_lane_form_system_theme_settings_alter(array &$form, FormStateInt
   ];
 
   // Google Maps API key.
+  $form['meadow_lane_settings']['google_photos_url'] = [
+    '#type'          => 'url',
+    '#title'         => t('Google Photos album URL'),
+    '#default_value' => theme_get_setting('google_photos_url') ?? '',
+    '#description'   => t(
+      'The shared Google Photos album URL for the History page. ' .
+      'Open the album in Google Photos, click Share → Create shareable link, and paste it here.'
+    ),
+    '#placeholder'   => 'https://photos.google.com/share/...',
+  ];
+
+  $form['meadow_lane_settings']['google_photos_join_url'] = [
+    '#type'          => 'url',
+    '#title'         => t('Google Photos album join link'),
+    '#default_value' => theme_get_setting('google_photos_join_url') ?? '',
+    '#description'   => t(
+      'The link members can use to join the album and contribute their own photos. ' .
+      'In Google Photos, open the album → Share → Invite to collaborate.'
+    ),
+    '#placeholder'   => 'https://photos.google.com/share/...',
+  ];
+
   $form['meadow_lane_settings']['google_maps_api_key'] = [
     '#type'          => 'textfield',
     '#title'         => t('Google Maps API key'),
