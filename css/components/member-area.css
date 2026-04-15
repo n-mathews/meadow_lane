@@ -1236,3 +1236,23 @@ details[open] > .member-doc-folder__summary .member-doc-folder__chevron {
   text-decoration: none;
   color: var(--clr-error, #c0392b);
 }
+
+/* ── Announcements header with add button ─────────────── */
+.member-announcements-page__header-right {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+/* ── Announcement detail actions ─────────────────────── */
+.member-announcement-detail__back {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-6);
+}
+
+.member-announcement-detail__actions {
+  display: flex;
+  gap: var(--space-3);
+}
