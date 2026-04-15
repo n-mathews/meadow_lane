@@ -21,6 +21,7 @@ input[type="tel"],
 input[type="url"],
 input[type="search"],
 input[type="number"],
+input[type="password"],
 select,
 textarea {
   display: block;
@@ -68,3 +69,91 @@ select.error {
   border-color: var(--clr-error);
 }
 
+
+/* ── Submit buttons ───────────────────────────────────── */
+input[type="submit"],
+button[type="submit"] {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 11px 28px;
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  font-weight: 500;
+  color: white;
+  background: var(--clr-teal);
+  border: none;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: background var(--transition-fast), transform var(--transition-fast);
+  width: 100%;
+}
+
+input[type="submit"]:hover,
+button[type="submit"]:hover {
+  background: var(--clr-teal-dark);
+}
+
+input[type="submit"]:active,
+button[type="submit"]:active {
+  transform: translateY(1px);
+}
+
+/* ── Login page ───────────────────────────────────────── */
+.page--user-login .layout-main,
+.path-user .layout-main {
+  display: flex;
+  justify-content: center;
+  padding: var(--space-16) var(--container-pad);
+}
+
+.login-card {
+  background: white;
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius-xl);
+  padding: var(--space-10);
+  width: 100%;
+  max-width: 420px;
+}
+
+.login-card__heading {
+  font-family: var(--font-serif);
+  font-size: var(--text-3xl);
+  font-weight: 400;
+  color: var(--clr-slate);
+  margin: 0 0 var(--space-8);
+  text-align: center;
+}
+
+.login-card__logo {
+  display: flex;
+  justify-content: center;
+  margin-bottom: var(--space-6);
+}
+
+.login-card__logo img {
+  height: 48px;
+  width: auto;
+}
+
+.login-card .form-item {
+  margin-bottom: var(--space-5);
+}
+
+.login-card .form-item label {
+  display: block;
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--clr-text-mid);
+  margin-bottom: var(--space-2);
+}
+
+.login-card .description {
+  font-size: var(--text-xs);
+  color: var(--clr-text-light);
+  margin-top: var(--space-2);
+}
+
+.login-card .form-actions {
+  margin-top: var(--space-6);
+}
