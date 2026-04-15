@@ -32,7 +32,7 @@ global-styling:
     js/global.js: {}
     js/navigation.js: {}
   dependencies:
-    - core/normalized-styles
+    - core/drupal
 
 # Mobile navigation — auto-attached on every page via meadow_lane.info.yml
 navigation:
