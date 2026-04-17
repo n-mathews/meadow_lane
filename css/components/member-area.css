@@ -1371,3 +1371,19 @@ details[open] > .member-doc-folder__summary .member-doc-folder__chevron {
   font-size: var(--text-xs);
   color: var(--clr-text-light);
 }
+
+/* ── Announcement detail attachments ─────────────────── */
+.member-announcement-detail__attachments {
+  margin-top: var(--space-8);
+  padding-top: var(--space-6);
+  border-top: 1px solid var(--clr-border);
+}
+
+.member-announcement-detail__attachments-title {
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--clr-text-mid);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin: 0 0 var(--space-4);
+}
