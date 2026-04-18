@@ -1,8 +1,12 @@
 {#
 /**
  * @file simplenews-newsletter-body.html.twig
- * Override to suppress the default <h2> title — our HTML email template
- * already includes the title in the branded header.
+ * Renders the node body directly, suppressing the default h2 title.
+ * Variables available: node, body, build, key, newsletter
  */
 #}
-{{ body }}
+{% if node.body.value %}
+  {{ node.body.value|raw }}
+{% elseif body %}
+  {{ body|raw }}
+{% endif %}
