@@ -66,38 +66,33 @@
 (function () {
   'use strict';
 
+  var memberNavInit = false;
+
   function initMemberNav() {
+    // Only ever initialise once.
+    if (memberNavInit) return;
+
     var toggle = document.querySelector('.member-nav-toggle');
     var collapse = document.getElementById('member-nav-collapse');
 
     if (!toggle || !collapse) return;
 
-    // Remove data-once and clone to strip any stale listeners.
-    toggle.removeAttribute('data-once');
-    var fresh = toggle.cloneNode(true);
-    toggle.parentNode.replaceChild(fresh, toggle);
-    toggle = fresh;
-
-    function open() {
-      toggle.classList.add('is-open');
-      collapse.classList.add('is-open');
-      toggle.setAttribute('aria-expanded', 'true');
-    }
-
-    function close() {
-      toggle.classList.remove('is-open');
-      collapse.classList.remove('is-open');
-      toggle.setAttribute('aria-expanded', 'false');
-    }
+    memberNavInit = true;
 
     toggle.addEventListener('click', function (e) {
       e.stopPropagation();
-      toggle.classList.contains('is-open') ? close() : open();
+      var isOpen = collapse.classList.contains('is-open');
+      collapse.classList.toggle('is-open', !isOpen);
+      toggle.classList.toggle('is-open', !isOpen);
+      toggle.setAttribute('aria-expanded', String(!isOpen));
     });
 
-    // Close when a nav link is tapped.
     collapse.querySelectorAll('.member-nav__link').forEach(function (link) {
-      link.addEventListener('click', close);
+      link.addEventListener('click', function () {
+        collapse.classList.remove('is-open');
+        toggle.classList.remove('is-open');
+        toggle.setAttribute('aria-expanded', 'false');
+      });
     });
   }
 
