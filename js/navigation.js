@@ -61,3 +61,39 @@
   }
 
 })();
+
+// ── Member portal nav toggle (mobile) ──────────────────
+(function initMemberNav() {
+  var toggle = document.querySelector('.member-nav-toggle');
+  if (!toggle) return;
+
+  // Clone to strip any stale listeners
+  var fresh = toggle.cloneNode(true);
+  toggle.parentNode.replaceChild(fresh, toggle);
+  toggle = fresh;
+
+  var collapse = document.getElementById('member-nav-collapse');
+  if (!collapse) return;
+
+  toggle.addEventListener('click', function () {
+    var open = toggle.classList.contains('is-open');
+    if (open) {
+      toggle.classList.remove('is-open');
+      collapse.classList.remove('is-open');
+      toggle.setAttribute('aria-expanded', 'false');
+    } else {
+      toggle.classList.add('is-open');
+      collapse.classList.add('is-open');
+      toggle.setAttribute('aria-expanded', 'true');
+    }
+  });
+
+  // Close when a nav link is tapped
+  collapse.querySelectorAll('.member-nav__link').forEach(function (link) {
+    link.addEventListener('click', function () {
+      toggle.classList.remove('is-open');
+      collapse.classList.remove('is-open');
+      toggle.setAttribute('aria-expanded', 'false');
+    });
+  });
+}());

@@ -22,6 +22,13 @@
   <div class="member-layout">
 
     <aside class="member-sidebar">
+      <button class="member-nav-toggle" aria-expanded="false" aria-controls="member-nav-collapse">
+        <span>{{ 'Member Menu'|t }}</span>
+        <span class="member-nav-toggle__icon" aria-hidden="true">
+          <span></span><span></span><span></span>
+        </span>
+      </button>
+      <div class="member-nav-collapse" id="member-nav-collapse">
       <nav class="member-nav" aria-label="{{ 'Member navigation'|t }}">
         <ul class="member-nav__list">
           <li class="member-nav__item">
@@ -61,6 +68,7 @@
           <a href="/user/logout" class="member-sidebar__logout">{{ 'Log out'|t }}</a>
         </div>
       {% endif %}
+      </div>{# end member-nav-collapse #}
     </aside>
 
     <main id="main-content" class="member-main" role="main" tabindex="-1">
