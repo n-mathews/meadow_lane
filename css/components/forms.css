@@ -157,3 +157,20 @@ button[type="submit"]:active {
 .login-card .form-actions {
   margin-top: var(--space-6);
 }
+
+/* ── Login page extras ───────────────────────────────── */
+.login-card__links {
+  margin-top: var(--space-4);
+  text-align: center;
+}
+
+.login-card__forgot {
+  font-size: var(--text-sm);
+  color: var(--clr-text-light);
+  text-decoration: none;
+  transition: color 0.15s;
+}
+
+.login-card__forgot:hover {
+  color: var(--clr-teal);
+}
