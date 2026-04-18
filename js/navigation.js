@@ -63,14 +63,9 @@
 })();
 
 // ── Member portal nav toggle (mobile) ──────────────────
-(function initMemberNav() {
+document.addEventListener('DOMContentLoaded', function () {
   var toggle = document.querySelector('.member-nav-toggle');
   if (!toggle) return;
-
-  // Clone to strip any stale listeners
-  var fresh = toggle.cloneNode(true);
-  toggle.parentNode.replaceChild(fresh, toggle);
-  toggle = fresh;
 
   var collapse = document.getElementById('member-nav-collapse');
   if (!collapse) return;
@@ -96,4 +91,33 @@
       toggle.setAttribute('aria-expanded', 'false');
     });
   });
-}());
+});
+
+// Drupal behaviors fallback for member nav toggle
+if (typeof Drupal !== 'undefined') {
+  Drupal.behaviors.memberNavToggle = {
+    attach: function (context) {
+      var toggle = context.querySelector ? context.querySelector('.member-nav-toggle') : null;
+      if (!toggle || toggle.dataset.memberNavInit) return;
+      toggle.dataset.memberNavInit = '1';
+
+      var collapse = document.getElementById('member-nav-collapse');
+      if (!collapse) return;
+
+      toggle.addEventListener('click', function () {
+        var open = toggle.classList.contains('is-open');
+        toggle.classList.toggle('is-open', !open);
+        collapse.classList.toggle('is-open', !open);
+        toggle.setAttribute('aria-expanded', String(!open));
+      });
+
+      collapse.querySelectorAll('.member-nav__link').forEach(function (link) {
+        link.addEventListener('click', function () {
+          toggle.classList.remove('is-open');
+          collapse.classList.remove('is-open');
+          toggle.setAttribute('aria-expanded', 'false');
+        });
+      });
+    }
+  };
+}
