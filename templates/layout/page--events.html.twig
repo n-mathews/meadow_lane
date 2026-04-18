@@ -76,7 +76,7 @@
       </nav>
       {% if logged_in %}
         <div class="member-sidebar__user">
-          <a href="/user/logout" class="member-sidebar__logout">{{ 'Log out'|t }}</a>
+          <a href="{{ logout_url }}" class="member-sidebar__logout">{{ 'Log out'|t }}</a>
         </div>
       {% endif %}
       </div>{# end member-nav-collapse #}
