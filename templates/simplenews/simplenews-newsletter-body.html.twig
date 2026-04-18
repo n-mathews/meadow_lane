@@ -1,12 +1,6 @@
 {#
 /**
  * @file simplenews-newsletter-body.html.twig
- * Renders the node body directly, suppressing the default h2 title.
- * Variables available: node, body, build, key, newsletter
+ * Suppress default output — body is set directly via hook_mailer_message_alter.
  */
 #}
-{% if node.body.value %}
-  {{ node.body.value|raw }}
-{% elseif body %}
-  {{ body|raw }}
-{% endif %}
