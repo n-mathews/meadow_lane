@@ -599,7 +599,11 @@
    RESPONSIVE
    ═══════════════════════════════════════════════════════ */
 
-/* ── Member nav toggle button (mobile only) ─────────── */
+/* ── Member nav checkbox toggle (mobile only) ────────── */
+.member-nav-checkbox {
+  display: none;
+}
+
 .member-nav-toggle {
   display: none;
 }
@@ -622,7 +626,7 @@
     grid-column: 1 / -1;
   }
 
-  /* Toggle button */
+  /* Toggle label */
   .member-nav-toggle {
     display: flex;
     align-items: center;
@@ -630,7 +634,6 @@
     width: 100%;
     padding: var(--space-4) var(--space-5);
     background: var(--clr-teal-light);
-    border: none;
     border-radius: var(--radius-xl);
     cursor: pointer;
     font-family: var(--font-sans);
@@ -638,11 +641,8 @@
     font-weight: 500;
     color: var(--clr-slate);
     transition: background 0.15s;
-  }
-
-  .member-nav-toggle.is-open {
-    border-radius: var(--radius-xl) var(--radius-xl) 0 0;
-    background: var(--clr-teal-pale);
+    box-sizing: border-box;
+    user-select: none;
   }
 
   .member-nav-toggle__icon {
@@ -660,19 +660,7 @@
     transition: transform 0.2s, opacity 0.2s;
   }
 
-  .member-nav-toggle.is-open .member-nav-toggle__icon span:nth-child(1) {
-    transform: translateY(6px) rotate(45deg);
-  }
-
-  .member-nav-toggle.is-open .member-nav-toggle__icon span:nth-child(2) {
-    opacity: 0;
-  }
-
-  .member-nav-toggle.is-open .member-nav-toggle__icon span:nth-child(3) {
-    transform: translateY(-6px) rotate(-45deg);
-  }
-
-  /* Collapsible nav panel */
+  /* Collapsible nav panel — hidden by default */
   .member-nav-collapse {
     display: none;
     background: var(--clr-teal-light);
@@ -681,8 +669,26 @@
     margin-bottom: var(--space-6);
   }
 
-  .member-nav-collapse.is-open {
+  /* Checkbox checked = open */
+  .member-nav-checkbox:checked ~ .member-nav-toggle {
+    border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+    background: var(--clr-teal-pale);
+  }
+
+  .member-nav-checkbox:checked ~ .member-nav-collapse {
     display: block;
+  }
+
+  .member-nav-checkbox:checked ~ .member-nav-toggle .member-nav-toggle__icon span:nth-child(1) {
+    transform: translateY(6px) rotate(45deg);
+  }
+
+  .member-nav-checkbox:checked ~ .member-nav-toggle .member-nav-toggle__icon span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .member-nav-checkbox:checked ~ .member-nav-toggle .member-nav-toggle__icon span:nth-child(3) {
+    transform: translateY(-6px) rotate(-45deg);
   }
 
   .member-nav__list {

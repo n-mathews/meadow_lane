@@ -24,12 +24,13 @@
   <div class="member-layout">
 
     <aside class="member-sidebar">
-      <button class="member-nav-toggle" aria-expanded="false" aria-controls="member-nav-collapse">
+      <input type="checkbox" id="member-nav-checkbox" class="member-nav-checkbox" aria-hidden="true">
+      <label for="member-nav-checkbox" class="member-nav-toggle">
         <span>{{ 'Member Menu'|t }}</span>
         <span class="member-nav-toggle__icon" aria-hidden="true">
           <span></span><span></span><span></span>
         </span>
-      </button>
+      </label>
       <div class="member-nav-collapse" id="member-nav-collapse">
       <nav class="member-nav" aria-label="{{ 'Member navigation'|t }}">
         <ul class="member-nav__list">
