@@ -180,3 +180,8 @@
 .site-footer .footer__col > .block > h2 {
   display: none;
 }
+
+/* ── Hide page title block in footer region ──────────── */
+#block-meadow-lane-page-title {
+  display: none;
+}

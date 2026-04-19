@@ -92,6 +92,7 @@
 
       {% if logged_in %}
         <div class="member-sidebar__user">
+          <a href="/user/{{ current_uid }}/edit" class="member-sidebar__account">{{ 'My Account'|t }}</a>
           <a href="{{ logout_url }}" class="member-sidebar__logout">{{ 'Log out'|t }}</a>
         </div>
       {% endif %}

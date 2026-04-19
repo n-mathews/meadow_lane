@@ -174,3 +174,25 @@ button[type="submit"]:active {
 .login-card__forgot:hover {
   color: var(--clr-teal);
 }
+
+/* ── One-time login page button contrast fix ─────────── */
+.user-pass-reset .button,
+.user-pass-reset input[type="submit"] {
+  background-color: var(--clr-teal) !important;
+  color: #ffffff !important;
+  border: 2px solid var(--clr-teal) !important;
+  padding: 10px 24px;
+  border-radius: var(--radius-md);
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.15s, border-color 0.15s;
+}
+
+.user-pass-reset .button:hover,
+.user-pass-reset input[type="submit"]:hover {
+  background-color: var(--clr-slate) !important;
+  border-color: var(--clr-slate) !important;
+  color: #ffffff !important;
+}

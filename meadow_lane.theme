@@ -45,6 +45,7 @@ function meadow_lane_preprocess_page(array &$variables): void {
   $variables['google_photos_url']     = theme_get_setting('google_photos_url') ?? '';
   $variables['google_photos_join_url'] = theme_get_setting('google_photos_join_url') ?? '';
   $variables['logout_url'] = \Drupal\Core\Url::fromRoute('user.logout')->toString();
+  \$variables['current_uid'] = \Drupal::currentUser()->id();
 
   // Set active member nav item based on current path.
   $current_path = \Drupal::service('path.current')->getPath();
