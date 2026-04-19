@@ -1,0 +1,33 @@
+{#
+/**
+ * @file page--user--edit.html.twig
+ * Meadow Lane Park — user account edit page.
+ */
+#}
+<div class="site-wrapper page--user-login">
+
+  {{ include('@meadow_lane/partials/site-header.html.twig') }}
+
+  <main id="main-content" role="main">
+    <div class="layout-main">
+      <div class="login-card">
+
+        <div class="login-card__logo">
+          <img src="/{{ directory }}/images/logo-icon.png" alt="{{ 'Meadow Lane Park'|t }}">
+        </div>
+
+        <h1 class="login-card__heading">{{ 'My Account'|t }}</h1>
+
+        {{ page.content }}
+
+        <div class="login-card__links">
+          <a href="/member" class="login-card__forgot">← {{ 'Back to dashboard'|t }}</a>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  {{ include('@meadow_lane/partials/site-footer.html.twig') }}
+
+</div>

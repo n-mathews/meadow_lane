@@ -183,6 +183,11 @@ function meadow_lane_theme_suggestions_page_alter(array &$suggestions, array $va
   if ($alias === 'history' || strpos($alias, 'history/') === 0) {
     $suggestions[] = 'page__history';
   }
+
+  // User account edit page.
+  if (preg_match('#^user/\d+/edit#', $alias)) {
+    $suggestions[] = 'page__user__edit';
+  }
 }
 
 /**
