@@ -44,6 +44,8 @@ function meadow_lane_preprocess_page(array &$variables): void {
   $variables['google_maps_api_key']   = theme_get_setting('google_maps_api_key') ?? '';
   $variables['google_photos_url']     = theme_get_setting('google_photos_url') ?? '';
   $variables['google_photos_join_url'] = theme_get_setting('google_photos_join_url') ?? '';
+  $variables['board_email'] = theme_get_setting('board_email') ?? 'board@meadowlanepark.com';
+  $variables['board_phone'] = theme_get_setting('board_phone') ?? '';
   $variables['logout_url'] = \Drupal\Core\Url::fromRoute('user.logout')->toString();
   $variables['current_uid'] = \Drupal::currentUser()->id();
 

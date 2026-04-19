@@ -96,6 +96,21 @@ function meadow_lane_form_system_theme_settings_alter(array &$form, FormStateInt
   ];
 
   // Google Maps API key.
+
+  $form['meadow_lane_settings']['board_email'] = [
+    '#type'          => 'email',
+    '#title'         => t('Board email address'),
+    '#default_value' => theme_get_setting('board_email') ?? 'board@meadowlanepark.com',
+    '#description'   => t('Contact email displayed in the member portal.'),
+  ];
+
+  $form['meadow_lane_settings']['board_phone'] = [
+    '#type'          => 'textfield',
+    '#title'         => t('Board phone number'),
+    '#default_value' => theme_get_setting('board_phone') ?? '',
+    '#description'   => t('Displayed prominently in the member portal. Include formatting, e.g. (315) 555-1234.'),
+    '#maxlength'     => 30,
+  ];
   $form['meadow_lane_settings']['google_photos_url'] = [
     '#type'          => 'url',
     '#title'         => t('Google Photos album URL'),

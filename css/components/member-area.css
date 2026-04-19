@@ -1490,3 +1490,44 @@ details[open] > .member-doc-folder__summary .member-doc-folder__chevron {
   flex-direction: column;
   gap: 2px;
 }
+
+/* ── Board contact bar ────────────────────────────────── */
+.member-contact-bar {
+  display: flex;
+  align-items: center;
+  gap: var(--space-6);
+  background: var(--clr-slate);
+  border-radius: var(--radius-xl);
+  padding: var(--space-4) var(--space-6);
+  margin-bottom: var(--space-8);
+  flex-wrap: wrap;
+}
+
+.member-contact-bar__item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: rgba(255,255,255,0.85);
+  text-decoration: none;
+  transition: color 0.15s;
+}
+
+.member-contact-bar__item:hover {
+  color: var(--clr-teal-pale);
+}
+
+.member-contact-bar__item svg {
+  color: var(--clr-teal-mid);
+  flex-shrink: 0;
+}
+
+@media (max-width: 900px) {
+  .member-contact-bar {
+    border-radius: var(--radius-md);
+    padding: var(--space-3) var(--space-4);
+    gap: var(--space-4);
+  }
+}
