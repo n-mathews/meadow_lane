@@ -1531,3 +1531,171 @@ details[open] > .member-doc-folder__summary .member-doc-folder__chevron {
     gap: var(--space-4);
   }
 }
+
+/* ── Role-based toolbar restrictions ─────────────────── */
+
+/* Shared: hide everything non-essential for all restricted roles */
+.toolbar--board-member,
+.toolbar--history-manager,
+.toolbar--document-manager,
+.toolbar--sales-manager {
+  /* Keep only core toolbar items relevant to their role */
+}
+
+/* Items hidden from ALL restricted roles */
+.toolbar--board-member #toolbar-item-administration-tray .toolbar-menu > .menu-item:has(a[href*="admin/structure"]),
+.toolbar--board-member #toolbar-item-administration-tray .toolbar-menu > .menu-item:has(a[href*="admin/config"]),
+.toolbar--board-member #toolbar-item-administration-tray .toolbar-menu > .menu-item:has(a[href*="admin/reports"]),
+.toolbar--board-member #toolbar-item-administration-tray .toolbar-menu > .menu-item:has(a[href*="admin/appearance"]),
+.toolbar--board-member #toolbar-item-administration-tray .toolbar-menu > .menu-item:has(a[href*="admin/modules"]) {
+  display: none !important;
+}
+
+/* History manager — Content only, no People or Config */
+.toolbar--history-manager #toolbar-item-administration-tray .toolbar-menu > .menu-item:has(a[href*="admin/people"]),
+.toolbar--history-manager #toolbar-item-administration-tray .toolbar-menu > .menu-item:has(a[href*="admin/config"]),
+.toolbar--history-manager #toolbar-item-administration-tray .toolbar-menu > .menu-item:has(a[href*="admin/structure"]),
+.toolbar--history-manager #toolbar-item-administration-tray .toolbar-menu > .menu-item:has(a[href*="admin/reports"]),
+.toolbar--history-manager #toolbar-item-administration-tray .toolbar-menu > .menu-item:has(a[href*="admin/appearance"]),
+.toolbar--history-manager #toolbar-item-administration-tray .toolbar-menu > .menu-item:has(a[href*="admin/modules"]) {
+  display: none !important;
+}
+
+/* Sales manager — Content only, no People or Config */
+.toolbar--sales-manager #toolbar-item-administration-tray .toolbar-menu > .menu-item:has(a[href*="admin/people"]),
+.toolbar--sales-manager #toolbar-item-administration-tray .toolbar-menu > .menu-item:has(a[href*="admin/config"]),
+.toolbar--sales-manager #toolbar-item-administration-tray .toolbar-menu > .menu-item:has(a[href*="admin/structure"]),
+.toolbar--sales-manager #toolbar-item-administration-tray .toolbar-menu > .menu-item:has(a[href*="admin/reports"]),
+.toolbar--sales-manager #toolbar-item-administration-tray .toolbar-menu > .menu-item:has(a[href*="admin/appearance"]),
+.toolbar--sales-manager #toolbar-item-administration-tray .toolbar-menu > .menu-item:has(a[href*="admin/modules"]) {
+  display: none !important;
+}
+
+/* Document manager — MLP config only, hide everything else */
+.toolbar--document-manager #toolbar-item-administration-tray .toolbar-menu > .menu-item:has(a[href*="admin/people"]),
+.toolbar--document-manager #toolbar-item-administration-tray .toolbar-menu > .menu-item:has(a[href*="admin/content"]),
+.toolbar--document-manager #toolbar-item-administration-tray .toolbar-menu > .menu-item:has(a[href*="admin/structure"]),
+.toolbar--document-manager #toolbar-item-administration-tray .toolbar-menu > .menu-item:has(a[href*="admin/reports"]),
+.toolbar--document-manager #toolbar-item-administration-tray .toolbar-menu > .menu-item:has(a[href*="admin/appearance"]),
+.toolbar--document-manager #toolbar-item-administration-tray .toolbar-menu > .menu-item:has(a[href*="admin/modules"]) {
+  display: none !important;
+}
+
+/* ═══════════════════════════════════════════════════════
+   LISTINGS MANAGER
+   ═══════════════════════════════════════════════════════ */
+
+.listings-manager {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: var(--space-10) var(--container-pad) var(--space-16);
+}
+
+.listings-manager__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-8);
+  padding-bottom: var(--space-6);
+  border-bottom: 1px solid var(--clr-border);
+}
+
+.listings-manager__title {
+  font-family: var(--font-serif);
+  font-size: var(--text-2xl);
+  font-weight: 400;
+  color: var(--clr-slate);
+  margin: 0;
+}
+
+.listings-manager__table-wrap {
+  overflow-x: auto;
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--clr-border);
+}
+
+.listings-manager__table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+}
+
+.listings-manager__table thead tr {
+  background: var(--clr-teal-light);
+}
+
+.listings-manager__table th {
+  padding: var(--space-3) var(--space-4);
+  text-align: left;
+  font-size: var(--text-xs);
+  font-weight: 600;
+  color: var(--clr-slate);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+}
+
+.listings-manager__row {
+  border-top: 1px solid var(--clr-border);
+  transition: background 0.1s;
+}
+
+.listings-manager__row:hover {
+  background: var(--clr-teal-light);
+}
+
+.listings-manager__row--unpublished {
+  opacity: 0.65;
+}
+
+.listings-manager__cell {
+  padding: var(--space-3) var(--space-4);
+  color: var(--clr-text-mid);
+  vertical-align: middle;
+}
+
+.listings-manager__cell--title {
+  font-weight: 500;
+  color: var(--clr-slate);
+}
+
+.listings-manager__cell--actions {
+  display: flex;
+  gap: var(--space-2);
+  align-items: center;
+  white-space: nowrap;
+}
+
+.listings-manager__cell--date {
+  white-space: nowrap;
+  color: var(--clr-text-light);
+  font-size: var(--text-xs);
+}
+
+.listings-manager__link {
+  color: var(--clr-teal);
+  text-decoration: none;
+}
+
+.listings-manager__link:hover {
+  text-decoration: underline;
+}
+
+.listings-manager__badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 20px;
+  font-size: var(--text-xs);
+  font-weight: 500;
+}
+
+.listings-manager__badge--published {
+  background: var(--clr-teal-pale);
+  color: var(--clr-teal);
+}
+
+.listings-manager__badge--draft {
+  background: #f0f0f0;
+  color: #888;
+}
