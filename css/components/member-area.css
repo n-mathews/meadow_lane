@@ -1699,3 +1699,70 @@ details[open] > .member-doc-folder__summary .member-doc-folder__chevron {
   background: #f0f0f0;
   color: #888;
 }
+
+/* ── History pending submissions ──────────────────────── */
+.history-pending {
+  margin-bottom: var(--space-10);
+  background: #fffbeb;
+  border: 1px solid #f0d060;
+  border-radius: var(--radius-xl);
+  padding: var(--space-6);
+}
+
+.history-pending__count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  background: #f59e0b;
+  color: white;
+  border-radius: 50%;
+  font-size: var(--text-xs);
+  font-weight: 700;
+  margin-left: var(--space-2);
+  vertical-align: middle;
+}
+
+.history-pending__list {
+  margin-top: var(--space-4);
+}
+
+.history-pending__item {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-4);
+  padding: var(--space-4) 0;
+  border-bottom: 1px solid #f0d060;
+  flex-wrap: wrap;
+}
+
+.history-pending__item:last-child {
+  border-bottom: none;
+}
+
+.history-pending__info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+}
+
+.history-pending__name {
+  font-weight: 500;
+  color: var(--clr-slate);
+  font-size: var(--text-sm);
+}
+
+.history-pending__meta {
+  font-size: var(--text-xs);
+  color: var(--clr-text-light);
+}
+
+.history-pending__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  flex-shrink: 0;
+}
