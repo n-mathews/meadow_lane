@@ -1,0 +1,81 @@
+{#
+/**
+ * @file node--home-sale--teaser.html.twig
+ * Meadow Lane Park — home listing card (teaser).
+ */
+#}
+{%
+  set status_val = node.field_listing_status.value
+%}
+<article class="listing-card{{ status_val == 'sale_pending' ? ' listing-card--pending' : '' }}">
+
+  {# Photo #}
+  <div class="listing-card__photo">
+    {% if node.field_listing_images.entity %}
+      <img
+        src="{{ file_url(node.field_listing_images.entity.fileuri) }}"
+        alt="{{ node.field_listing_images.alt ?: node.label }}"
+        loading="lazy"
+        class="listing-card__img"
+      >
+    {% else %}
+      <div class="listing-card__no-photo">
+        <svg viewBox="0 0 48 48" fill="none" width="40" height="40" aria-hidden="true">
+          <rect x="4" y="8" width="40" height="32" rx="3" stroke="currentColor" stroke-width="1.5"/>
+          <circle cx="16" cy="20" r="4" stroke="currentColor" stroke-width="1.3"/>
+          <path d="M4 34l12-10 9 9 7-6 12 10" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span>{{ 'No photo'|t }}</span>
+      </div>
+    {% endif %}
+    {% if status_val == 'sale_pending' %}
+      <span class="listing-card__badge">{{ 'Sale Pending'|t }}</span>
+    {% endif %}
+  </div>
+
+  {# Details #}
+  <div class="listing-card__body">
+    <h3 class="listing-card__title">
+      <a href="{{ url }}" class="listing-card__link">{{ label }}</a>
+    </h3>
+
+    {% if node.field_listing_address.value %}
+      <p class="listing-card__address">{{ node.field_listing_address.value }}</p>
+    {% endif %}
+
+    <div class="listing-card__specs">
+      {% if node.field_listing_bedrooms.value %}
+        <span class="listing-card__spec">
+          <svg viewBox="0 0 16 16" fill="none" width="13" height="13" aria-hidden="true"><path d="M1 10V7a5 5 0 0110 0v3M1 10h12M1 10v3M13 10v3M3 13h8" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+          {{ node.field_listing_bedrooms.value }} {{ 'bd'|t }}
+        </span>
+      {% endif %}
+      {% if node.field_listing_bathrooms.value %}
+        <span class="listing-card__spec">
+          <svg viewBox="0 0 16 16" fill="none" width="13" height="13" aria-hidden="true"><path d="M3 7V4a2 2 0 014 0v1M1 7h14v2a6 6 0 01-12 0V7z" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+          {{ node.field_listing_bathrooms.value }} {{ 'ba'|t }}
+        </span>
+      {% endif %}
+      {% if node.field_listing_sqft.value %}
+        <span class="listing-card__spec">{{ node.field_listing_sqft.value|number_format }} {{ 'sq ft'|t }}</span>
+      {% endif %}
+    </div>
+
+    {% if node.field_home_price.value %}
+      <p class="listing-card__price">${{ node.field_home_price.value|number_format(0, '.', ',') }}</p>
+    {% endif %}
+
+    {% if node.field_sale_contact_name.value or node.field_sale_contact_number.value %}
+      <div class="listing-card__contact">
+        <span class="listing-card__contact-label">{{ 'Contact'|t }}:</span>
+        {% if node.field_sale_contact_name.value %}
+          <span>{{ node.field_sale_contact_name.value }}</span>
+        {% endif %}
+        {% if node.field_sale_contact_number.value %}
+          <a href="tel:{{ node.field_sale_contact_number.value|replace({' ': '', '(': '', ')': '', '-': ''}) }}">{{ node.field_sale_contact_number.value }}</a>
+        {% endif %}
+      </div>
+    {% endif %}
+  </div>
+
+</article>

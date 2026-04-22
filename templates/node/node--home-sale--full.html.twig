@@ -1,0 +1,96 @@
+{#
+/**
+ * @file node--home-sale--full.html.twig
+ * Meadow Lane Park — home listing full detail page.
+ */
+#}
+{%
+  set status_val = node.field_listing_status.value
+%}
+<article class="listing-detail">
+
+  {# Gallery #}
+  {% if node.field_listing_images | length %}
+    <div class="listing-detail__gallery">
+      {% for image in node.field_listing_images %}
+        <div class="listing-detail__gallery-item">
+          <img
+            src="{{ file_url(image.entity.fileuri) }}"
+            alt="{{ image.alt ?: node.label }}"
+            loading="{{ loop.index == 1 ? 'eager' : 'lazy' }}"
+          >
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+
+  <div class="listing-detail__body">
+
+    <div class="listing-detail__header">
+      <div>
+        <h1 class="listing-detail__title">{{ label }}</h1>
+        {% if node.field_listing_address.value %}
+          <p class="listing-detail__address">{{ node.field_listing_address.value }}</p>
+        {% endif %}
+      </div>
+      <div class="listing-detail__header-right">
+        {% if node.field_home_price.value %}
+          <p class="listing-detail__price">${{ node.field_home_price.value|number_format(0, '.', ',') }}</p>
+        {% endif %}
+        {% if status_val == 'sale_pending' %}
+          <span class="listing-card__badge listing-card__badge--inline">{{ 'Sale Pending'|t }}</span>
+        {% endif %}
+      </div>
+    </div>
+
+    {% if node.field_listing_bedrooms.value or node.field_listing_bathrooms.value or node.field_listing_sqft.value %}
+      <div class="listing-detail__specs">
+        {% if node.field_listing_bedrooms.value %}
+          <div class="listing-detail__spec">
+            <span class="listing-detail__spec-val">{{ node.field_listing_bedrooms.value }}</span>
+            <span class="listing-detail__spec-label">{{ 'Bedrooms'|t }}</span>
+          </div>
+        {% endif %}
+        {% if node.field_listing_bathrooms.value %}
+          <div class="listing-detail__spec">
+            <span class="listing-detail__spec-val">{{ node.field_listing_bathrooms.value }}</span>
+            <span class="listing-detail__spec-label">{{ 'Bathrooms'|t }}</span>
+          </div>
+        {% endif %}
+        {% if node.field_listing_sqft.value %}
+          <div class="listing-detail__spec">
+            <span class="listing-detail__spec-val">{{ node.field_listing_sqft.value|number_format }}</span>
+            <span class="listing-detail__spec-label">{{ 'Sq Ft'|t }}</span>
+          </div>
+        {% endif %}
+      </div>
+    {% endif %}
+
+    {% if node.field_home_description.value %}
+      <div class="listing-detail__description">
+        {{ node.field_home_description.value|raw }}
+      </div>
+    {% endif %}
+
+    {% if node.field_sale_contact_name.value or node.field_sale_contact_number.value %}
+      <div class="listing-detail__contact-box">
+        <h3 class="listing-detail__contact-heading">{{ 'Contact the Seller'|t }}</h3>
+        {% if node.field_sale_contact_name.value %}
+          <p class="listing-detail__contact-name">{{ node.field_sale_contact_name.value }}</p>
+        {% endif %}
+        {% if node.field_sale_contact_number.value %}
+          <a href="tel:{{ node.field_sale_contact_number.value|replace({' ': '', '(': '', ')': '', '-': ''}) }}" class="btn btn--primary">
+            <svg viewBox="0 0 16 16" fill="none" width="14" height="14" aria-hidden="true"><path d="M2 2.5A1.5 1.5 0 013.5 1h1.38a1 1 0 01.894.553l1.2 2.4a1 1 0 01-.24 1.137l-.738.738a8.002 8.002 0 003.176 3.176l.738-.738a1 1 0 011.137-.24l2.4 1.2A1 1 0 0115 10.12V11.5A1.5 1.5 0 0113.5 13C6.596 13 1 7.404 1 .5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+            {{ node.field_sale_contact_number.value }}
+          </a>
+        {% endif %}
+      </div>
+    {% endif %}
+
+    <div class="listing-detail__back">
+      <a href="/homes-for-sale" class="listing-card__contact-label">← {{ 'Back to all listings'|t }}</a>
+    </div>
+
+  </div>
+
+</article>
