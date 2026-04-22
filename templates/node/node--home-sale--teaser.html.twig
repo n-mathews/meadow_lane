@@ -7,7 +7,7 @@
 {%
   set status_val = node.field_listing_status.value
 %}
-<article class="listing-card{{ status_val == 'sale_pending' ? ' listing-card--pending' : '' }}">
+<article class="listing-card{{ status_val == 'sale_pending' ? ' listing-card--pending' : '' }}" data-status="{{ status_val }}" data-price="{{ node.field_home_price.value ?: 0 }}" data-beds="{{ node.field_listing_bedrooms.value ?: 0 }}">
 
   {# Photo #}
   <div class="listing-card__photo">

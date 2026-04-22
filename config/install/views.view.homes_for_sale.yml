@@ -100,12 +100,17 @@ display:
           id: type
           table: node_field_data
           field: type
+          plugin_id: in_operator
+          operator: in
           value:
             home_sale: home_sale
           group: 1
+          entity_type: node
+          entity_field: type
           expose:
             operator: ''
           exposed: false
+          is_grouped: false
       access:
         type: none
         options: {}
